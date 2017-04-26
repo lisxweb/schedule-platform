@@ -88,11 +88,7 @@ DROP TABLE IF EXISTS `role_permission`;
 
 CREATE TABLE `role_permission` (
   `role_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`role_id`,`permission_id`),
-  KEY `permission_id` (`permission_id`) USING BTREE,
-  CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`permission_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `permission_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `role_permission` VALUES ('1', '1');
@@ -112,24 +108,23 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `login_name` varchar(30) NOT NULL COMMENT '登录名',
   `password` varchar(100) NOT NULL,
   `secret_key` varchar(64) DEFAULT NULL,
-  `employee_code` varchar(50) DEFAULT NULL COMMENT '工号',
+  `user_code` varchar(50) DEFAULT NULL COMMENT '工号',
+  `user_job` varchar(64) DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  `gender` varchar(10) DEFAULT NULL,
-  `phone` varchar(30) DEFAULT NULL,
-  `department_id` int(11) DEFAULT NULL,
-  `creator_id` int(11) DEFAULT '1',
+  `station_area` varchar(30) DEFAULT NULL,
+  `station` varchar(30) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
-  `is_deleted` varchar(10) DEFAULT '0',
-  PRIMARY KEY (`user_id`),
-  KEY `index_login_name` (`login_name`)
+  `creator_id` varchar(30) default null,
+  `is_deleted` int(1) DEFAULT '0',
+  `is_admin` int(1) DEFAULT '0',
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `user` (`user_id`, `login_name`, `password`, `secret_key`, `employee_code`, `name`, `email`, `gender`, `phone`, `department_id`, `creator_id`, `created_at`, `is_deleted`) VALUES ('1', 'admin', '7394630bee36f2bd8b793f88320efdf8', 'cb7e52304f0d11e6965c00ff2c2e2b3f', '1', '系统管理员', NULL, '男', NULL, '1', '1', '2015-10-10 12:14:17', '0');
+INSERT INTO `user` (`user_id`, `password`, `secret_key`, `user_code`,`user_job`, `name`, `station_area`, `station`, `creator_id`, `created_at`, `is_deleted`,`is_admin`) VALUES
+('1', '7394630bee36f2bd8b793f88320efdf8', 'cb7e52304f0d11e6965c00ff2c2e2b3f', '1', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
 
 
 
@@ -137,11 +132,7 @@ DROP TABLE IF EXISTS `user_role`;
 
 CREATE TABLE `user_role` (
   `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `role_id` (`role_id`) USING BTREE,
-  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES ('1', '1');

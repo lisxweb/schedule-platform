@@ -208,13 +208,6 @@
 			</exclusions>
 		</dependency>
 
-		<!-- httpclient -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
-		</dependency>
-
 		<!-- fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -475,5 +468,6 @@
         		</configuration>
       		</plugin>
 		</plugins>
+
   	</build>
 </project>

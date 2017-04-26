@@ -54,7 +54,7 @@
 			<p class="error" id="result">$!message</p>
             <div class="icon-input">
                 <span class="icon-user"></span>
-                <input type="text"  name="username" placeholder="用户名" id="username">
+                <input type="text"  name="userCode" placeholder="用户名" id="userCode">
             </div>
             <div class="icon-input">
                 <span class="icon-psw"></span>
@@ -67,7 +67,7 @@
     </div>
 <script>
 function submitLogin(){
-	var name = $("#username").val();
+	var name = $("#userCode").val();
 	var pass = $("#password").val();
 	if($.trim(name)=='' && $.trim(pass)==''){
 		$("#result").text("请输入用户名和密码");

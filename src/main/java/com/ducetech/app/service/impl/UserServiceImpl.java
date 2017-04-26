@@ -1,10 +1,8 @@
 package com.ducetech.app.service.impl;
 
 import com.ducetech.app.dao.UserDAO;
-import com.ducetech.app.model.Department;
 import com.ducetech.app.model.Role;
 import com.ducetech.app.model.User;
-import com.ducetech.app.service.DepartmentService;
 import com.ducetech.app.service.RoleService;
 import com.ducetech.app.service.UserService;
 import com.ducetech.framework.model.PagerRS;
@@ -22,31 +20,40 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserDAO userDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 	
 	@Autowired
 	private RoleService roleService;
 	
-	@Autowired
-	private DepartmentService departmentService;
-	
 	@Override
-	public User getUserByLoginName(String loginName) {
-		return userDAO.selectUserByLoginName(loginName);
+	public User getUserByUserName(String userName) {
+		return userDAO.selectUserByUserName(userName);
 	}
 
-	@Override
+    @Override
+    public User getUserByUserCode(String userCode) {
+        return userDAO.selectUserByUserCode(userCode);
+    }
+
+    @Override
 	public List<String> getUserPermission(String userId) {
 		return userDAO.selectPermissionByUserId(userId);
 	}
 	
 	@Override
-	public List<User> getUsersByDeptId(String deptId) {
+	public List<User> getUsersByStationArea(String stationArea) {
 		User user = new User();
-		user.setDepartmentId(deptId);
+		user.setStationArea(stationArea);
 		return userDAO.selectUser(user);
 	}
+    @Override
+    public List<User> getUsersByStation(String station) {
+        User user = new User();
+        user.setStation(station);
+        return userDAO.selectUser(user);
+    }
 
 	@Override
 	public User getUserByUserId(String userId) {
@@ -77,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void deleteUserById(String userId) {
 		User user = userDAO.selectUserByUserId(userId);
-		user.setIsDeleted("1");		// 1为删除
+		user.setIsDeleted(1);		// 1为删除
 		userDAO.updateUser(user);
 	}
 
@@ -108,10 +115,6 @@ public class UserServiceImpl implements UserService {
 			}
 			user.setRoleNames(roleNames);
 			user.setRoles(roles);
-			Department dept = departmentService.getDepartmentById(user.getDepartmentId());
-			if(dept!=null){
-				user.setDepartment(dept);
-			}
 		}
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		PageInfo page = new PageInfo(userList);
@@ -138,10 +141,6 @@ public class UserServiceImpl implements UserService {
 		}
 		List<User> userList = userDAO.selectUsersByRoleId(query.getT().getRoleId());
 		for (User user : userList) {
-			Department dept = departmentService.getDepartmentById(user.getDepartmentId());
-			if(dept!=null){
-				user.setDepartment(dept);
-			}
 		}
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		PageInfo page = new PageInfo(userList);

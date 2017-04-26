@@ -15,7 +15,7 @@ public interface RoleDAO {
 	
 	/** 
 	* @Title: selectRole  
-	* @param t
+	* @param role
 	* @return List<Role>
 	* @Description: 角色通用查询
 	*/
@@ -23,7 +23,7 @@ public interface RoleDAO {
 	
 	/** 
 	* @Title: selectRoleById  
-	* @param id
+	* @param roleId
 	* @return Role
 	* @Description: 通过角色ID获取角色
 	*/
@@ -37,7 +37,7 @@ public interface RoleDAO {
 
 	/** 
 	* @Title: updateRole 
-	* @param fole
+	* @param role
 	* @return void
 	* @Description: 更新角色
 	*/
@@ -45,7 +45,7 @@ public interface RoleDAO {
 
 	/** 
 	* @Title: selectRolesByUserId  
-	* @param UserId
+	* @param userId
 	* @return List<Role>
 	* @Description: 按人员ID获取拥有的角色
 	*/
@@ -60,7 +60,7 @@ public interface RoleDAO {
 
 	/** 
 	* @Title: deleteUserManagerRoleByUserId  
-	* @param createById
+	* @param creatorId
 	* @Description: 根据人员ID删除创建角色人ID和角色ID 
 	*/ 
 	void deleteUserManagerRoleByUserId(@Param("creatorId") String creatorId);

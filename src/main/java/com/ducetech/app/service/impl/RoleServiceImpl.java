@@ -40,7 +40,7 @@ public class RoleServiceImpl implements RoleService {
 			List<User> users = userDAO.selectUsersByRoleId(role.getRoleId());
 			if(users!=null && users.size()>0){
 				for(User user : users){
-					names += user.getName() + " ,";
+					names += user.getUserName() + " ,";
 				}
 			}
 			if(names.length()>0){

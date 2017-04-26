@@ -38,7 +38,7 @@ public class AuthRealm extends AuthorizingRealm {
 		// 拿到用户录入的用户名密码
 		// 调用userService的方法，获取当前对象
 		UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-		User _user = userService.getUserByLoginName(userToken.getUsername());
+		User _user = userService.getUserByUserCode(userToken.getUsername());
 		if (_user == null) {
 			logger.info("User为空!");
 			return null;

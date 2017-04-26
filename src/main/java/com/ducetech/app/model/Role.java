@@ -18,7 +18,7 @@ public class Role extends BaseModel implements Serializable {
 	private String comment;				//备注
 	
 	private String deptId;				//部门ID
-	
+
 	private String permissionIds;		//菜单权限IDS
 	
 	private String permissionMajorIds;	//菜单权限专业IDS

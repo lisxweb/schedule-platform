@@ -1,7 +1,6 @@
 package com.ducetech.app.controller;
 
 import com.ducetech.app.model.User;
-import com.ducetech.app.service.DepartmentService;
 import com.ducetech.app.service.UserService;
 import com.ducetech.framework.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,6 @@ public class MainPageController extends BaseController {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private DepartmentService departmentService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String testPager(Model model, HttpServletRequest request) {

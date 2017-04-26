@@ -5,24 +5,26 @@
 <mapper namespace="com.ducetech.app.dao.UserDAO">
 	<resultMap type="com.ducetech.app.model.User" id="userMap">
 		<id column="user_id" property="userId"/>
-    	<result column="login_name" property="loginName"/>
     	<result column="password" property="password"/>
     	<result column="secret_key" property="secretKey"/>
-    	<result column="employee_code" property="employeeCode"/>
-    	<result column="name" property="name"/>
-    	<result column="gender" property="gender"/>
-    	<result column="department_id" property="departmentId"/>
-    	<result column="phone" property="phone"/>
-    	<result column="email" property="email"/>
+    	<result column="user_code" property="userCode"/>
+        <result column="user_job" property="userJob"/>
+        <result column="user_name" property="userName"/>
+    	<result column="station_area" property="stationArea"/>
+    	<result column="station" property="station"/>
     	<result column="creator_id" property="creatorId"/>
     	<result column="created_at" property="createdAt"/>
     	<result column="is_deleted" property="isDeleted"/>
+        <result column="is_admin" property="isAdmin"/>
 	</resultMap>
 	
 	<!-- 登录 -->
-	<select id="selectUserByLoginName" resultMap="userMap">
-		select user_id, login_name, password, secret_key, employee_code, name, gender, department_id, phone, email, creator_id, created_at, is_deleted from user where login_name=#{loginName}
+	<select id="selectUserByUserName" resultMap="userMap">
+		select user_id, password, secret_key, user_code,user_job, user_name, station_area, station, creator_id, created_at, is_deleted from user where user_name=#{userName}
 	</select>
+    <select id="selectUserByUserCode" resultMap="userMap">
+        select user_id, password, secret_key, user_code,user_job, user_name, station_area, station, creator_id, created_at, is_deleted from user where user_code=#{userCode}
+    </select>
 	
 	<!-- 获取某用户的全部菜单权限 -->
 	<select id="selectPermissionByUserId" resultType="String">
@@ -39,26 +41,23 @@
 	<!-- 对用户的通用查询  -->
 	<select id="selectUser" parameterType="com.ducetech.app.model.User" resultMap="userMap">
 		select user_id, login_name, password, secret_key, employee_code, name, gender, department_id, phone, email, creator_id, created_at, is_deleted from user where 1=1
-		<if test="loginName!=null and loginName!=''">
-			and login_name=#{loginName}
+		<if test="userCode!=null and userCode!=''">
+			and user_code=#{userCode}
 		</if>
-		<if test="employeeCode!=null and employeeCode!=''">
-			and employee_code=#{employeeCode}
+		<if test="userName!=null and userName!=''">
+			and user_name like '%' #{userName} '%'
 		</if>
-		<if test="name!=null and name!=''">
-			and name like '%' #{name} '%'
+		<if test="stationArea!=null and stationArea!=''">
+			and station_area=#{stationArea}
 		</if>
-		<if test="email!=null and email!=''">
-			and email=#{email}
+		<if test="station!=null and station!=''">
+			and station=#{station}
 		</if>
-		<if test="gender!=null and gender!=''">
-			and gender=#{gender}
+		<if test="userJob!=null and userJob!=''">
+			and user_job=#{userJob}
 		</if>
-		<if test="departmentId!=null and departmentId!=''">
-			and department_id=#{departmentId}
-		</if>
-		<if test="phone!=null and phone!=''">
-			and phone=#{phone}
+		<if test="isAdmin!=null and isAdmin!=''">
+			and is_admin=#{isAdmin}
 		</if>
 		<if test="creatorId!=null and creatorId!=''">
 			and creator_id=#{creatorId}
@@ -74,7 +73,7 @@
 	<!-- 插入新用户 -->
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
 		insert into user (login_name,password,secret_key,employee_code,name,email,gender,phone,department_id,create_by_id,create_at)
-		values(#{loginName},#{password},#{secretKey},#{employeeCode},#{name},#{email},#{gender},#{phone},#{departmentId},#{createById},#{createAt})
+		values(#{loginName},#{password},#{secretKey},#{userCode},#{name},#{email},#{gender},#{phone},#{departmentId},#{createById},#{createAt})
 	</insert>
 	
 	<!-- 更新某用户信息 -->
@@ -87,8 +86,8 @@
 			<if test="password != null and password != ''">
 				password=#{password},
 			</if>
-			<if test="employeeCode != null and employeeCode != ''">
-				employee_code=#{employeeCode},
+			<if test="userCode != null and userCode != ''">
+				employee_code=#{userCode},
 			</if>
 			<if test="name != null and name != ''">
 				name=#{name},

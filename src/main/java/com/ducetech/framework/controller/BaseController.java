@@ -22,7 +22,7 @@ public class BaseController {
 
     public User getLoginUser(HttpServletRequest request, Model model) {
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute(CookieUtil.USER_NAME);
-        if (null == user || StringUtils.isEmpty(user.getName())) {
+        if (null == user || StringUtils.isEmpty(user.getUserCode())) {
             String userId = CookieUtil.getLoginUserId(request);
             if (StringUtils.isNotEmpty(userId)) {
                 user = userService.getUserByUserId(userId);
@@ -34,7 +34,7 @@ public class BaseController {
 
     public User getLoginUser(HttpServletRequest request) {
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute(CookieUtil.USER_NAME);
-        if (null == user || StringUtils.isEmpty(user.getName())) {
+        if (null == user || StringUtils.isEmpty(user.getUserCode())) {
             String userId = CookieUtil.getLoginUserId(request);
             if (StringUtils.isNotEmpty(userId)) {
               user = userService.getUserByUserId(userId);

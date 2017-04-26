@@ -39,7 +39,7 @@ public interface RoleService {
 	
 	/** 
 	* @Title: getRolesByUserId  
-	* @param id
+	* @param userId
 	* @return List<Role>
 	* @Description: 按人员ID获取拥有的角色
 	*/
@@ -71,7 +71,7 @@ public interface RoleService {
 
 	/** 
 	* @Title: updateRole  
-	* @param roleId
+	* @param role
 	* @param role
 	* @Description: 更新角色
 	*/

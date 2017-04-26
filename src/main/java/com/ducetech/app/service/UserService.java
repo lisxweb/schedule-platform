@@ -12,12 +12,13 @@ public interface UserService {
 	
 	/** 
 	* @Title: getUserByLoginName  
-	* @param loginName
+	* @param userName
 	* @return User
 	* @Description: 按登录名获取人员
 	*/
-	User getUserByLoginName(String loginName);
-	
+	User getUserByUserName(String userName);
+
+    User getUserByUserCode(String userCode);
 	/** 
 	* @Title: getUserPermission  
 	* @param userId
@@ -32,11 +33,19 @@ public interface UserService {
 	* @return List<User>
 	* @Description: 按部门ID获取人员
 	*/
-	List<User> getUsersByDeptId(String deptId);
+	List<User> getUsersByStationArea(String deptId);
+
+    /**
+     * @Title: getUsersByDeptId
+     * @param deptId
+     * @return List<User>
+     * @Description: 按部门ID获取人员
+     */
+    List<User> getUsersByStation(String deptId);
 
 	/** 
 	* @Title: getUserByUserId  
-	* @param principalPersonId
+	* @param userId
 	* @return String
 	* @Description: 通过人员ID获取人员信息
 	*/
@@ -58,7 +67,7 @@ public interface UserService {
 
 	/** 
 	* @Title: deleteUser  
-	* @param UserId
+	* @param userId
 	* @Description: 删除人员,这里是假删除,只是更改isDeleted的状态
 	*/
 	void deleteUserById(String userId);

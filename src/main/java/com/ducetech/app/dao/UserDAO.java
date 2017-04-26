@@ -5,22 +5,19 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/** 
-* @ClassName: UserDAO  
-* @author lisy
-* @date 2015年11月3日 下午4:00:45 
-* @Description: 用户相关方法
-*/
+
 public interface UserDAO {
 	
 	
 	/** 
 	* @Title: selectUserByLoginName  
-	* @param loginName
+	* @param userName
 	* @return User
-	* @Description: 按登录名查询用户
+	* @Description: 按登录名查询用户姓名
 	*/
-	User selectUserByLoginName(@Param("loginName") String loginName);
+	User selectUserByUserName(@Param("userName") String userName);
+
+    User selectUserByUserCode(@Param("userCode") String userCode);
 	
 	/** 
 	* @Title: selectPermissionByUserId  
@@ -47,14 +44,14 @@ public interface UserDAO {
 	
 	/** 
 	* @Title: addUser  
-	* @param userForm
+	* @param user
 	* @Description: 保存新增的人员信息
 	*/
 	void insertUser(User user);
 	
 	/** 
 	* @Title: updateUser  
-	* @param userForm
+	* @param user
 	* @Description: 更新人员信息
 	*/
 	void updateUser(User user);

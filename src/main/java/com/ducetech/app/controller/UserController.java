@@ -1,11 +1,8 @@
 package com.ducetech.app.controller;
 
 
-import com.alibaba.fastjson.JSON;
-import com.ducetech.app.model.Department;
 import com.ducetech.app.model.Role;
 import com.ducetech.app.model.User;
-import com.ducetech.app.service.DepartmentService;
 import com.ducetech.app.service.RoleService;
 import com.ducetech.app.service.UserService;
 import com.ducetech.framework.controller.BaseController;
@@ -44,9 +41,6 @@ public class UserController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
-	@Autowired
-	private DepartmentService departmentService;
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request) {
 		if (request.getSession().getAttribute("DT_LOGIN_NAME")!=null) {
@@ -63,15 +57,15 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpServletResponse response, RedirectAttributesModelMap modelMap) {
-		String loginName = request.getParameter("username");
+		String userCode = request.getParameter("userCode");
 		String password = request.getParameter("password");
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(loginName,password);
-		if (StringUtils.isNotEmpty(loginName) && StringUtils.isNotEmpty(password)) {
+		UsernamePasswordToken token = new UsernamePasswordToken(userCode,password);
+		if (StringUtils.isNotEmpty(userCode) && StringUtils.isNotEmpty(password)) {
 			try{
 				subject.login(token);	
 				User user = (User)subject.getPrincipal();
-				log.info("{}:{} login.", loginName, user.getName());
+				log.info("{}:{} login.", userCode, user.getUserName());
 				subject.getSession().setAttribute("DT_LOGIN_USER", user);
 				CookieUtil.setCookie(response, "", user.getUserId());
 			}catch(Exception ex){
@@ -92,10 +86,10 @@ public class UserController extends BaseController {
 	
 	@RequestMapping(value = "/users/info", method = RequestMethod.POST)
 	public String editUser(@ModelAttribute("form") User user, HttpServletRequest request, Model model) {
-		String name = user.getName();
+		String name = user.getUserName();
 		
 		User userInfo = getLoginUser(request);
-		userInfo.setName(name);
+		userInfo.setUserName(name);
 		
 //		userService.editUserInfo(userInfo);
 		model.addAttribute("msg", "success");
@@ -120,8 +114,6 @@ public class UserController extends BaseController {
 		role.setIsDeleted("0");
 		List<Role> roles = roleService.getRoleByQuery(role);
 		model.addAttribute("roles", roles);
-		List<Department> depts = departmentService.getAllDepartments();
-		model.addAttribute("depts", depts);
 		return "/user/users";
 	}
 
@@ -135,8 +127,8 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public PagerRS<User> personData(HttpServletRequest request) throws Exception {
 		BaseQuery<User> query = User.getSearchCondition(User.class, request);
-		query.getT().setEmployeeCode(query.getT().getEmployeeCode().trim());
-		query.getT().setName(query.getT().getName().trim());
+		query.getT().setUserCode(query.getT().getUserCode().trim());
+		query.getT().setUserName(query.getT().getUserName().trim());
 		PagerRS<User> rs = userService.getUserByPager(query);
 		return rs;
 	}
@@ -151,15 +143,10 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public OperationResult create(User user, HttpServletRequest request) throws IOException {
 		User userInfo = getLoginUser(request);
-		User us = new User();
-		us.setLoginName(user.getLoginName());
-		List<User> uName = userService.getUserByQuery(us);
 		User ur = new User();
-		ur.setEmployeeCode(user.getEmployeeCode());
+		ur.setUserCode(user.getUserCode());
 		List<User> uCode = userService.getUserByQuery(ur);
-		if (uName!=null && uName.size()>0) {
-			return OperationResult.buildFailureResult("登录名已存在", 0);
-		} else if(uCode!=null && uCode.size()>0) {
+		if(uCode!=null && uCode.size()>0) {
 			return OperationResult.buildFailureResult("工号已存在", 0);
 		} else {
 			user.setCreatorId(userInfo.getUserId());
@@ -197,9 +184,7 @@ public class UserController extends BaseController {
 			}
 		}
 		for (User us : uList) {
-			if (us.getLoginName().equals(user.getLoginName())) {
-				return OperationResult.buildFailureResult("用户名已存在", 0);
-			} else if (us.getEmployeeCode().equals(user.getEmployeeCode())) {
+			if (us.getUserCode().equals(user.getUserCode())) {
 				return OperationResult.buildFailureResult("工号已存在", 0);
 			}
 		}
@@ -213,7 +198,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/users/{id}/updateStatus", method = RequestMethod.PUT)
 	@ResponseBody
-	public OperationResult updateStatus(@PathVariable(value="id") String userId, String isDeleted) throws IOException {
+	public OperationResult updateStatus(@PathVariable(value="id") String userId, int isDeleted) throws IOException {
 		User user = new User();
 		user.setUserId(userId);
 		user.setIsDeleted(isDeleted);

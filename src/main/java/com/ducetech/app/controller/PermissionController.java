@@ -1,11 +1,9 @@
 package com.ducetech.app.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.ducetech.app.model.Department;
 import com.ducetech.app.model.Permission;
 import com.ducetech.app.model.Role;
 import com.ducetech.app.model.User;
-import com.ducetech.app.service.DepartmentService;
 import com.ducetech.app.service.PermissionService;
 import com.ducetech.app.service.RoleService;
 import com.ducetech.app.service.UserService;
@@ -14,14 +12,12 @@ import com.ducetech.framework.model.PagerRS;
 import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.util.DateUtil;
 import com.ducetech.framework.util.Digests;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
