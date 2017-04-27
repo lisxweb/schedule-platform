@@ -16,7 +16,7 @@
         </div>
         <ul class="right header-r-ul">
             <li class="left main-select">
-                <a class="userName" href="javascript:void(0);">$user.name</a>
+                <a class="userName" href="javascript:void(0);">$user.userName</a>
                 <a href="javascript:void(0);" class="seat-icon icon-left-triangle"></a>
                 <div class="collapse">
                     <a href="javascript:;" onclick="detail();">资料</a>
@@ -53,6 +53,11 @@
                         <a href="$path/permissions/role" target="myiframe">角色管理</a>
                     </li>
 					#end
+                    #if($shiro.hasPermission("系统管理-角色管理"))
+                        <li>
+                            <a href="$path/department" target="myiframe">分组管理</a>
+                        </li>
+                    #end
                 </ul>
             </li>
             #end

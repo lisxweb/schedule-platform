@@ -4,6 +4,7 @@ import com.ducetech.framework.model.BaseModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -33,6 +34,10 @@ public class User extends BaseModel implements Serializable {
 
 	private String roleNames;		//角色名字
 
+    private String reportId;
+
+    private Date reportAt;
+    
 	private String creatorId;		//创建人ID
 
 	private String createdAt;		//创建时间

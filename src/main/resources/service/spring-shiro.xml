@@ -62,8 +62,8 @@
 				/report/** = anon
 				/api/** = anon
                 /hessian/** = anon
-				<!-- /** = anon -->
-				/** = authc
+				<!--/** = anon-->
+				 /** = authc
             </value>
         </property>
     </bean>

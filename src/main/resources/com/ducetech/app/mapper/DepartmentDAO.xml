@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ducetech.app.dao.DepartmentDAO">
+	<resultMap type="com.ducetech.app.model.Department" id="departmentMap">
+		<id column="node_code" property="nodeCode"/>
+    	<result column="node_name" property="nodeName"/>
+    	<result column="node_order" property="nodeOrder"/>
+    	<result column="if_use" property="ifUse"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="updator_id" property="updatorId"/>
+    	<result column="created_at" property="createdAt"/>
+    	<result column="updated_at" property="updatedAt"/>
+	</resultMap>
+
+	<!-- 登录 -->
+	<select id="selectDepartmentByNodeName" resultMap="departmentMap">
+		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where node_name=#{nodeName}
+	</select>
+    <select id="selectDepartmentByDepartmentCode" resultMap="departmentMap">
+        select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where node_code=#{nodeCode}
+    </select>
+	
+	<!-- 根据ID精确查找部门 -->
+	<select id="selectDepartmentByDepartmentId" resultMap="departmentMap">
+		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where department_id=#{departmentId}
+	</select>
+	
+	<!-- 对部门的通用查询  -->
+	<select id="selectDepartment" parameterType="com.ducetech.app.model.Department" resultMap="departmentMap">
+		select department_id, password, secret_key, node_code, node_name, station_area, station, creator_id, created_at, is_deleted, is_admin from department where 1=1
+		<if test="nodeCode!=null and nodeCode!=''">
+			and node_code=#{nodeCode}
+		</if>
+		<if test="nodeName!=null and nodeName!=''">
+			and node_name like '%' #{nodeName} '%'
+		</if>
+		<if test="stationArea!=null and stationArea!=''">
+			and station_area=#{stationArea}
+		</if>
+		<if test="station!=null and station!=''">
+			and station=#{station}
+		</if>
+		<if test="departmentJob!=null and departmentJob!=''">
+			and department_job=#{departmentJob}
+		</if>
+		<if test="isAdmin!=null and isAdmin!=''">
+			and is_admin=#{isAdmin}
+		</if>
+		<if test="creatorId!=null and creatorId!=''">
+			and creator_id=#{creatorId}
+		</if>
+		<if test="createdAt!=null and createdAt!=''">
+			and created_at=#{createdAt}
+		</if>
+		<if test="isDeleted!=null and isDeleted!=''">
+			and is_deleted=#{isDeleted}
+		</if>
+	</select>
+	
+	<!-- 插入新部门 -->
+	<insert id="insertDepartment" useGeneratedKeys="true" keyProperty="departmentId">
+		insert into department (password,secret_key,node_code,node_name,station_area,station,create_by_id,create_at,is_admin)
+		values(#{password},#{secretKey},#{nodeCode},#{nodeName},#{stationArea},#{station},#{createById},#{createAt},#{is_admin})
+	</insert>
+	
+	<!-- 更新某部门信息 -->
+	<update id="updateDepartment" parameterType="com.ducetech.app.model.Department">
+		update department 
+		<set>
+			<if test="nodeCode != null and nodeCode != ''">
+				node_code=#{nodeCode},
+			</if>
+			<if test="nodeName != null and nodeName != ''">
+				node_name=#{nodeName},
+			</if>
+		</set>
+		where department_id=#{departmentId}
+	</update>
+	
+	<!-- 通过角色ID获取人员  -->
+	<select id="selectDepartmentsByRoleId" resultMap="departmentMap">
+		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where department_id in (select department_id from department_role where role_id=#{roleId})
+	</select>
+</mapper>

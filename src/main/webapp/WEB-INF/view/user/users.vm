@@ -32,8 +32,8 @@
                     <input type="text" id="name" name="name">
                 </div>
                 <div class="form-inline">
-                    <label for="department">部门：</label>
-                    <select name="departmentId" id="departmentId">
+                    <label for="userJob">岗位：</label>
+                    <select name="userJob" id="userJob">
                         <option value="">全部</option>
 						#foreach($dept in $!depts)
                             <option value="$!dept.departmentId">$!dept.departmentName</option>
@@ -83,39 +83,31 @@
             <div class="modal-body">
                 <div class="the-information-input the-information-list">
                     <div class="row clear mar-top-10">
-                        <label for="login-name" class="red-star">登录名：</label>
-                        <input type="text" placeholder="请输入" id="login-name" name="loginName" class=" reset-input">
+                        <label for="login-name" class="red-star">工号：</label>
+                        <input type="text" placeholder="请输入" id="user-code" name="userCode" class=" reset-input">
                     </div>
                     <div class="row clear mar-top-10">
                         <label for="init-password">初始密码：</label>
                         <input type="text" value="123456" id="init-password" name="password" class=" reset-input" readOnly>
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="job-number" class="red-star">工号：</label>
-                        <input type="text" placeholder="请输入" id="job-number" name="employeeCode" class=" reset-input">
-                    </div>
-                    <div class="row clear mar-top-10">
                         <label for="username" class="red-star">姓名：</label>
-                        <input type="text" placeholder="请输入" id="username" name="name" class=" reset-input">
+                        <input type="text" placeholder="请输入" id="userName" name="userName" class=" reset-input">
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="gender">性别：</label>
-                        <select name="gender" id="gender" class=" reset-input">
+                        <label for="stationArea">站区：</label>
+                        <select name="stationArea" id="stationArea" class=" reset-input">
                             <option>男</option>
                             <option>女</option>
                         </select>
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="email">邮箱：</label>
-                        <input type="text" placeholder="请输入" id="email" name="email" class=" reset-input">
+                        <label for="station">站点：</label>
+                        <input type="text" placeholder="请输入" id="station" name="station" class=" reset-input">
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="email">联系电话：</label>
-                        <input type="text" placeholder="请输入" id="tel-phone" name="phone" class=" reset-input">
-                    </div>
-                    <div class="row clear mar-top-10">
-                        <label for="department" class="red-star">部门：</label>
-                        <select name="departmentId" id="departmentId" class=" reset-input">
+                        <label for="userJob" class="red-star">岗位：</label>
+                        <select name="userJob" id="userJob" class=" reset-input">
                             <option value="0">请选择</option>
 							#foreach($dept in $!depts)
                                 <option value="$!dept.departmentId">$!dept.departmentName</option>
@@ -164,8 +156,8 @@
             <div class="modal-body">
                 <div class="the-information-input the-information-list">
                     <div class="row clear mar-top-10">
-                        <label for="login-name" class="red-star">登录名：</label>
-                        <input type="text" id="editLoginName" name="loginName" class=" reset-input">
+                        <label for="user-code" class="red-star">工号：</label>
+                        <input type="text" id="editUserCode" name="userCode" class=" reset-input">
                     </div>
                     <div class="row clear mar-top-10 relative">
                         <label for="init-password">密码：</label>
@@ -173,28 +165,20 @@
                         <a href="javascript:void(0)" class="blue-font btn-reset-password" onclick="resetPass()">重置密码</a>
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="job-number" class="red-star">工号：</label>
-                        <input type="text" id="editEmployeeCode" name="employeeCode" class=" reset-input">
-                    </div>
-                    <div class="row clear mar-top-10">
                         <label for="username" class="red-star">姓名：</label>
-                        <input type="text" id="editName" name="name" class=" reset-input">
+                        <input type="text" id="editUserName" name="userName" class=" reset-input">
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="gender">性别：</label>
-                        <select name="gender" id="editGender" class=" reset-input">
+                        <label for="stationArea">站区：</label>
+                        <select name="stationArea" id="editStationArea" class=" reset-input">
                         </select>
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="email">邮箱：</label>
-                        <input type="text" id="editEmail" name="email" class=" reset-input">
+                        <label for="station">站点：</label>
+                        <input type="text" id="editStation" name="station" class=" reset-input">
                     </div>
                     <div class="row clear mar-top-10">
-                        <label for="email">联系电话：</label>
-                        <input type="text" id="editPhone" name="phone" class=" reset-input">
-                    </div>
-                    <div class="row clear mar-top-10">
-                        <label for="department" class="red-star">部门：</label>
+                        <label for="department" class="red-star">岗位：</label>
                         <select name="departmentId" id="editDept" class=" reset-input">
                             <option value="0">请选择</option>
 							#foreach($dept in $!depts)
@@ -250,11 +234,10 @@
             },
             colNames:['账号', '工号', '姓名','联系电话','所属部门',"拥有角色","","操作"],
             colModel:[
-                {name:'loginName', width:'15%'},
-                {name:'employeeCode', width:'15%'},
-                {name:'name', width:'10%'},
-                {name:'phone', width:'15%'},
-                {name:'department.departmentName', width:'15%'},
+                {name:'userName', width:'15%'},
+                {name:'userCode', width:'15%'},
+                {name:'stationArea', width:'15%'},
+                {name:'station', width:'15%'},
                 {name:'roleNames', width:'10%'},
                 {name:'isDeleted', width:'10%',hidden:true},
                 {name:'operation', width:'10%',formatter:function(cellvalue,options,rowObject){
@@ -353,21 +336,21 @@
                 $("#editLoginName").val(data.loginName);
                 $("#editEmployeeCode").val(data.employeeCode);
                 $("#editName").val(data.name);
-                $("#editEmail").val(data.email);
+                $("#editStation").val(data.station);
                 $("#editPhone").val(data.phone);
-                $("#editGender").empty();
-                if(data.gender=="男") {
+                $("#editStationArea").empty();
+                if(data.stationArea=="男") {
                     option = "<option selected>男</option>";
                 }else{
                     option = "<option>男</option>";
                 }
-                $("#editGender").append(option);
-                if(data.gender=="女") {
+                $("#editStationArea").append(option);
+                if(data.stationArea=="女") {
                     option = "<option selected>女</option>";
                 }else{
                     option = "<option>女</option>";
                 }
-                $("#editGender").append(option);
+                $("#editStationArea").append(option);
                 $("#editDept").val(data.departmentId);
                 console.log(data.roles);
                 $(".select-drop li").remove();

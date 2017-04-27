@@ -35,12 +35,12 @@
 	
 	<!-- 根据ID精确查找用户 -->
 	<select id="selectUserByUserId" resultMap="userMap">
-		select user_id, login_name, password, secret_key, employee_code, name, gender, department_id, phone, email, creator_id, created_at, is_deleted from user where user_id=#{userId}
+		select user_id, password, secret_key, user_code, user_name, station_area, station, creator_id, created_at, is_deleted,is_admin from user where user_id=#{userId}
 	</select>
 	
 	<!-- 对用户的通用查询  -->
 	<select id="selectUser" parameterType="com.ducetech.app.model.User" resultMap="userMap">
-		select user_id, login_name, password, secret_key, employee_code, name, gender, department_id, phone, email, creator_id, created_at, is_deleted from user where 1=1
+		select user_id, password, secret_key, user_code, user_name, station_area, station, creator_id, created_at, is_deleted, is_admin from user where 1=1
 		<if test="userCode!=null and userCode!=''">
 			and user_code=#{userCode}
 		</if>
@@ -72,37 +72,31 @@
 	
 	<!-- 插入新用户 -->
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
-		insert into user (login_name,password,secret_key,employee_code,name,email,gender,phone,department_id,create_by_id,create_at)
-		values(#{loginName},#{password},#{secretKey},#{userCode},#{name},#{email},#{gender},#{phone},#{departmentId},#{createById},#{createAt})
+		insert into user (password,secret_key,user_code,user_name,station_area,station,create_by_id,create_at,is_admin)
+		values(#{password},#{secretKey},#{userCode},#{userName},#{stationArea},#{station},#{createById},#{createAt},#{is_admin})
 	</insert>
 	
 	<!-- 更新某用户信息 -->
 	<update id="updateUser" parameterType="com.ducetech.app.model.User">
 		update user 
 		<set>
-			<if test="loginName != null and loginName != ''">
-				login_name=#{loginName},
-			</if>
 			<if test="password != null and password != ''">
 				password=#{password},
 			</if>
 			<if test="userCode != null and userCode != ''">
-				employee_code=#{userCode},
+				user_code=#{userCode},
 			</if>
-			<if test="name != null and name != ''">
-				name=#{name},
+			<if test="userName != null and userName != ''">
+				user_name=#{userName},
 			</if>
-			<if test="gender != null and gender != ''">
-				gender=#{gender},
+			<if test="userJob != null and userJob != ''">
+                user_job=#{userJob},
 			</if>
-			<if test="email != null and email != ''">
-				email=#{email},
+			<if test="stationArea != null and stationArea != ''">
+                station_area=#{stationArea},
 			</if>
-			<if test="phone != null and phone != ''">
-				phone=#{phone},
-			</if>
-			<if test="departmentId != null and departmentId != ''">
-				department_id=#{departmentId},
+			<if test="station != null and station != ''">
+                station=#{station},
 			</if>
 			<if test="creatorId!=null and creatorId!=''">
 				creator_id=#{creatorId},
@@ -113,12 +107,15 @@
 			<if test="isDeleted!=null and isDeleted!=''">
 				is_deleted=#{isDeleted}
 			</if>
+            <if test="isAdmin!=null and isAdmin!=''">
+                is_admin=#{isAdmin}
+            </if>
 		</set>
 		where user_id=#{userId}
 	</update>
 	
 	<!-- 通过角色ID获取人员  -->
 	<select id="selectUsersByRoleId" resultMap="userMap">
-		select user_id, login_name, password, secret_key, employee_code, name, gender, department_id, phone, email, creator_id, created_at, is_deleted from user where user_id in (select user_id from user_role where role_id=#{roleId})
+		select user_id, user_code, password, secret_key, user_name, station_area, station, creator_id, created_at, is_deleted,is_admin from user where user_id in (select user_id from user_role where role_id=#{roleId})
 	</select>
 </mapper>

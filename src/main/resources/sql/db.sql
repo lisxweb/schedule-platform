@@ -112,7 +112,7 @@ CREATE TABLE `user` (
   `secret_key` varchar(64) DEFAULT NULL,
   `user_code` varchar(50) DEFAULT NULL COMMENT '工号',
   `user_job` varchar(64) DEFAULT NULL,
-  `name` varchar(30) DEFAULT NULL,
+  `user_name` varchar(30) DEFAULT NULL,
   `station_area` varchar(30) DEFAULT NULL,
   `station` varchar(30) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,

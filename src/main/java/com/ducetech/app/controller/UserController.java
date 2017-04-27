@@ -210,12 +210,17 @@ public class UserController extends BaseController {
 	 * @Title: resetPass
 	 * @Description: 重置密码为123456
 	 */
-	@RequestMapping(value = "/users/{id}/resetPass", method = RequestMethod.PUT)
+	@RequestMapping(value = "/users/{id}/resetPass", method = RequestMethod.GET)
 	@ResponseBody
 	public OperationResult resetPass(@PathVariable(value="id") String userId) throws IOException {
 		User user = userService.getUserByUserId(userId);
+		System.out.println(user.getPassword()+"||||||");
 		user.setPassword(Digests.md5Hash("123456", user.getSecretKey()));
 		userService.resetPass(user);
 		return OperationResult.buildFailureResult("重置成功，密码为：123456", 1);
 	}
+
+	public static void main(String [] args){
+        System.out.println(Digests.md5Hash("123456", "cb7e52304f0d11e6965c00ff2c2e2b3f"));
+    }
 }
