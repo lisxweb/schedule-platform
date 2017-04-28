@@ -37,7 +37,7 @@ public class User extends BaseModel implements Serializable {
     private String reportId;
 
     private Date reportAt;
-    
+
 	private String creatorId;		//创建人ID
 
 	private String createdAt;		//创建时间

@@ -68,7 +68,7 @@
     <section class="section">
         <!--iframe-->
         <div class="iframe-parent">
-            <iframe src="$path/main" frameborder="0"  id="myiframe" name="myiframe"></iframe>
+            <iframe src="$path/main" frameborder="0"  id="myiframe" nodeName="myiframe"></iframe>
         </div>
         <!--calendar-->
         <div id="calendar">
@@ -86,20 +86,16 @@
                 <a href="javascript:void(0)" class="icon-delete right"></a>
             </div>
 			<form id="userEditForm">
-				<input type="hidden" id="editUserId" name="userId" />
+				<input type="hidden" id="editUserId" nodeName="userId" />
                 <div class="modal-body min-height">
                     <div class="the-information-input the-information-list">
                         <div class="row clear mar-top-10">
-                            <label for="login-name">登 录 名：</label>
-                            <label>$!user.loginName</label>
-                        </div>
-                        <div class="row clear mar-top-10">
                             <label for="job-number">工  号：</label>
-                            <label>$!user.employeeCode</label>
+                            <label>$!user.nodeCode</label>
                         </div>
                         <div class="row clear mar-top-10">
-                            <label for="username">姓  名：</label>
-                            <label>$!user.name</label>
+                            <label for="usernodeName">姓  名：</label>
+                            <label>$!user.nodeName</label>
                         </div>
                         <div class="row clear mar-top-10">
                             <label for="gender">性  别：</label>
@@ -128,18 +124,18 @@
 			<form id="passwordEditForm">
                 <div class="modal-body min-height">
                     <div class="the-information-input the-information-list">
-                     <input type="hidden" value="$!user.userId" name="userId">
+                     <input type="hidden" value="$!user.userId" nodeName="userId">
                         <div class="row clear mar-top-10">
-                            <label for="login-name" class="red-star">旧密码：</label>
-                            <input type="password" id="password" name="password" class=" reset-input">
+                            <label for="login-nodeName" class="red-star">旧密码：</label>
+                            <input type="password" id="password" nodeName="password" class=" reset-input">
                         </div>
                         <div class="row clear mar-top-10 relative">
                             <label for="init-password" class="red-star">新密码：</label>
-                            <input type="password" name="newPassword" id＝"newPassword" class=" reset-input">
+                            <input type="password" nodeName="newPassword" id＝"newPassword" class=" reset-input">
                         </div>
                         <div class="row clear mar-top-10">
                             <label for="job-number" class="red-star">确认密码：</label>
-                            <input type="password" id="comfirmPassword" name="comfirmPassword" class=" reset-input">
+                            <input type="password" id="comfirmPassword" nodeName="comfirmPassword" class=" reset-input">
                         </div>
                     </div>
                 </div>

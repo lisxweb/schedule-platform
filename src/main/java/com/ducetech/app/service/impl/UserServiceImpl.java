@@ -10,12 +10,22 @@ import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.util.Digests;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.UUID;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +41,132 @@ public class UserServiceImpl implements UserService {
 	public User getUserByUserName(String userName) {
 		return userDAO.selectUserByUserName(userName);
 	}
+    @Override
+	public List<User> importFile(MultipartFile mFile, String rootPath){
+        List<User> secUserList = new ArrayList<>();
+
+        String fileName = mFile.getOriginalFilename();
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+        String ym = new SimpleDateFormat("yyyy-MM").format(new Date());
+        String filePath = "uploadFile/" + ym + fileName;
+        try {
+            File file = new File(rootPath + filePath);
+            if (file.exists()) {
+                file.delete();
+                file.mkdirs();
+            }else {
+                file.mkdirs();
+            }
+            mFile.transferTo(file);
+
+            if ("xls".equals(suffix) || "XLS".equals(suffix)) {
+                secUserList = importXls(file);
+            }else if ("xlsx".equals(suffix) || "XLSX".equals(suffix)) {
+                secUserList = importXlsx(file);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return secUserList;
+    }
+
+    private List<User> importXls(File file) {
+        List<User> secUserList = new ArrayList<User>();
+
+        InputStream is = null;
+        HSSFWorkbook hWorkbook = null;
+        try {
+            is = new FileInputStream(file);
+            hWorkbook = new HSSFWorkbook(is);
+            HSSFSheet hSheet = hWorkbook.getSheetAt(0);
+
+            if (null != hSheet){
+                for (int i = 1; i < hSheet.getPhysicalNumberOfRows(); i++){
+                    User su = new User();
+                    HSSFRow hRow = hSheet.getRow(i);
+                    su.setUserName(hRow.getCell(0).toString());
+                    su.setUserCode(hRow.getCell(1).toString());
+                    su.setStationArea(hRow.getCell(2).toString());
+                    userDAO.insertUser(su);
+                    secUserList.add(su);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return secUserList;
+    }
+    private List<User> importXlsx(File file) {
+        List<User> secUserList = new ArrayList<User>();
+
+        InputStream is = null;
+        XSSFWorkbook xWorkbook = null;
+        try {
+            is = new FileInputStream(file);
+            xWorkbook = new XSSFWorkbook(is);
+            XSSFSheet xSheet = xWorkbook.getSheetAt(0);
+
+            if (null != xSheet) {
+                for (int i = 1; i < xSheet.getPhysicalNumberOfRows(); i++) {
+                    User su = new User();
+                    XSSFRow hRow = xSheet.getRow(i);
+                    su.setUserName(hRow.getCell(0).toString());
+                    su.setUserCode(hRow.getCell(1).toString());
+                    su.setStationArea(hRow.getCell(2).toString());
+                    su.setPassword(genRandomNum(6));
+                    userDAO.insertUser(su);
+                    secUserList.add(su);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return secUserList;
+    }
+
+    public static String genRandomNum(int pwd_len){
+        //35是因为数组是从0开始的，26个字母+10个数字
+        final int  maxNum = 36;
+        int i;  //生成的随机数
+        int count = 0; //生成的密码的长度
+        char[] str = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+                'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+                'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+        StringBuffer pwd = new StringBuffer("");
+        Random r = new Random();
+        while(count < pwd_len){
+            //生成随机数，取绝对值，防止生成负数，
+
+            i = Math.abs(r.nextInt(maxNum));  //生成的数最大为36-1
+
+            if (i >= 0 && i < str.length) {
+                pwd.append(str[i]);
+                count ++;
+            }
+        }
+
+        return pwd.toString();
+    }
 
     @Override
     public User getUserByUserCode(String userCode) {

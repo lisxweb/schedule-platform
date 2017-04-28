@@ -2,6 +2,7 @@ package com.ducetech.app.dao;
 
 import com.ducetech.app.model.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,8 +19,7 @@ public interface UserDAO {
 	User selectUserByUserName(@Param("userName") String userName);
 
     User selectUserByUserCode(@Param("userCode") String userCode);
-	
-	/** 
+	/**
 	* @Title: selectPermissionByUserId  
 	* @param userId
 	* @return List<String>

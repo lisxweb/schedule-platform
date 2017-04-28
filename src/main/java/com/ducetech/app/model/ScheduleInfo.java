@@ -21,6 +21,12 @@ public class ScheduleInfo extends BaseModel implements Serializable {
     private String userId;
     //排班日期
     private Date scheduleDate;
+    //星期几
+    private String scheduleWeek;
+    //所属站点
+    private String station;
+    //所属站区
+    private String stationArea;
     //备注
     private String scheduleDesc;
     //是否请假

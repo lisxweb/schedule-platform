@@ -4,6 +4,7 @@ import com.ducetech.app.model.Role;
 import com.ducetech.app.model.User;
 import com.ducetech.framework.model.PagerRS;
 import com.ducetech.framework.model.BaseQuery;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public interface UserService {
 	User getUserByUserName(String userName);
 
     User getUserByUserCode(String userCode);
+
+    List<User> importFile(MultipartFile mFile,String rootPath);
 	/** 
 	* @Title: getUserPermission  
 	* @param userId

@@ -22,10 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +44,7 @@ public class UserController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request) {
 		if (request.getSession().getAttribute("DT_LOGIN_NAME")!=null) {
@@ -48,7 +52,23 @@ public class UserController extends BaseController {
 		}
 		return "login";
 	}
+    @RequestMapping(value = "/user/toImport", method = RequestMethod.GET)
+    public String toImport(HttpServletRequest request){
+        return "redirect:/user/import";
+    }
 
+
+    @RequestMapping("/import")
+    public ModelAndView importFile(@RequestParam(value="uploadFile")MultipartFile mFile, HttpServletRequest request, HttpServletResponse response){
+        String rootPath = request.getSession().getServletContext().getRealPath(File.separator);
+        List<User> secUserList = userService.importFile(mFile, rootPath);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("type", "import");
+        mv.addObject("secUserList", secUserList);
+        mv.setViewName("/success");
+        return mv;
+    }
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage() {
 		SecurityUtils.getSubject().logout();
@@ -127,9 +147,11 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public PagerRS<User> personData(HttpServletRequest request) throws Exception {
 		BaseQuery<User> query = User.getSearchCondition(User.class, request);
+
 		query.getT().setUserCode(query.getT().getUserCode().trim());
 		query.getT().setUserName(query.getT().getUserName().trim());
 		PagerRS<User> rs = userService.getUserByPager(query);
+		System.out.println(rs.getCount()+"|||||");
 		return rs;
 	}
 
@@ -142,14 +164,16 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	@ResponseBody
 	public OperationResult create(User user, HttpServletRequest request) throws IOException {
+	    System.out.println(user.getUserCode()+"|||||||||");
 		User userInfo = getLoginUser(request);
 		User ur = new User();
 		ur.setUserCode(user.getUserCode());
-		List<User> uCode = userService.getUserByQuery(ur);
-		if(uCode!=null && uCode.size()>0) {
+		User uCode = userService.getUserByUserCode(user.getUserCode());
+		if(uCode!=null) {
 			return OperationResult.buildFailureResult("工号已存在", 0);
 		} else {
 			user.setCreatorId(userInfo.getUserId());
+			user.setIsAdmin(user.getRoleIds()!=""?0:1);
 			user.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
 			userService.addUser(user);
 			return OperationResult.buildSuccessResult("成功", 1);
@@ -220,7 +244,7 @@ public class UserController extends BaseController {
 		return OperationResult.buildFailureResult("重置成功，密码为：123456", 1);
 	}
 
-	public static void main(String [] args){
-        System.out.println(Digests.md5Hash("123456", "cb7e52304f0d11e6965c00ff2c2e2b3f"));
-    }
+//	public static void main(String [] args){
+//        System.out.println(Digests.md5Hash("123456", "cb7e52304f0d11e6965c00ff2c2e2b3f"));
+//    }
 }

@@ -18,6 +18,8 @@ public class Shift extends BaseModel implements Serializable {
     private String shiftName;
     //班次人数
     private int shiftNum;
+    //班次颜色
+    private String scheduleColor;
     //开始时间
     private Date stratAt;
     //结束时间
