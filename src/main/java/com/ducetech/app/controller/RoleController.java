@@ -34,7 +34,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("permissions")
-public class PermissionController extends BaseController{
+public class RoleController extends BaseController{
 
 	@Autowired
 	private UserService userService;
@@ -54,7 +54,7 @@ public class PermissionController extends BaseController{
 	*/
 	@RequestMapping(value = "/role", method = RequestMethod.GET)
 	public String role(Model model) {
-		return "/permission/index";
+		return "/role/index";
 	}
 
 	/**

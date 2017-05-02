@@ -44,13 +44,20 @@ public interface DepartmentDAO {
      * @Description: 按登部门名称查询
      */
     Department selectDepartmentByNodeCode(@Param("nodeCode") String nodeCode);
-
+    /**
+     * 根据id获取
+     * @param deptId
+     * @return
+     */
+    Department getDepartmentById(@Param("deptId") String deptId);
     /**
      * @Title: selectPermissionByDepartmentId
      * @param parentCode
      * @return List<String>
      * @Description: 获取某用户的全部菜单权限
      */
-    List<String> selectDepartmentByParentCode(@Param("parentCode") String parentCode);
+    String selectDepartmentByParentCode(@Param("parentCode") String parentCode);
+
+    List<Department> selectByParentCode(@Param("parentCode") String parentCode);
 
 }

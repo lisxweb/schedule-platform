@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>运三公司新班制辅助管理系统</title>
+    #set($path = ${rc.contextPath})
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/static/css/common.css">
@@ -13,7 +14,6 @@
     <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/static/js/underscore-min.js" type="text/javascript"></script>
     <script src="/static/js/moment.min.js" type="text/javascript"></script>
-    <script src="/static/js/clndr.min.js" type="text/javascript"></script>
     <script src="/static/js/common.js" type="text/javascript"></script>
     <script src="/static/js/alert.js" type="text/javascript"></script>
     <script src="/static/js/index.js" type="text/javascript"></script>
@@ -49,7 +49,7 @@
                 #end
                 <div class="collapse in slide-menu" id="part1">
                     #if($shiro.hasPermission("系统管理-人员管理"))
-                    <a class="active" href="/users/person" target="myiframe">
+                    <a class="active" href="/user" target="myiframe">
                         <span class="icon-19"></span>人员管理
                     </a>
                     #end
@@ -124,16 +124,8 @@
         </div>
         <!-- 系统设置 end -->
     </div>
-    <iframe id="myiframe" name="myiframe" src=""></iframe>
+    <iframe id="myiframe" name="myiframe" src="/user"></iframe>
 </section>
 </div>
-<!--隐藏的页面元素 end-->
-<!-- 左侧菜单 end -->
-<!-- 日历插件 start -->
-<div id="calendar">
-    <h2>日历便签</h2>
-    <div class="calendar"></div>
-</div>
-<!-- 日历插件 end -->
 </body>
 </html>

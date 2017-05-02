@@ -1,24 +1,16 @@
 package com.ducetech.app.service.impl;
 
 import com.ducetech.app.dao.DepartmentDAO;
-import com.ducetech.app.dao.UserDAO;
 import com.ducetech.app.model.Department;
-import com.ducetech.app.model.Role;
-import com.ducetech.app.model.User;
 import com.ducetech.app.service.DepartmentService;
-import com.ducetech.app.service.RoleService;
-import com.ducetech.app.service.UserService;
 import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.model.PagerRS;
-import com.ducetech.framework.util.Digests;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
@@ -59,6 +51,37 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
+    public String selectDepartmentByParentCode(String parentCode){
+        List<Department> nodes = querySubNodesByCode(parentCode);
+        String newCode="001";
+        if(!nodes.isEmpty()){
+            Department node = nodes.get(nodes.size()-1);
+            String nodeCode = node.getNodeCode();
+            String subCode = nodeCode.substring(nodeCode.length()-3, nodeCode.length());
+            int current = Integer.parseInt(subCode);
+            current = current+1;
+            newCode = leftJoin(current, 3, "0");
+        }
+
+        return parentCode+newCode;
+    }
+    public static String leftJoin(Object obj,int scale,String val){
+        String str = String.valueOf(obj);
+        int len = str.length();
+        if(len<scale){
+            int diff = scale-len;
+            String prefix="";
+            for(int i=0;i<diff;i++){
+                prefix+=val;
+            }
+            str = prefix+str;
+        }
+        return str;
+    }
+    public List<Department> querySubNodesByCode(String parentCode){
+        return departmentDAO.selectByParentCode(parentCode);
+    }
+    @Override
     public void updateDepartment(Department dept) {
         departmentDAO.updateDepartment(dept);
     }
@@ -68,5 +91,10 @@ public class DepartmentServiceImpl implements DepartmentService{
         Department dept = departmentDAO.selectDepartmentByNodeCode(nodeCode);
         dept.setIfUse(1);
         departmentDAO.updateDepartment(dept);
+    }
+
+    @Override
+    public Department selectDepartmentByNodeCode(String nodeCode) {
+        return departmentDAO.selectDepartmentByNodeCode(nodeCode);
     }
 }

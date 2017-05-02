@@ -30,6 +30,8 @@ public class User extends BaseModel implements Serializable {
 
 	private String station;	        //站点
 
+    private String position;        //岗位
+
 	private List<Role> roles; 		// 用户拥有的角色列表
 	
 	private String roleIds;			//角色IDS

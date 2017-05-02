@@ -131,7 +131,7 @@ public class UserController extends BaseController {
 	 * @return String
 	 * @Description: 跳转人员首页
 	 */
-	@RequestMapping(value = "/users/person", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String person(Model model) {
 		Role role = new Role();
 		role.setIsDeleted("0");
