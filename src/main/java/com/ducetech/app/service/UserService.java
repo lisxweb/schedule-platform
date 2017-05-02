@@ -22,6 +22,7 @@ public interface UserService {
     User getUserByUserCode(String userCode);
 
     List<User> importFile(MultipartFile mFile,String rootPath);
+    String genRandomNum(int pwd_len);
 	/** 
 	* @Title: getUserPermission  
 	* @param userId
@@ -136,7 +137,7 @@ public interface UserService {
 	* @return void
 	* @Description: 重置密码
 	*/
-	void resetPass(User user);
+	String resetPass(User user);
 
 	/** 
 	* @Title: updateUserStatus  

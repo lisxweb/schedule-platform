@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
         return secUserList;
     }
 
-    public static String genRandomNum(int pwd_len){
+    public String genRandomNum(int pwd_len){
         //35是因为数组是从0开始的，26个字母+10个数字
         final int  maxNum = 36;
         int i;  //生成的随机数
@@ -290,8 +290,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void resetPass(User user) {
-		userDAO.updateUser(user);
+	public String resetPass(User user) {
+	    String pwd = genRandomNum(6);
+        user.setPassword(pwd);
+	    userDAO.updateUser(user);
+	    return pwd;
 	}
 
 	@Override

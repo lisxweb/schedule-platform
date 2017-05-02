@@ -34,7 +34,7 @@ public class Department extends BaseModel implements Serializable{
     private long updatorId;
 
     // 创建时间
-    private Date createdAt;
+    private String createdAt;
 
     // 更新时间
     private Date updatedAt;

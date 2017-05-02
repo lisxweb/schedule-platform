@@ -23,30 +23,17 @@ import java.util.UUID;
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
 
-
     @Autowired
     private DepartmentDAO departmentDAO;
-	
-    @Override
-    public Department selectDepartmentByNodeName(String nodeName) {
-        return departmentDAO.selectDepartmentByNodeName(nodeName);
-    }
-
 
     @Override
-    public Department selectDepartmentByNodeCode(String nodeCode) {
-        return departmentDAO.selectDepartmentByNodeCode(nodeCode);
-    }
-
-    @Override
-    public List<Department> getAllDepartment() {
+    public List<Department> getAllDepartments() {
         return this.getDepartmentByPager(new BaseQuery<Department>(new Department())).getResults();
     }
 
-
     @Override
-    public List<Department> getDepartmentByQuery(Department department) {
-        return departmentDAO.selectDepartment(department);
+    public List<Department> getDepartmentByQuery(Department dept) {
+        return departmentDAO.selectDepartment(dept);
     }
 
     @Override
@@ -59,11 +46,6 @@ public class DepartmentServiceImpl implements DepartmentService{
         PageInfo page = new PageInfo(deptList);
         PagerRS<Department> pagerRS = new PagerRS<Department>(deptList, page.getTotal(), page.getPages());
         return pagerRS;
-    }
-
-    @Override
-    public List<String> selectDepartmentByParentCode(String parentCode) {
-        return departmentDAO.selectDepartmentByParentCode(parentCode);
     }
 
     @Override
@@ -82,8 +64,8 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public void deleteDepartmentById(String deptId, String isDeleted) {
-        Department dept = departmentDAO.selectDepartmentByNodeCode(deptId);
+    public void deleteDepartment(String nodeCode) {
+        Department dept = departmentDAO.selectDepartmentByNodeCode(nodeCode);
         dept.setIfUse(1);
         departmentDAO.updateDepartment(dept);
     }

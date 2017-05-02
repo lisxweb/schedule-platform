@@ -1,0 +1,731 @@
+@import "color";
+@blue:#648EF1;
+@black:#1a1a1a;/* 深灰色 */
+@border:#e5e5e5;
+@red:#C0272D;
+@green:#39B44A;
+ul,ol {
+  list-style: none;
+  margin-bottom :0;
+}
+p{
+  margin:0;
+}
+input {
+  margin: 0;
+}
+textarea {
+  resize: none;
+}
+.clear-float {
+  clear: both;
+  overflow: hidden;
+}
+/* 重置a标签的默认样式 */
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+/* 公共图标按钮样式 */
+.btnDefault{
+  padding:0 20px;
+  text-align: center;
+  line-height: 36px;
+  float: left;
+  margin-left:5px;
+  border:1px solid @border;
+  border-radius:5px;
+  box-sizing: border-box;
+  background: #fff;
+  &.bgGreen,&.bgBlue,&.bgOrange{
+    *{
+      color: #fff !important;
+    }
+  }
+  &.bgGreen{
+    background: @green;
+    color: #fff;
+  }
+  &.bgBlue{
+    background: @blue;
+    color:#fff;
+  }
+  &.bgOrange{
+    background: @orange;
+  }
+}
+select {
+  height: 25px;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+/* 最外层容器 */
+.wrapper {
+  padding:15px;
+  background:#fff;
+}
+/* 标题栏 */
+.content-header {
+  min-height:60px;
+  clear: both;
+  overflow: hidden;
+  padding:10px 15px 0;
+  border-bottom: 1px solid @border;
+  .float-left{
+    .bgGreen{
+      margin-left:0;
+    }
+  }
+  .float-right{
+    *{
+      float: left;
+    }
+    .search-input{
+      width:300px;
+      height:38px;
+      border:1px solid @border;
+      border-radius: 5px;
+      background: #fff;
+      *{
+        float:left;
+      }
+      span{
+        width:40px;
+        line-height:38px;
+        text-align: center;
+        color: @blue;
+      }
+      input{
+        border:0;
+        line-height:30px;
+        margin-top:4px;
+        color: #999;
+        outline:none;
+      }
+    }
+  }
+}
+/* 按钮组合 */
+.btn-inline {
+  .btn-operate {
+    margin-left:5px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  a {
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+/* 表格样式 */
+.table{
+  thead{
+    tr{
+      background: #D7E4FF;
+      th{
+        padding:0 8px !important;
+        line-height:50px;
+        color: #808080;
+        font-weight: normal;
+        color: #333;
+        border:0;
+      }
+    }
+  }
+  tbody{
+    tr{
+      &:nth-of-type(2n){
+        background: #F9F9F9;
+      }
+      outline: none;
+      td{
+        padding:0 8px;
+        line-height:50px;
+        border-bottom:1px solid @border;
+        border-top:0;
+        color: @black;
+        a{
+          float: left;
+          margin-left:10px;
+          color: #1887EC;
+          &:nth-of-type(1){
+            margin-left:0;
+          }
+        }
+      }
+    }
+  }
+}
+/* 分页 */
+.page{
+  overflow: hidden;
+  clear: both;
+  ul{
+    float: right;
+    border:1px solid @border;
+    border-left:0;
+    li{
+      float: left;
+      width:30px;
+      line-height:30px;
+      border-left:1px solid @border;
+      text-align: center;
+      &.active{
+        background: @blue;
+        color: #fff;
+      }
+    }
+  }
+}
+/* 状态样色 */
+.red{
+  color: #C0272D !important;
+}
+.orange{
+  color: @orange !important;
+}
+.gray{
+  color: #989898 !important;
+}
+.green{
+  color: #009145 !important;
+}
+/*表单部分*/
+.form-container{
+  margin-top: 10px;
+  width:100%;
+}
+.form_line{
+  float:left;
+  margin:2px 0 10px;
+  &>*{
+    float: left;
+  }
+  label{
+    width:70px;
+    text-align:right;
+    line-height:32px;
+    color: @black;
+    margin-right:10px;
+  }
+  .datetimepicker{
+    width:130px;
+    input{
+      padding:6px;
+      border-color:@border;
+    }
+    .input-group-addon{
+      border-color:@border;
+    }
+  }
+  >span{
+    margin:0 5px;
+    line-height:32px;
+  }
+  &>input[type="text"],select,.section input[type="text"],.section select{
+    width:130px;
+    height:34px;
+    padding:0 5px;
+    border:1px solid @border;
+    border-radius:3px;
+  }
+  textarea{
+    border:1px solid @border;
+  }
+  a.button{
+    width:120px;
+    height:32px;
+    line-height:32px;
+    border-radius:3px;
+    background:@blue;
+    color: #fff;
+    text-align: center;
+  }
+}
+.time-slot{
+  input{
+    width: 85px !important;
+  }
+  em.input-group-addon,input{
+    border-radius:0;
+  }
+  .to{
+    width:8px !important;
+    height:1px;
+    background:#999;
+    font-size:0;
+    display: inline-block;
+    margin:15px 5px 0;
+  }
+}
+.mar-t20{
+  margin-top:20px;
+}
+/* 模态框样式重写 */
+.modal-backdrop{
+  background-color:#fff;
+}
+.modal{
+  .modal-content{
+    border-radius:0;
+    border:0;
+    width:800px;
+    .modal-body{
+      min-height:200px;
+    }
+  }
+  .modal-header{
+    height:40px;
+    padding:0 15px;
+    background: @blue;
+    *{
+      color: #fff;
+    }
+    h4{
+      font-size:16px;
+      font-weight:normal;
+      line-height:40px;
+    }
+    a{
+      margin-top:10px;
+      opacity:1;
+      font-size:18px;
+    }
+  }
+}
+.btn{
+  width:100px;
+  height:34px;
+  border-raius:5px;
+  box-sizing: border-box;
+  &.btn-confirm:hover{
+    color: #fff;
+  }
+  &.btn-red{
+    background: @red;
+    color: #fff;
+  }
+}
+.btn-cancel{
+  border:1px solid @border;
+  background: #fff;
+}
+.btn-confirm{
+  background: @blue;
+  color: #fff;
+}
+/* 模态框 */
+.modal{
+  .form-container{
+    .form_line{
+      width:100%;
+      p{
+        width:100%;
+        line-height:32px;
+      }
+      label{
+        width:100px;
+        margin-right:10px;
+        &.require:before{
+          content:"*";
+          color:red;
+          font-size:14px;
+          margin-right:3px;
+        }
+      }
+      input,select{
+        width:460px;
+        margin-right:5px;
+      }
+      .btn{
+        margin-left:10px;
+      }
+      &.psw{
+        input{
+          width:350px;
+        }
+        p{
+          text-indent:100px;
+        }
+      }
+      .section{
+        *{
+          float: left;
+        }
+        input{
+          width:217px;
+        }
+        span{
+          margin:0 5px;
+        }
+      }
+    }
+    span{
+      line-height:32px;
+      margin-right:10px;
+      &.orange{
+        color: @orange;
+      }
+    }
+    .datetimepicker {
+      input {
+        margin-right: 0;
+        width: 174px;
+      }
+    }
+    textarea{
+      width: 640px;
+      height:80px;
+      border-radius:3px;
+      padding:5px;
+      line-height:20px;
+    }
+  }
+  .wrapper{
+    padding:0;
+    margin:15px 0 0;
+  }
+}
+/* 人员分组 */
+.bgYellow{
+  background:#F5D328;
+}
+.bgGreen{
+  background:#70BF41;
+}
+.bgRed{
+  background:#EC5D57;
+}
+.heading{
+  font-size:20px;
+  padding:10px 0 20px;
+  .orange{
+    font-size:20px;
+    margin-left:20px;
+  }
+  ul{
+    li{
+      float: left;
+      margin-left:30px;
+      span{
+        width:40px;
+        height:20px;
+        float: left;
+        margin-right:7px;
+      }
+    }
+  }
+}
+/* 下拉菜单样式重写 */
+.dropdown{
+  position: absolute;
+  right:5px;
+  top:5px;
+  outline: none;
+  button{
+    background: @blue;
+    width:80px;
+    height:30px;
+    line-height:30px;
+    padding:0;
+    color: #fff;
+    font-size:16px;
+    span{
+      color: #fff;
+      border-width:6px;
+      margin-left:5px !important;
+    }
+    &:hover{
+      color:#fff;
+    }
+  }
+  .dropdown-menu{
+    right:0;
+    left:auto;
+    width:100px;
+    border:1px solid @border;
+    border-radius: 0;
+    li{
+      padding:10px 0;
+      a:hover{
+        background: none;
+      }
+      &:nth-last-of-type(1) a{
+        color: @red;
+      }
+    }
+  }
+}
+.stationArea{
+  overflow: hidden;
+  clear:both;
+  .list{
+    width:400px;
+    float:left;
+    margin-right:10px;
+    background: #f1f1f1;
+    .station-head{
+      height:40px;
+      background: #D7E4FF;
+      position: relative;
+      span{
+        margin-left:10px;
+        line-height:40px;
+      }
+    }
+    .stations{
+      height:310px;
+      overflow: auto;
+      padding:5px 10px;
+      li{
+        width:100%;
+        height:40px;
+        float: left;
+        background: #fff;
+        margin:5px 0;
+        *{
+          line-height:40px;
+        }
+        span{
+          float: left;
+          margin-left:10px;
+        }
+        a{
+
+        }
+      }
+      .clear{
+        height:0;
+        padding:0;
+        margin:0;
+      }
+    }
+  }
+}
+/* 权限列表 */
+.post{
+  width:100%;
+  margin:15px 0;
+  float: left;
+  td{
+    padding:5px 8px;
+    color: #000;
+    vertical-align:top;
+    p{
+      line-height:24px;
+      color: #666;
+    }
+  }
+}
+/* 班次设置 */
+.menu{
+  position: absolute;
+  width:160px;
+  height:100%;
+  background:#e5e5e5;
+  left:0;
+  top:0;
+  *{
+    text-indent:40px;
+    width:100%;
+  }
+  .menu-head{
+    background:#CBCBCB;
+    line-height:60px;
+  }
+  .nav-tabs{
+    border:0;
+    li>a{
+      line-height:40px;
+      border:0;
+      border:0;
+      border-radius:0;
+    }
+    >li>a:hover,>li.active>a, >li.active>a:focus, >li.active>a:hover{
+      background: #fff;
+      border:0;
+    }
+  }
+}
+.content{
+  margin-left:160px;
+}
+.shifts{
+  float: left;
+  width:100%;
+  border:0;
+  margin-top:17px;
+  margin-bottom:10px;
+  li{
+    margin-right:10px;
+    a,a:hover,a:focus{
+      background: @blue;
+      color: #fff;
+      border-radius:5px;
+      border:2px solid @blue;
+      padding:5px 15px;
+    }
+    &.active{
+      a,a:hover,a:focus{
+        border:2px solid @blue;
+        background: #fff;
+        color: @blue;
+      }
+    }
+  }
+}
+.table-header{
+  position: relative;
+  width:100%;
+  height:50px;
+  margin:10px 0;
+  >span{
+    position: absolute;
+    left:0;
+    top:10px;
+    padding-left:5px;
+    height:30px;
+    line-height:30px;
+    border-left:4px solid @blue;
+  }
+  .dropdown{
+    right:0;
+    button{
+      width:100px;
+      height:40px;
+    }
+  }
+}
+/* 添加新方案 */
+.newPlan{
+  display: block;
+  width:260px;
+  line-height:60px;
+  border:2px dashed @blue;
+  text-align: center;
+  color: @blue;
+  font-size:18px;
+  margin-top:20px;
+}
+/* 柱状图 */
+#myChart{
+  width:800px;
+  height:400px;
+}
+.chart{
+  ul{
+    float: right;
+    margin-bottom:20px;
+    li{
+      float: left;
+      width:200px;
+      span{
+        float:left;
+        width:20px;
+        height:20px;
+        margin-right:10px;
+        &.realHour{
+          background: @green;
+        }
+        &.planHour{
+          background:@blue;
+        }
+      }
+    }
+  }
+  margin-bottom:30px;
+}
+/* 排班表格 */
+.schedule{
+  width:100%;
+  min-height:660px;
+  overflow-x:auto;
+  table{
+    min-width:100%;
+    margin-bottom:20px;
+    th,td{
+      min-width:50px;
+      text-align: center;
+      border:2px solid #fff;
+      padding:8px;
+    }
+    th{
+      background: #767C85;
+      color: #fff;
+      font-weight:normal;
+    }
+    td{
+      position: relative;
+      background: #DCDEE0;
+      color: #000;
+      z-index:1;
+      &.bgYellow{
+        background:#F5D328;
+        z-index:2;
+      }
+      &.bgGreen{
+        background:#70BF41;
+      }
+      &.bgRed{
+        background:#EC5D57;
+      }
+      .remarks{
+        position: absolute;
+        width:260px;
+        padding:10px;
+        top:38px;
+        left:0;
+        background: #FFFBE9;
+        border:1px solid #FFDEB3;
+        p{
+          line-height:30px;
+          text-align: left;
+          color: #1a1a1a;
+        }
+        .head{
+          font-size:18px;
+          margin-bottom:10px;
+        }
+      }
+      .rightMenu{
+        position: absolute;
+        width:120px;
+        left:0;
+        top:38px;
+        border:1px solid #E5E5E5;
+        background:#fff;
+        a{
+          display:block;
+          line-height: 40px;
+          border-top:1px solid @border;
+          color: #1a1a1a;
+        }
+      }
+    }
+    .dark{
+      background:#535761;
+      color: #fff;
+    }
+  }
+  .page{
+    .float-left{
+      span{
+        margin-left:10px;
+        line-height:38px;
+      }
+    }
+  }
+}

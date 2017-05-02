@@ -73,7 +73,7 @@
 	<!-- 插入新用户 -->
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
 		insert into user (password,user_code,user_name,station_area,station,creator_id,created_at,is_admin)
-		values(#{password},#{userCode},#{userName},#{stationArea},#{station},#{creatorId},#{createdAt},#{is_admin})
+		values(#{password},#{userCode},#{userName},#{stationArea},#{station},#{creatorId},#{createdAt},#{isAdmin})
 	</insert>
 	
 	<!-- 更新某用户信息 -->

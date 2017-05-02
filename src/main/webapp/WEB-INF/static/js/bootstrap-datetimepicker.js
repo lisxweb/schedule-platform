@@ -1059,7 +1059,7 @@
 
                 showPicker: function () {
                     widget.find('.timepicker > div:not(.timepicker-picker)').hide();
-                    widget.find('.timepicker .timepicker-picker').show(); //by lj
+                    widget.find('.timepicker .timepicker-picker').show();
                 },
 
                 showHours: function () {
@@ -1274,7 +1274,7 @@
             attachDatePickerElementEvents = function () {
                 input.on({
                     'change': change,
-                    'blur': options.debug ? '' : hide,//ljljlj
+                    'blur': options.debug ? '' : hide,
                     'keydown': keydown,
                     'keyup': keyup,
                     'focus': options.allowInputToggle ? show : ''
@@ -2326,12 +2326,12 @@
         disabledDates: false,
         enabledDates: false,
         icons: {
-            time: 'icon icon-clock2',//by lj
-            date: 'icon icon-calendar-alt-stroke',//by lj
-            up: 'icon icon-chevron-up',//by lj
-            down: 'icon icon-chevron-down',//by lj
-            previous: 'icon icon-chevron-left',//by lj
-            next: 'icon icon-chevron-right',//by lj
+            time: 'glyphicon glyphicon-time',
+            date: 'glyphicon glyphicon-calendar',
+            up: 'glyphicon glyphicon-chevron-up',
+            down: 'glyphicon glyphicon-chevron-down',
+            previous: 'glyphicon glyphicon-chevron-left',
+            next: 'glyphicon glyphicon-chevron-right',
             today: 'glyphicon glyphicon-screenshot',
             clear: 'glyphicon glyphicon-trash',
             close: 'glyphicon glyphicon-remove'

@@ -8,10 +8,10 @@ import java.util.List;
 
 
 public interface UserDAO {
-	
-	
-	/** 
-	* @Title: selectUserByLoginName  
+
+
+	/**
+	* @Title: selectUserName
 	* @param userName
 	* @return User
 	* @Description: 按登录名查询用户姓名

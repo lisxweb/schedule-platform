@@ -65,4 +65,18 @@ public class DepartmentController extends BaseController {
 		return rs;
 	}
 
+    /**
+     * @Title: addUser
+     * @return void
+     * @Description: 新增部门
+     */
+    @RequestMapping(value = "/addDepartment", method = RequestMethod.POST)
+    @ResponseBody
+    public OperationResult create(Department dept) throws Exception {
+        dept.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
+        departmentService.insertDepartment(dept);
+        return OperationResult.buildSuccessResult("成功", 1);
+    }
+
+
 }

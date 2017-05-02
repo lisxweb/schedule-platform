@@ -86,11 +86,7 @@ ul.nav > li {
 }
 .content {
   width: 325px;
-  height:300px;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin:-200px 0 0 -162px;
+  margin: 80px auto 0;
   text-align: center;
 }
 .content h1.text-gray {
@@ -121,7 +117,6 @@ ul.nav > li {
 }
 .brand {
   color: #333;
-  font-family: "微软雅黑";
 }
 .product {
   color: #808080;
@@ -141,11 +136,10 @@ ul.nav > li {
 }
 .icon-input input {
   float: left;
-  width: 283px;
+  width: 266px;
   height: 36px;
   border: 0;
   outline: none;
-  padding:0 5px;
 }
 .btn-login {
   display: inline-block;
@@ -155,7 +149,6 @@ ul.nav > li {
   color: #FFF;
   background-color: #09F;
   font-size: 14px;
-  border:0;
 }
 span.checkbox {
   float: left;
@@ -462,5 +455,3 @@ span.checkbox span.checked {
 .tip-list .texindent {
   text-indent: 2em;
 }
-/* 登录页提示信息 */
-.error#result{color:red;text-align:left;}

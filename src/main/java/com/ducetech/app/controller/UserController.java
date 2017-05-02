@@ -10,7 +10,6 @@ import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.model.PagerRS;
 import com.ducetech.framework.util.CookieUtil;
 import com.ducetech.framework.util.DateUtil;
-import com.ducetech.framework.util.Digests;
 import com.ducetech.framework.web.view.OperationResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -44,7 +43,11 @@ public class UserController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
-
+    /**
+     * 登录
+     * @param request
+     * @return
+     */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request) {
 		if (request.getSession().getAttribute("DT_LOGIN_NAME")!=null) {
@@ -83,7 +86,7 @@ public class UserController extends BaseController {
 		UsernamePasswordToken token = new UsernamePasswordToken(userCode,password);
 		if (StringUtils.isNotEmpty(userCode) && StringUtils.isNotEmpty(password)) {
 			try{
-				subject.login(token);	
+				subject.login(token);
 				User user = (User)subject.getPrincipal();
 				log.info("{}:{} login.", userCode, user.getUserName());
 				subject.getSession().setAttribute("DT_LOGIN_USER", user);
@@ -134,7 +137,7 @@ public class UserController extends BaseController {
 		role.setIsDeleted("0");
 		List<Role> roles = roleService.getRoleByQuery(role);
 		model.addAttribute("roles", roles);
-		return "/user/users";
+		return "/user/index";
 	}
 
 	/**
@@ -147,11 +150,9 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public PagerRS<User> personData(HttpServletRequest request) throws Exception {
 		BaseQuery<User> query = User.getSearchCondition(User.class, request);
-
 		query.getT().setUserCode(query.getT().getUserCode().trim());
 		query.getT().setUserName(query.getT().getUserName().trim());
 		PagerRS<User> rs = userService.getUserByPager(query);
-		System.out.println(rs.getCount()+"|||||");
 		return rs;
 	}
 
@@ -164,84 +165,34 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
 	@ResponseBody
 	public OperationResult create(User user, HttpServletRequest request) throws IOException {
-	    System.out.println(user.getUserCode()+"|||||||||");
 		User userInfo = getLoginUser(request);
-		User ur = new User();
-		ur.setUserCode(user.getUserCode());
+		user.setUserPass(user.getPassword());
 		User uCode = userService.getUserByUserCode(user.getUserCode());
 		if(uCode!=null) {
 			return OperationResult.buildFailureResult("工号已存在", 0);
 		} else {
 			user.setCreatorId(userInfo.getUserId());
 			user.setIsAdmin(user.getRoleIds()!=""?0:1);
+			System.out.println(user.getIsAdmin()+"||");
 			user.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
 			userService.addUser(user);
 			return OperationResult.buildSuccessResult("成功", 1);
 		}
 	}
 
-	/**
-	 * @param userId
-	 * @Description: 跳转人员编辑页面
-	 */
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public User edit(@PathVariable(value="id")String userId) throws IOException {
-		User user = new User();
-		if(org.apache.commons.lang3.StringUtils.isNotEmpty(userId)){
-			user = userService.getUserByUserId(userId);
-		}
-		return user;
-	}
-
-	/**
-	 * @param user
-	 * @Description: 更新人员信息
-	 */
-	@RequestMapping(value = "/users", method = RequestMethod.PUT)
-	@ResponseBody
-	public OperationResult update(User user) throws IOException {
-		List<User> uList = userService.getAllUsers();
-		for (int i = 0; i < uList.size(); i++) {
-			if(uList.get(i).getUserId().equals(user.getUserId())){
-				uList.remove(i);
-			}
-		}
-		for (User us : uList) {
-			if (us.getUserCode().equals(user.getUserCode())) {
-				return OperationResult.buildFailureResult("工号已存在", 0);
-			}
-		}
-		userService.updateUser(user);
-		return OperationResult.buildFailureResult("成功", 1);
-	}
-
-
-	/**
-	 * @Description: 人员禁用启用
-	 */
-	@RequestMapping(value = "/users/{id}/updateStatus", method = RequestMethod.PUT)
-	@ResponseBody
-	public OperationResult updateStatus(@PathVariable(value="id") String userId, int isDeleted) throws IOException {
-		User user = new User();
-		user.setUserId(userId);
-		user.setIsDeleted(isDeleted);
-		userService.updateUserStatus(user);
-		return OperationResult.buildFailureResult("成功", 1);
-	}
 
 	/**
 	 * @Title: resetPass
 	 * @Description: 重置密码为123456
 	 */
-	@RequestMapping(value = "/users/{id}/resetPass", method = RequestMethod.GET)
+	@RequestMapping(value = "/users/{id}/resetPass", method = RequestMethod.PUT)
 	@ResponseBody
-	public OperationResult resetPass(@PathVariable(value="id") String userId) throws IOException {
+	public ModelAndView resetPass(@PathVariable(value="id") String userId) throws IOException {
 		User user = userService.getUserByUserId(userId);
-		System.out.println(user.getPassword()+"||||||");
-		user.setPassword(Digests.md5Hash("123456", user.getSecretKey()));
-		userService.resetPass(user);
-		return OperationResult.buildFailureResult("重置成功，密码为：123456", 1);
+		String pwd = userService.resetPass(user);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("password", pwd);
+        return mv;
 	}
 
 //	public static void main(String [] args){

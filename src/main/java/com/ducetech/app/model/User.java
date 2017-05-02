@@ -16,6 +16,8 @@ public class User extends BaseModel implements Serializable {
 
 	private String password; 		// 用户密码,由于采用shiro自带的MD5加密算法
 
+    private String userPass;
+
 	private String secretKey;		//秘钥,用作生成密码中的盐
 	
 	private String userCode; 	    // 工号
@@ -44,5 +46,5 @@ public class User extends BaseModel implements Serializable {
 
 	private int isDeleted;		//删除标记	0启用	1停用	默认0启用
 
-    private int isAdmin;            //是否是管理员
+    private int isAdmin;            //是否是管理员 1是管理员 0是普通 默认0
 }

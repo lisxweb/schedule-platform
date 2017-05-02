@@ -1,206 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>地铁运营三分公司新班制辅助管理系统</title>
-    #parse('common/path-css.vm')
-    <script src="$path/static/js/alert.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <title>运三公司新班制辅助管理系统</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/demo.css">
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/js/underscore-min.js" type="text/javascript"></script>
+    <script src="/static/js/moment.min.js" type="text/javascript"></script>
+    <script src="/static/js/clndr.min.js" type="text/javascript"></script>
+    <script src="/static/js/common.js" type="text/javascript"></script>
+    <script src="/static/js/alert.js" type="text/javascript"></script>
+    <script src="/static/js/index.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
 </head>
-<body style="overflow:hidden;">
-<div class="container clear">
-    <!--头部内容-->
-    <header class="clear">
-        <div class="clear left">
-            <span class="icon-logo logo-img left"></span>
-            <h3 class="main-title right">地铁运营三分公司新班制辅助管理系统</h3>
-        </div>
-        <ul class="right header-r-ul">
-            <li class="left main-select">
-                <a class="userName" href="javascript:void(0);">$user.userName</a>
-                <a href="javascript:void(0);" class="seat-icon icon-left-triangle"></a>
-                <div class="collapse">
-                    <a href="javascript:;" onclick="detail();">资料</a>
-                    <a href="javascript:;" onclick="editPassword();">设置</a>
-                    <a href="$path/logout">退出</a>
-                </div>
-            </li>
-        </ul>
-    </header>
-    <!--导航链接-->
-    <nav>
-        <ul class="nav-ul clear left">
-            <li class="nav-add ">
-
-            </li>
-            <li class="nav-home link selected" data-href="$path/main">
-                <span class="icon-home"></span>
-                <a href="javascript:void(0)" target="myiframe">主页</a>
-            </li>
-			#if($shiro.hasPermission("系统管理"))
-            <li class="nav-administration link multi-select">
-                <span class="icon-setup"></span>
-                <a href="javascript:void(0);">系统管理</a>
-                <span class="seat-icon icon-left-triangle"></span>
-                <!--collapes-->
-                <ul class="amazed-collapse collapse">
-					#if($shiro.hasPermission("系统管理-人员管理"))
-                    <li>
-                        <a href="$path/users/person" target="myiframe">人员管理</a>
-                    </li>
-					#end
-					#if($shiro.hasPermission("系统管理-角色管理"))
-                    <li>
-                        <a href="$path/permissions/role" target="myiframe">角色管理</a>
-                    </li>
-					#end
-                    #if($shiro.hasPermission("系统管理-角色管理"))
-                        <li>
-                            <a href="$path/department" target="myiframe">分组管理</a>
-                        </li>
-                    #end
-                </ul>
-            </li>
-            #end
-        </ul>
-        <span class="icon-calendar-alt-stroke right"></span>
-    </nav>
-    <!--主体内容-->
-    <section class="section">
-        <!--iframe-->
-        <div class="iframe-parent">
-            <iframe src="$path/main" frameborder="0"  id="myiframe" nodeName="myiframe"></iframe>
-        </div>
-        <!--calendar-->
-        <div id="calendar">
-            <h2>日历便签<a href="javascript:;" class="icon-close"></a></h2>
-            <div class="calendar"></div>
-        </div>
-    </section>
-</div>
+<body>
 <div id="mask"></div>
-	<!--个人资料-->
- <div class="modal index-12" id="people-edit">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <h3 class="left weight-bold blue-font">个人资料</h3>
-                <a href="javascript:void(0)" class="icon-delete right"></a>
-            </div>
-			<form id="userEditForm">
-				<input type="hidden" id="editUserId" nodeName="userId" />
-                <div class="modal-body min-height">
-                    <div class="the-information-input the-information-list">
-                        <div class="row clear mar-top-10">
-                            <label for="job-number">工  号：</label>
-                            <label>$!user.nodeCode</label>
-                        </div>
-                        <div class="row clear mar-top-10">
-                            <label for="usernodeName">姓  名：</label>
-                            <label>$!user.nodeName</label>
-                        </div>
-                        <div class="row clear mar-top-10">
-                            <label for="gender">性  别：</label>
-                            <label>$!user.gender</label>
-                        </div>
-                        <div class="row clear mar-top-10">
-                            <label for="email">邮  箱：</label>
-                            <label>$!user.email</label>
-                        </div>
-                        <div class="row clear mar-top-10">
-                            <label for="email">电话：</label>
-                            <label>$!user.phone</label>
-                        </div>
-                    </div>
-                </div>
-			</form>
+<!--  头部 start -->
+<div class="navbar header">
+    <div class="header-left">
+        <div class="logo">
+            <img src="/static/img/logo.png" alt="北京地铁">
         </div>
+        <p>运三公司新班制辅助管理系统</p>
     </div>
-<!--修改密码-->
-<div class="modal index-12" id="password-edit">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <h3 class="left weight-bold blue-font">修改密码</h3>
-                <a href="javascript:void(0)" class="icon-delete right"></a>
+    <div class="nav header-right">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="javascript:;">小曹狠认真 <span class="arror_down icon-21"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--  头部 end -->
+<!-- 左侧菜单 start -->
+<section>
+    <div class="tab-content">
+        <!-- 系统设置 start -->
+        <div role="tabpanel" class="tab-pane fade in active" id="sideMenu">
+            <div class="panel">
+                #if($shiro.hasPermission("系统管理"))
+                <a class="active" href="#part1" data-toggle="collapse" data-parent="#sideMenu">系统设置</a>
+                #end
+                <div class="collapse in slide-menu" id="part1">
+                    #if($shiro.hasPermission("系统管理-人员管理"))
+                    <a class="active" href="$path/users/person" target="myiframe">
+                        <span class="icon-19"></span>人员管理
+                    </a>
+                    #end
+                    #if($shiro.hasPermission("系统管理-角色管理"))
+                    <a href="javascript:;" target="myiframe">
+                        <span class="icon-18"></span>人员分组
+                    </a>
+                    #end
+                    #if($shiro.hasPermission("系统管理-角色管理"))
+                    <a href="javascript:;" target="myiframe">
+                        <span class="icon-17"></span>权限管理
+                    </a>
+                    #end
+                </div>
             </div>
-			<form id="passwordEditForm">
-                <div class="modal-body min-height">
-                    <div class="the-information-input the-information-list">
-                     <input type="hidden" value="$!user.userId" nodeName="userId">
-                        <div class="row clear mar-top-10">
-                            <label for="login-nodeName" class="red-star">旧密码：</label>
-                            <input type="password" id="password" nodeName="password" class=" reset-input">
-                        </div>
-                        <div class="row clear mar-top-10 relative">
-                            <label for="init-password" class="red-star">新密码：</label>
-                            <input type="password" nodeName="newPassword" id＝"newPassword" class=" reset-input">
-                        </div>
-                        <div class="row clear mar-top-10">
-                            <label for="job-number" class="red-star">确认密码：</label>
-                            <input type="password" id="comfirmPassword" nodeName="comfirmPassword" class=" reset-input">
-                        </div>
-                    </div>
+            <div class="panel">
+                #if($shiro.hasPermission("系统管理"))
+                <a href="#part2" data-toggle="collapse" data-parent="#sideMenu">排班管理</a>
+                #end
+                <div class="collapse slide-menu" id="part2">
+                    #if($shiro.hasPermission("系统管理"))
+                    <a class="active" href="javascript:;" target="myiframe">
+                        <span class="icon-16"></span>排班表格
+                    </a>
+                    #end
+                    #if($shiro.hasPermission("系统管理"))
+                    <a href="javascript:;" target="myiframe">
+                        <span class="icon-6"></span>新增自动排班
+                    </a>
+                    #end
+                    #if($shiro.hasPermission("系统管理"))
+                    <a href="javascript:;" target="myiframe">
+                        <span class="icon-17"></span>排班审批
+                    </a>
+                    #end
                 </div>
-                <div class="modal-footer  clear">
-                    <div class="btn-group">
-                        <a href="javascript:void(0)" class="btn btn-warn" onclick="passwordUpdate()">保存</a>
-                        <a href="javascript:void(0)" class="btn btn-primary disappear-modal" >取消</a>
-                    </div>
+            </div>
+            <div class="panel">
+                #if($shiro.hasPermission("系统管理"))
+                <a href="#part3" data-toggle="collapse" data-parent="#sideMenu">排班设置</a>
+                #end
+                <div class="collapse slide-menu" id="part3">
+                    #if($shiro.hasPermission("系统管理"))
+                    <a class="active" href="javascript:;" target="myiframe">
+                        <span class="icon-7"></span>班次设置
+                    </a>
+                    #end
+                    #if($shiro.hasPermission("系统管理"))
+                    <a href="javascript:;" target="myiframe">
+                        <span class="icon-8"></span>岗位设置
+                    </a>
+                    #end
                 </div>
-			</form>
+            </div>
+            <div class="panel">
+                #if($shiro.hasPermission("系统管理"))
+                <a href="#part4" data-toggle="collapse" data-parent="#sideMenu">统计报表</a>
+                #end
+                #if($shiro.hasPermission("系统管理"))
+                <div class="collapse slide-menu" id="part4">
+                    <a class="active" href="javascript:;" target="myiframe">
+                        <span class="icon-15"></span>工时报表
+                    </a>
+                #end
+                #if($shiro.hasPermission("系统管理"))
+                    <a href="javascript:;" target="myiframe">
+                        <span class="icon-16"></span>临时安排报表
+                    </a>
+                #end
+                </div>
+            </div>
         </div>
+        <!-- 系统设置 end -->
     </div>
-    
-    
-#parse('common/path-js.vm')
-<script>
-	function passwordUpdate(){
-		var result = formValidation($("#passwordEditForm"));
-		if(!result){
-			return false;
-		}
-		jQuery.ajax({
-	  		async: false,
-       		type: "post",
-       		url: "$path/permissions/passwordUpdate",
-       		data: $('#passwordEditForm').serialize(),
-		    dataType: "json",
-		    error: function (request) {
-		   		initAlert(0,"网络错误");   
-		    },
-		    success: function (data) {
-				for(x in data){
-					initAlert(x,data[x]);
-					if(x == 1){
-						setTimeout(function(){
-							location.href="$path/logout";
-						},2000)
-					}
-       			}
-		   	}
-		});
-	}
-
-	function detail(){
-		$("#people-edit").show();
-	}
-	function editPassword(){
-		$("#password-edit").show();
-	}
-    $(function(){
-        //初始化日历
-        $(".calendar").clndr();
-        /*if (typeof(EventSource) !== "undefined") {
-            var source = new EventSource("$path/sseTest");
-            source.addEventListener('message', function(e) {
-                console.log(e.data);
-            });
-            source.addEventListener('open', function(e) {
-                console.log("连接打开.");
-            });
-
-            source.addEventListener('error', function(e) {
-            });
-        }*/
-    })
-</script>
+    <iframe id="myiframe" name="myiframe" src=""></iframe>
+</section>
+</div>
+<!--隐藏的页面元素 end-->
+<!-- 左侧菜单 end -->
+<!-- 日历插件 start -->
+<div id="calendar">
+    <h2>日历便签</h2>
+    <div class="calendar"></div>
+</div>
+<!-- 日历插件 end -->
 </body>
 </html>
