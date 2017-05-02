@@ -54,7 +54,7 @@ public class PermissionController extends BaseController{
 	*/
 	@RequestMapping(value = "/role", method = RequestMethod.GET)
 	public String role(Model model) {
-		return "/permission/role";
+		return "/permission/index";
 	}
 
 	/**

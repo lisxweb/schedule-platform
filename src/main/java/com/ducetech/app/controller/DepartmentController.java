@@ -48,7 +48,7 @@ public class DepartmentController extends BaseController {
 	 */
 	@RequestMapping(value = "/department", method = RequestMethod.GET)
 	public String departments(Model model) {
-		return "/department/departments";
+		return "/department/index";
 	}
 
 	/**

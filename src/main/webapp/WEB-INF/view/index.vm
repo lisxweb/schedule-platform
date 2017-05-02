@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/static/css/font.css">
     <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/demo.css">
     <script src="/static/js/jquery.min.js" type="text/javascript"></script>
     <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/static/js/underscore-min.js" type="text/javascript"></script>
@@ -50,17 +49,17 @@
                 #end
                 <div class="collapse in slide-menu" id="part1">
                     #if($shiro.hasPermission("系统管理-人员管理"))
-                    <a class="active" href="$path/users/person" target="myiframe">
+                    <a class="active" href="/users/person" target="myiframe">
                         <span class="icon-19"></span>人员管理
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理-角色管理"))
-                    <a href="javascript:;" target="myiframe">
+                    <a href="/department" target="myiframe">
                         <span class="icon-18"></span>人员分组
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理-角色管理"))
-                    <a href="javascript:;" target="myiframe">
+                    <a href="/role" target="myiframe">
                         <span class="icon-17"></span>权限管理
                     </a>
                     #end

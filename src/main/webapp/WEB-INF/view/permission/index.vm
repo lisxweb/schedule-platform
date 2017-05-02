@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>职务管理</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/static/js/underscore-min.js" type="text/javascript"></script>
+    <script src="/static/js/moment.min.js" type="text/javascript"></script>
+    <script src="/static/js/clndr.min.js" type="text/javascript"></script>
+    <script src="/static/js/common.js" type="text/javascript"></script>
+    <script src="/static/js/alert.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- 右侧内容 start -->
+<div class="content-header">
+    <div class="float-left">
+        <a class="btnDefault bgGreen" href="#addPost" data-toggle="modal" data-target="#addPost">新增权限方案</a>
+    </div>
+    <div class=" float-right">
+        <div class="search-input">
+            <span class="icon-5"></span>
+            <input type="text" placeholder="岗位名称">
+        </div>
+        <a class="btnDefault bgBlue" href="javascript:;">查询</a>
+    </div>
+</div>
+<!-- 右侧内容 end -->
+<!-- 表格 start -->
+<div class="wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>权限方案</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>站区长</td>
+                <td>2017.04.27 16:51</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>人力</td>
+                <td>2017.04.27 16:51</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>人力2</td>
+                <td>2017.04.27 16:51</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>值班站长</td>
+                <td>2017.04.27 16:51</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editUser">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="page" class="page">
+        <ul>
+            <li class="icon-20"></li>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>...</li>
+            <li>26</li>
+            <li class="icon-22"></li>
+        </ul>
+    </div>
+</div>
+<!-- 表格 end -->
+<!-- 新增权限方案 -->
+<div class="modal" id="addPost" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">编辑职务权限</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label class="require">职务名称</label>
+                        <input type="text">
+                    </div>
+                    <table class="post" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td width="120">站点查看</td>
+                            <td>
+                                <p>查看本地铁站，所有站务员、综控员、值班站长的排班信息。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>最高查看权限</td>
+                            <td>
+                                <p>查看2号、8号、10号、13号，所有站务员、综控员、值班站长的排班信息。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>站区查看</td>
+                            <td>
+                                <p>查看本站区，所有站务员、综控员、值班站长的排班信息。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>高级维护</td>
+                            <td>
+                                <p>营销、站区长、区长助理、人力账号的信息维护，包括密码变更、归属站区、
+                                    岗位、拥有权限的变更。以及站务员、综控员、值班站长的职务调整，权限
+                                    调整、站区调整。人员分组的站区、站点信息编辑。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>低级维护</td>
+                            <td>
+                                <p>站务员、综控员、值班站长的归属站点信息编辑与修改。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>生成账号</td>
+                            <td>
+                                <p>员工编号、姓名、密码生成、归属站区、岗位的录入、是否是管理员、拥有
+                                    管理权限的设定。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>排班制度维护</td>
+                            <td>
+                                <p>本站区对应站点，每天多少班，每班多少人，每个班时间点等排班制度内容
+                                    的编辑和变更。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>负责排班</td>
+                            <td>
+                                <p>本站区对应站点，每两周的排班计划生成确认和向下传达。排班表格中值班
+                                    站长、综控员、站务员临时安排信息的添加。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>权限管理</td>
+                            <td>
+                                <p>账号拥有权限的调整变更。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>实际工时写入</td>
+                            <td>
+                                <p>本站的站务员、综控员、值班站长的实际工时写入、相应描述和上报审批。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>假期填写</td>
+                            <td>
+                                <p>在本站排班表格中，假期信息的添加和上报审批。</p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">保存</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑职务权限 -->
+<div class="modal" id="editPost" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">编辑职务权限</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>职务名称</label>
+                        <input type="text" value="人力">
+                    </div>
+                    <table class="post" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td width="120">站点查看</td>
+                            <td>
+                                <p>查看本地铁站，所有站务员、综控员、值班站长的排班信息。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>最高查看权限</td>
+                            <td>
+                                <p>查看2号、8号、10号、13号，所有站务员、综控员、值班站长的排班信息。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>站区查看</td>
+                            <td>
+                                <p>查看本站区，所有站务员、综控员、值班站长的排班信息。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>高级维护</td>
+                            <td>
+                                <p>营销、站区长、区长助理、人力账号的信息维护，包括密码变更、归属站区、
+                                    岗位、拥有权限的变更。以及站务员、综控员、值班站长的职务调整，权限
+                                    调整、站区调整。人员分组的站区、站点信息编辑。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>低级维护</td>
+                            <td>
+                                <p>站务员、综控员、值班站长的归属站点信息编辑与修改。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>生成账号</td>
+                            <td>
+                                <p>员工编号、姓名、密码生成、归属站区、岗位的录入、是否是管理员、拥有
+                                    管理权限的设定。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>排班制度维护</td>
+                            <td>
+                                <p>本站区对应站点，每天多少班，每班多少人，每个班时间点等排班制度内容
+                                    的编辑和变更。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>负责排班</td>
+                            <td>
+                                <p>本站区对应站点，每两周的排班计划生成确认和向下传达。排班表格中值班
+                                    站长、综控员、站务员临时安排信息的添加。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>权限管理</td>
+                            <td>
+                                <p>账号拥有权限的调整变更。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>实际工时写入</td>
+                            <td>
+                                <p>本站的站务员、综控员、值班站长的实际工时写入、相应描述和上报审批。</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>假期填写</td>
+                            <td>
+                                <p>在本站排班表格中，假期信息的添加和上报审批。</p>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">保存</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
