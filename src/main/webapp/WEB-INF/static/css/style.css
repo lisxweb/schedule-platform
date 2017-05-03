@@ -34,6 +34,9 @@ textarea {
   clear: both;
   overflow: hidden;
 }
+.blue {
+  color: #3A6BCE;
+}
 /* 重置a标签的默认样式 */
 a:link,
 a:visited,
@@ -45,7 +48,7 @@ a:active {
 .btnDefault {
   padding: 0 20px;
   text-align: center;
-  line-height: 36px;
+  line-height: 34px;
   float: left;
   margin-left: 5px;
   border: 1px solid #e5e5e5;
@@ -63,7 +66,7 @@ a:active {
   color: #fff;
 }
 .btnDefault.bgBlue {
-  background: #648EF1;
+  background: #3A6BCE;
   color: #fff;
 }
 .btnDefault.bgOrange {
@@ -95,8 +98,20 @@ select {
   padding: 10px 15px 0;
   border-bottom: 1px solid #e5e5e5;
 }
+.content-header .float-left {
+  line-height: 32px;
+}
 .content-header .float-left .bgGreen {
   margin-left: 0;
+}
+.content-header .float-left .title {
+  float: left;
+  line-height: 32px;
+  color: #EC1C24;
+  margin-right: 20px;
+}
+.content-header .float-right {
+  margin-bottom: 10px;
 }
 .content-header .float-right * {
   float: left;
@@ -115,7 +130,7 @@ select {
   width: 40px;
   line-height: 38px;
   text-align: center;
-  color: #648EF1;
+  color: #3A6BCE;
 }
 .content-header .float-right .search-input input {
   border: 0;
@@ -185,7 +200,7 @@ select {
   text-align: center;
 }
 .page ul li.active {
-  background: #648EF1;
+  background: #3A6BCE;
   color: #fff;
 }
 /* 状态样色 */
@@ -208,15 +223,15 @@ select {
 }
 .form_line {
   float: left;
-  margin: 2px 0 10px;
+  margin: 0 10px 10px;
 }
 .form_line > * {
   float: left;
 }
 .form_line label {
-  width: 70px;
+  min-width: 70px;
   text-align: right;
-  line-height: 32px;
+  line-height: 34px;
   color: #1a1a1a;
   margin-right: 10px;
 }
@@ -239,7 +254,7 @@ select {
 .form_line .section input[type="text"],
 .form_line .section select {
   width: 130px;
-  height: 34px;
+  height: 36px;
   padding: 0 5px;
   border: 1px solid #e5e5e5;
   border-radius: 3px;
@@ -252,7 +267,7 @@ select {
   height: 32px;
   line-height: 32px;
   border-radius: 3px;
-  background: #648EF1;
+  background: #3A6BCE;
   color: #fff;
   text-align: center;
 }
@@ -278,10 +293,15 @@ select {
 .modal-backdrop {
   background-color: #fff;
 }
+.modal {
+  margin-left: -100px;
+}
+.modal .modal-dialog {
+  width: 800px;
+}
 .modal .modal-content {
   border-radius: 0;
   border: 0;
-  width: 800px;
 }
 .modal .modal-content .modal-body {
   min-height: 200px;
@@ -289,7 +309,7 @@ select {
 .modal .modal-header {
   height: 40px;
   padding: 0 15px;
-  background: #648EF1;
+  background: #3A6BCE;
 }
 .modal .modal-header * {
   color: #fff;
@@ -314,7 +334,7 @@ select {
   color: #fff;
 }
 .btn.btn-red {
-  background: #C0272D;
+  background: #EC1C24;
   color: #fff;
 }
 .btn-cancel {
@@ -322,7 +342,7 @@ select {
   background: #fff;
 }
 .btn-confirm {
-  background: #648EF1;
+  background: #3A6BCE;
   color: #fff;
 }
 /* 模态框 */
@@ -424,7 +444,7 @@ select {
   outline: none;
 }
 .dropdown button {
-  background: #648EF1;
+  background: #3A6BCE;
   width: 80px;
   height: 30px;
   line-height: 30px;
@@ -454,7 +474,7 @@ select {
   background: none;
 }
 .dropdown .dropdown-menu li:nth-last-of-type(1) a {
-  color: #C0272D;
+  color: #EC1C24;
 }
 .stationArea {
   overflow: hidden;
@@ -494,6 +514,25 @@ select {
   float: left;
   margin-left: 10px;
 }
+.stationArea .list .stations li a {
+  float: right;
+  margin-right: 10px;
+}
+.stationArea .list .stations li a.icon-1 {
+  color: #EC1C24;
+}
+.stationArea .list .stations li a.icon-4 {
+  color: #3A6BCE;
+}
+.stationArea .list .stations li input {
+  width: 200px;
+  float: left;
+  height: 28px;
+  margin: 5px;
+  padding: 3px;
+  border: 1px solid #e5e5e5;
+  line-height: 28px;
+}
 .stationArea .list .stations .clear {
   height: 0;
   padding: 0;
@@ -530,6 +569,7 @@ select {
 .menu .menu-head {
   background: #CBCBCB;
   line-height: 60px;
+  font-size: 20px;
 }
 .menu .nav-tabs {
   border: 0;
@@ -538,6 +578,7 @@ select {
   line-height: 40px;
   border: 0;
   border-radius: 0;
+  padding: 10px 0;
 }
 .menu .nav-tabs > li > a:hover,
 .menu .nav-tabs > li.active > a,
@@ -557,23 +598,37 @@ select {
   margin-bottom: 10px;
 }
 .shifts li {
+  position: relative;
   margin-right: 10px;
 }
 .shifts li a,
 .shifts li a:hover,
 .shifts li a:focus {
-  background: #648EF1;
+  background: #3A6BCE;
   color: #fff;
   border-radius: 5px;
-  border: 2px solid #648EF1;
+  border: 2px solid #3A6BCE;
   padding: 5px 15px;
 }
 .shifts li.active a,
 .shifts li.active a:hover,
 .shifts li.active a:focus {
-  border: 2px solid #648EF1;
+  border: 2px solid #3A6BCE;
   background: #fff;
-  color: #648EF1;
+  color: #3A6BCE;
+}
+.shifts li > span {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #EC1C24;
+  color: #fff;
+  text-align: center;
+  line-height: 18px;
+  right: -4px;
+  top: -4px;
+  font-size: 14px;
+  border-radius: 50%;
 }
 .table-header {
   position: relative;
@@ -588,7 +643,8 @@ select {
   padding-left: 5px;
   height: 30px;
   line-height: 30px;
-  border-left: 4px solid #648EF1;
+  border-left: 4px solid #3A6BCE;
+  cursor: pointer;
 }
 .table-header .dropdown {
   right: 0;
@@ -602,9 +658,9 @@ select {
   display: block;
   width: 260px;
   line-height: 60px;
-  border: 2px dashed #648EF1;
+  border: 2px dashed #3A6BCE;
   text-align: center;
-  color: #648EF1;
+  color: #3A6BCE;
   font-size: 18px;
   margin-top: 20px;
 }
@@ -634,7 +690,7 @@ select {
   background: #39B44A;
 }
 .chart ul li span.planHour {
-  background: #648EF1;
+  background: #3A6BCE;
 }
 /* 排班表格 */
 .schedule {
@@ -706,6 +762,14 @@ select {
   border-top: 1px solid #e5e5e5;
   color: #1a1a1a;
 }
+.schedule table td input {
+  border: 1px solid #e5e5e5;
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  line-height: 30px;
+  text-align: center;
+}
 .schedule table .dark {
   background: #535761;
   color: #fff;
@@ -713,4 +777,130 @@ select {
 .schedule .page .float-left span {
   margin-left: 10px;
   line-height: 38px;
+}
+.schedule .foot {
+  overflow: hidden;
+  clear: both;
+}
+.schedule .foot .btnDefault {
+  width: 120px;
+}
+/* 新增自动排班 */
+.noPlan {
+  padding: 10px;
+  margin: 20px 0;
+}
+.noPlan em {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #989898;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 5px;
+}
+/* 排班审批 */
+.no-mes {
+  margin-bottom: 20px;
+  padding: 0 15px;
+  font-size: 20px;
+}
+.approvalList {
+  overflow: hidden;
+  clear: both;
+}
+.approvalList li {
+  border: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+  position: relative;
+}
+.approvalList li .checkbox {
+  position: absolute;
+  width: 70px;
+  height: 100%;
+  background: #f1f1f1;
+  margin: 0;
+  border-right: 1px solid #e5e5e5;
+}
+.approvalList li .checkbox > * {
+  position: absolute;
+  top: 50%;
+}
+.approvalList li .checkbox input {
+  width: 16px;
+  height: 16px;
+  left: 50%;
+  background: #fff;
+  margin: -8px 0 0 -8px;
+}
+.approvalList li .checkbox span {
+  width: 100%;
+  line-height: 20px;
+  text-align: center;
+  margin-top: -10px;
+}
+.approvalList li .vacationInfo {
+  position: relative;
+  margin-left: 70px;
+  padding: 40px 15px 10px;
+  overflow: hidden;
+  clear: both;
+}
+.approvalList li .vacationInfo .head {
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  top: 10px;
+}
+.approvalList li .vacationInfo .head * {
+  line-height: 24px;
+}
+.approvalList li .vacationInfo .head span {
+  border-left: 4px solid #3A6BCE;
+  text-indent: 15px;
+  font-size: 18px;
+  color: #3A6BCE;
+}
+.approvalList li .vacationInfo .head em {
+  color: #999;
+  margin-right: 10px;
+}
+.approvalList li .vacationInfo .col {
+  float: left;
+  min-width: 150px;
+}
+.approvalList li .vacationInfo .col > * {
+  line-height: 40px;
+  float: left;
+}
+.approvalList li .vacationInfo .col em {
+  color: #B2B2B2;
+  margin-right: 8px;
+}
+.approvalList li .vacationInfo .col2 {
+  min-width: 400px;
+}
+.approvalList li .vacationInfo .col3 {
+  width: 100%;
+}
+.approvalHeading {
+  margin-bottom: 20px;
+}
+.approvalHeading .float-left {
+  border-left: 4px solid #3A6BCE;
+  padding-left: 10px;
+}
+.approvalSchedule {
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.approvalSchedule .schedule {
+  min-height: 100px !important;
+}
+.approvalSchedule:nth-last-child(1) {
+  border: 0;
 }

@@ -123,8 +123,8 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `user` (`user_id`, `password`, `secret_key`, `user_code`,`user_job`, `name`, `station_area`, `station`, `creator_id`, `created_at`, `is_deleted`,`is_admin`) VALUES
-('1', '7394630bee36f2bd8b793f88320efdf8', 'cb7e52304f0d11e6965c00ff2c2e2b3f', '1', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
+INSERT INTO `user` (`user_id`, `password`, `secret_key`, `user_code`,`user_job`, `user_name`, `station_area`, `station`, `creator_id`, `created_at`, `is_deleted`,`is_admin`) VALUES
+('1', 'e7b68248d0782b49f0d4efaefb0e508c', 'cb7e52304f0d11e6965c00ff2c2e2b3f', '1', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
 
 
 

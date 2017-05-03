@@ -93,3 +93,6 @@
 .icon-22:before {
     content: "\e915";
 }
+.icon-danger:before {
+    content: "\e916";
+}

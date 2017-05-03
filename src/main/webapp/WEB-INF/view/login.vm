@@ -36,16 +36,7 @@
 	</script>
 </head>
 <body>
-    <!-- <div class="header">
-        <<ul class="nav nav-zsj">
-            <li><a href="javascript:;" class="active">了解通号公司</a></li>
-            <li><a href="javascript:;">下载app</a></li>
-            <li><a href="javascript:;">帮助</a></li>
-        </ul>
-    </div> -->
     <div class="wrapper">
-        <img class="img-top" src="static/img/DNA-top.png">
-        <img class="img-bottom" src="static/img/DNA-bottom.png">
         <div class="content">
         <form action="login" method="post" id="loginForm">
             <span class="icon-brand icon icon-logo"></span>

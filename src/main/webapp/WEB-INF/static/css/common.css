@@ -99,23 +99,17 @@ i {
 .header .header-left {
   float: left;
 }
-.header .header-right {
-  float: right;
+.header .dropdown {
+  border-left: 1px solid #648EF1;
+  top: 0;
 }
-.header .navbar-nav * {
-  color: #fff;
-}
-.header .navbar-nav li {
-  margin-right: 10px;
-}
-.header .navbar-nav li:hover {
-  background: #1F76DD;
-}
-.header .navbar-nav li a:focus,
-.header .navbar-nav li a:hover,
-.header .navbar-nav li a:focus,
-.header .navbar-nav li a:link {
-  background: none;
+.header .dropdown button {
+  width: 120px;
+  outline-offset: 0;
+  height: 56px;
+  line-height: 56px;
+  border: 0;
+  border-radius: 0;
 }
 /* 顶部tab菜单 */
 section {
@@ -321,9 +315,13 @@ section .tab-content .slide-menu a.active span {
   text-align: center;
 }
 .Alert .alert-dialog .alert-mes span {
+  border-radius: 50%;
   display: block;
-  font-size: 40px;
-  margin: 40px 0 30px;
+  font-size: 60px;
+  margin: 40px auto 30px;
+}
+.Alert .alert-dialog .alert-mes .icon-danger {
+  color: #F6921E;
 }
 .Alert .alert-dialog .alert-mes b {
   font-size: 16px;
@@ -344,12 +342,6 @@ section .tab-content .slide-menu a.active span {
 }
 .Alert.success .alert-mes span:before {
   content: "\e924";
-}
-.Alert.danger .alert-mes span {
-  color: #EC1C24;
-}
-.Alert.danger .alert-mes span:before {
-  content: "\e923";
 }
 .Alert.fail .alert-mes span {
   color: #EC1C24;
