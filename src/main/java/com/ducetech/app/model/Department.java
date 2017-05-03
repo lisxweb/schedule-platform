@@ -18,7 +18,7 @@ public class Department extends BaseModel implements Serializable{
     // 字典code
     private String nodeCode;
 
-    // 字典名称  工时 labor 报表
+    // 字典名称
     private String nodeName;
 
     // 字典排序
@@ -37,5 +37,5 @@ public class Department extends BaseModel implements Serializable{
     private String createdAt;
 
     // 更新时间
-    private Date updatedAt;
+    private String updatedAt;
 }

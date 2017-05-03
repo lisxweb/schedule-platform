@@ -206,7 +206,7 @@ section .tab-content .slide-menu a.active span {
 /* 日历插件 */
 #calendar {
   position: absolute;
-  width: 280px;
+  width: 240px;
   right: 0;
   top: 60px;
   background: #fff;
@@ -222,7 +222,7 @@ section .tab-content .slide-menu a.active span {
   font-weight: normal;
 }
 #calendar .clndr {
-  padding: 0 20px;
+  padding: 0 10px;
 }
 #calendar .clndr-controls {
   width: 100%;

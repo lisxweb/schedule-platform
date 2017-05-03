@@ -30,7 +30,12 @@ public interface DepartmentService {
      */
     PagerRS<Department> getDepartmentByPager(BaseQuery<Department> query);
 
-
+    /**
+     * 获取新节点
+     * @param parentCode
+     * @return
+     */
+    String selectDepartmentByParentCode(String parentCode);
     /**
      * @Title: selectDepartment
      * @param dept
@@ -60,4 +65,5 @@ public interface DepartmentService {
      */
     void deleteDepartment(String nodeCode);
 
+    Department selectDepartmentByNodeCode(String nodeCode);
 }

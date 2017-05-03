@@ -49,7 +49,7 @@
                 #end
                 <div class="collapse in slide-menu" id="part1">
                     #if($shiro.hasPermission("系统管理-人员管理"))
-                    <a class="active" href="/users/person" target="myiframe">
+                    <a class="active" href="/user" target="myiframe">
                         <span class="icon-19"></span>人员管理
                     </a>
                     #end
@@ -124,7 +124,7 @@
         </div>
         <!-- 系统设置 end -->
     </div>
-    <iframe id="myiframe" name="myiframe" src=""></iframe>
+    <iframe id="myiframe" name="myiframe" src="/user"></iframe>
 </section>
 </div>
 <!--隐藏的页面元素 end-->

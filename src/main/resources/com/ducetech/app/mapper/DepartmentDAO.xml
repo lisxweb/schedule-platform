@@ -14,14 +14,21 @@
     	<result column="updated_at" property="updatedAt"/>
 	</resultMap>
 
-	<!-- 登录 -->
+	<!-- 根据部门名称获取 -->
 	<select id="selectDepartmentByNodeName" resultMap="departmentMap">
 		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where node_name=#{nodeName}
 	</select>
-    <select id="selectDepartmentByDepartmentCode" resultMap="departmentMap">
+
+    <!-- 根据部门编码获取 -->
+    <select id="selectDepartmentByNodeCode" resultMap="departmentMap">
         select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where node_code=#{nodeCode}
     </select>
-	
+
+    <!-- 根据部门编码获取 -->
+    <select id="selectDepartmentByParentCode" resultMap="departmentMap">
+        select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where node_code=#{nodeCode}
+    </select>
+
 	<!-- 根据ID精确查找部门 -->
 	<select id="selectDepartmentByDepartmentId" resultMap="departmentMap">
 		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where department_id=#{departmentId}
@@ -78,9 +85,4 @@
 		</set>
 		where department_id=#{departmentId}
 	</update>
-	
-	<!-- 通过角色ID获取人员  -->
-	<select id="selectDepartmentsByRoleId" resultMap="departmentMap">
-		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where department_id in (select department_id from department_role where role_id=#{roleId})
-	</select>
 </mapper>
