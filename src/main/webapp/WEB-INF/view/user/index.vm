@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <title>人员信息</title>
     #set($path = ${rc.contextPath})
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/static/css/common.css">
-    <link rel="stylesheet" href="/static/css/font.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/static/js/underscore-min.js" type="text/javascript"></script>
-    <script src="/static/js/moment.min.js" type="text/javascript"></script>
-    <script src="/static/js/common.js" type="text/javascript"></script>
-    <script src="/static/js/alert.js" type="text/javascript"></script>
-    <script src="/static/js/index.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="$path/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="$path/static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="$path/static/css/common.css">
+    <link rel="stylesheet" href="$path/static/css/font.css">
+    <link rel="stylesheet" href="$path/static/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="$path/static/css/style.css">
+    <script src="$path/static/js/jquery.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/underscore-min.js" type="text/javascript"></script>
+    <script src="$path/static/js/moment.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/common.js" type="text/javascript"></script>
+    <script src="$path/static/js/alert.js" type="text/javascript"></script>
+    <script src="$path/static/js/index.js" type="text/javascript"></script>
     <!-- jqgrid -->
     <script src="$path/static/js/jqgrid/grid.locale-cn.js" type="text/javascript"></script>
     <script src="$path/static/js/jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
     <script src="$path/static/js/jqgrid/table-jqgrid.js" type="text/javascript"></script>
     <!-- json-serializeObject -->
     <script src="$path/static/js/json/json-serializeObject.js" type="text/javascript"></script>
-    <script src="/static/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <script src="$path/static/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
 </head>
 <body>
 <!-- 右侧内容 start -->
@@ -36,94 +36,20 @@
     <div class=" float-right">
         <div class="search-input">
             <span class="icon-5"></span>
-            <input type="text" placeholder="姓名/员工编号/岗位">
+            <input type="text" placeholder="姓名/员工编号/岗位" name="userSearch">
+            <input type="hidden" name="userCode">
+            <input type="hidden" name="userName">
+            <input type="hidden" name="userJob">
         </div>
-        <a class="btnDefault bgBlue" href="javascript:;">查询</a>
+        <a class="btnDefault bgBlue"  onclick="getTableData()" href="javascript:void(0);">查询</a>
     </div>
 </div>
 <!-- 右侧内容 end -->
 <!-- 表格 start -->
 <div class="wrapper">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>员工编号</th>
-                <th>姓名</th>
-                <th>岗位</th>
-                <th>站区</th>
-                <th>站点</th>
-                <th>权限</th>
-                <th>密码</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>12112121</td>
-                <td>高阳</td>
-                <td>站区长</td>
-                <td>西直门战区</td>
-                <td>西直门</td>
-                <td>管理员</td>
-                <td>200</td>
-                <td>
-                    <a href="#editUser" data-toggle="modal" data-target="#editUser">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>12112121</td>
-                <td>叶涛涛</td>
-                <td>站区助理</td>
-                <td>西直门战区</td>
-                <td>车公庄</td>
-                <td>管理员</td>
-                <td>200</td>
-                <td>
-                    <a href="#editUser" data-toggle="modal" data-target="#editUser">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>12112121</td>
-                <td>陈云</td>
-                <td>值班站长</td>
-                <td>西直门战区</td>
-                <td>公务员</td>
-                <td>无</td>
-                <td>200</td>
-                <td>
-                    <a href="#editUser" data-toggle="modal" data-target="#editUser">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>12112121</td>
-                <td>李双喜</td>
-                <td>站务员</td>
-                <td>西直门战区</td>
-                <td>新街口</td>
-                <td>无</td>
-                <td>200</td>
-                <td>
-                    <a href="#editUser" data-toggle="modal" data-target="#editUser">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
-        </tbody>
+    <table class="table" id="userTable">
     </table>
-    <div id="page" class="page">
-        <ul>
-            <li class="icon-20"></li>
-            <li class="active">1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>...</li>
-            <li>26</li>
-            <li class="icon-22"></li>
-        </ul>
-    </div>
+    <div id="pager"></div>
 </div>
 <!-- 表格 end -->
 </form>
@@ -162,26 +88,26 @@
                     </div>
                     <div class="form_line">
                         <label class="require">岗位</label>
-                        <select id="position" name="position">
-                            <option>站区长</option>
-                            <option>站区助理</option>
-                            <option>值班站长</option>
-                            <option>站务员</option>
+                        <select id="userJob" name="userJob">
+                            <option value="站区长">站区长</option>
+                            <option value="站区助理">站区助理</option>
+                            <option value="值班站长">值班站长</option>
+                            <option value="站务员">站务员</option>
                         </select>
                     </div>
                     <div class="form_line">
                         <label>管理员</label>
-                        <select id="isAdmin" name="isAdmin">
-                            <option value="1">是</option>
+                        <select id="isAdmin" name="isAdmin" onchange="selectAdmin(this.options[this.options.selectedIndex].value)">
                             <option value="0">否</option>
+                            <option value="1">是</option>
                         </select>
                     </div>
-                    <div class="form_line hidden">
+                    <div class="form_line user_pass hidden">
                         <label class="red">密码</label>
-                        <span>123456</span>
+                        <input type="text" name="password">
                         <span class="orange">请记录此密码作为下次登录用</span>
                     </div>
-                    <div class="form_line hidden">
+                    <div class="form_line user_role hidden">
                         <label>权限方案</label>
                         <select>
                             <option></option>
@@ -198,6 +124,7 @@
     </div>
 </div>
 
+<!-- 编辑人员 -->
 <div class="modal" id="editUser" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -206,48 +133,64 @@
                 <h4 class="modal-title">编辑人员</h4>
             </div>
             <div class="modal-body">
-                <form class="form-container clear">
+                <form class="form-container clear" id="userEditForm">
                     <div class="form_line">
+                        <input id="editUserId" name="userId" type="hidden">
                         <label class="require">员工编号</label>
-                        <span>21212121</span>
+                        <input id="editUserCode" name="userCode" type="text">
                     </div>
                     <div class="form_line">
                         <label class="require">姓名</label>
-                        <span>侯玉洁</span>
+                        <input id="editUserName" name="userName" type="text">
                     </div>
                     <div class="form_line">
                         <label class="require">站区</label>
-                        <select>
+                        <select id="editStationArea" name="stationArea">
                             <option>西直门站区</option>
-                            <option selected>永泰庄站区</option>
+                            <option>永泰庄站区</option>
                         </select>
                     </div>
                     <div class="form_line">
                         <label class="require">站点</label>
-                        <select>
+                        <select id="editStation" name="station">
                             <option>西直门</option>
-                            <option selected>动物园</option>
+                            <option>动物园</option>
                         </select>
                     </div>
                     <div class="form_line">
                         <label class="require">岗位</label>
-                        <select>
-                            <option>站区长</option>
-                            <option>站区助理</option>
-                            <option>值班站长</option>
-                            <option selected>站务员</option>
+                        <select id="editUserJob" name="userJob">
+                            <option value="站区长">站区长</option>
+                            <option value="站区助理">站区助理</option>
+                            <option value="值班站长">值班站长</option>
+                            <option value="站务员">站务员</option>
                         </select>
                     </div>
-                    <div class="form_line psw">
-                        <label class="red">密码</label>
-                        <input type="text" value="123456">
-                        <a class="btn btn-confirm" href="javascript:;">更换密码</a>
-                        <p class="orange">请记录此密码作为下次登录使用</p>
+                    <div class="form_line">
+                        <label>管理员</label>
+                        <select id="editIsAdmin" name="isAdmin" onchange="selectAdmin(this.options[this.options.selectedIndex].value)">
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
                     </div>
+                    <div class="form_line user_pass">
+                        <label class="red">密码</label>
+                        <input type="text" id="editPassword" name="password">
+                        <a class="btn btn-confirm" href="javascript:;">更换密码</a>
+                        <span class="orange">请记录此密码作为下次登录用</span>
+                    </div>
+                    <div class="form_line user_role">
+                        <label>权限方案</label>
+                        <select>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <a class="btn btn-confirm" href="javascript:;" onclick="userUpdate()">确定</a>
                 <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
@@ -273,7 +216,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-confirm" href="javascript:;">确定</a>
-                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+                <button class="btn btn-cancel" href="javascript:void(0);" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
     </div>
@@ -281,8 +224,7 @@
 <script>
     $(function () {
         tableInit();
-
-
+    });
     function tableInit(){
         $("#userTable").jqGrid({
             url:"$path/users",
@@ -293,155 +235,65 @@
             postData: {
                 search : JSON.stringify($('#userForm').serializeObject())
             },
-            colNames:['账号', '工号', '姓名','联系电话','所属部门',"拥有角色","","操作"],
+            colNames:['员工编号', '姓名', '岗位',  '站区','站点','权限'  ,"操作"],
             colModel:[
-                {name:'userName', width:'15%'},
                 {name:'userCode', width:'15%'},
+                {name:'userName', width:'15%'},
+                {name:'userJob', width:'15%'},
                 {name:'stationArea', width:'15%'},
                 {name:'station', width:'15%'},
-                {name:'roleNames', width:'10%'},
-                {name:'isDeleted', width:'10%',hidden:true},
+                {name:'isAdmin', width:'10%',formatter:function(cellvalue,options,rowObject){
+                    return rowObject.isAdmin == 0 ? '管理员' : '';
+                }},
                 {name:'operation', width:'10%',formatter:function(cellvalue,options,rowObject){
-                    //var str = '<a href="" target="myiframe">登录日志</a><span class="separate"> | </span>';
                     var	str='';
                     if($shiro.hasPermission("人员管理-编辑")){
                         str = '<a href="javascript:;"' + (rowObject.isDeleted == 0 ? 'onclick="editUser('+ rowObject.userId +')" class="edit"' : 'class="edit disabled"') +'>编辑</a>';
                     }
-                    str += '<span class="separate"> | </span>';
                     if($shiro.hasPermission("人员管理-停用")){
-                        str += '<a class="stop" href="javascript:;" onclick="userStatus('+ rowObject.userId+')">删除</a>';
-                }
-                return str;
-    }},
-    ],
-    viewrecords: true,//是否在浏览导航栏显示记录总数
+                        str += '<a class="stop" href="javascript:;" onclick="userDel('+ rowObject.userId+')">删除</a>';
+                    }
+                    return str;
+                }},
+            ],
+            viewrecords: true,//是否在浏览导航栏显示记录总数
             rowNum:10,//每页显示记录数
-            pager:$('#page'),
+            pager:$('#pager'),
             jsonReader:{
-        page: "page",
+                page: "page",
                 total: "pages",
                 records: "count",
                 root: "results",
                 repeatitems: false,
                 id: "userId"
-    },
-    gridComplete:function(){
-        resize();
-        $("#userTable tr td[aria-describedby $= 'isDeleted']").each(function(){
-            var isDeleted = $(this).text();
-            isDeleted == 1 ? $(this).parent().addClass("disabled") : $(this).parent().removeClass("disabled");
-        })
-    }
-    });
-    }
-
-    function getTableData() {
-        $("#userTable").jqGrid('setGridParam',{
-            postData: {
-                search : JSON.stringify($('#userForm').serializeObject())
-            }
-        }).trigger('reloadGrid');
-    }
-
-    function addRole(){
-        var checkboxOne =$("#roleSelect").find(":checkbox:checked");
-        var arrOne = [];
-        for(var i=0;i<checkboxOne.length;i++){
-            var obj=checkboxOne[i];
-            if(obj.checked==true){
-                arrOne.push($(checkboxOne[i]).attr("value"));
-            }
-        }
-        $("#roleIds").val(arrOne);
-        userAdd();
-    }
-
-    function userAdd(){
-        var result = formValidation($("#userAddForm"));
-        if(!result){
-            return false;
-        }
-        jQuery.ajax({
-            async: false,
-            type: "post",
-            url: "$path/permissions/addUser",
-            data: $('#userAddForm').serialize(),
-            dataType: "json",
-            error: function (request) {
-                initAlert(0,"网络错误");
-            },
-            success: function (data) {
-                for(x in data){
-                    initAlert(x,data[x]);
-                }
-                setTimeout(function(){
-                    $("#people-add").hide();
-                    $("#mask",parent.document).hide();
-                },2000)
-                $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
             }
         });
+        jQuery("#userTable").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
     }
 
     function editUser(userId){
         jQuery.ajax({
             type: "get",
-            url: "$path/users/" + userId,
+            url: "$path/users/"+userId ,
             data: null,
             dataType: "json",
             error: function (xmlHttpReq, status) {
-                initAlert(0,"网络错误");
+                alert("网络错误");
             },
             success: function (data) {
-                $("#editUserId").val(data.userId);
-                $("#editLoginName").val(data.loginName);
-                $("#editEmployeeCode").val(data.employeeCode);
-                $("#editName").val(data.name);
+                $("#editUserId").val(userId);
+                $("#editUserName").val(data.userName);
+                $("#editUserCode").val(data.userCode);
+                $("#editUserJob").val(data.userJob);
+                $("#editStationArea").val(data.stationArea);
                 $("#editStation").val(data.station);
-                $("#editPhone").val(data.phone);
-                $("#editStationArea").empty();
-                if(data.stationArea=="男") {
-                    option = "<option selected>男</option>";
-                }else{
-                    option = "<option>男</option>";
-                }
-                $("#editStationArea").append(option);
-                if(data.stationArea=="女") {
-                    option = "<option selected>女</option>";
-                }else{
-                    option = "<option>女</option>";
-                }
-                $("#editStationArea").append(option);
-                $("#editDept").val(data.departmentId);
-                console.log(data.roles);
-                $(".select-drop li").remove();
-                $(".editRole input[type='checkbox']").prop("checked",false);
-                for(var i=0;i<data.roles.length;i++){
-                    $(".editRole [value='"+data.roles[i].roleId+"']").click();
-                }
-                $("#people-edit").show();
+
+                $("#editUser").show();
             }
         });
     }
 
-    function editRole(){
-        var checkboxOne =$("#editRoleSelect").find(":checkbox:checked");
-        var arrOne = [];
-        for(var i=0;i<checkboxOne.length;i++){
-            var obj=checkboxOne[i];
-            if(obj.checked==true){
-                arrOne.push($(checkboxOne[i]).attr("value"));
-            }
-        }
-        $("#editRoleIds").val(arrOne);
-        userUpdate();
-    }
-
     function userUpdate(){
-        var result = formValidation($("#userEditForm"));
-        if(!result){
-            return false;
-        }
         jQuery.ajax({
             async: false,
             type: "put",
@@ -449,61 +301,73 @@
             data: null,
             dataType: "json",
             error: function () {
-                initAlert(0,"网络错误");
+                alert("网络错误");
             },
-            success: function (result) {
-                initAlert(result.data, result.message);
+            success: function (data) {
+            alert(data.message)
+            setTimeout(function(){
+                $("#editUser .close").click();
+                $("#editUser").hide();
+            },500)
+            $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
+        }
+    })}
+
+    function userDel(userId){
+        jQuery.ajax({
+            async: false,
+            type: "put",
+            url: "$path/users/" + userId + "/userDel",
+            dataType: "json",
+            error: function () {
+                alert("网络错误");
+            },
+            success: function (data) {
+                alert(data["msg"])
+                getTableData();
+            }
+        });
+    }
+    function getTableData() {
+        console.log("||||||");
+        var search=$("input[name=userSearch").val();
+        $("input[name=userCode").val(search);
+        $("input[name=userName").val(search);
+        $("input[name=userJob").val(search);
+        $("#userTable").jqGrid('setGridParam',{
+            postData: {
+                search : JSON.stringify($('#userForm').serializeObject())
+            }
+        }).trigger('reloadGrid');
+    }
+    function selectAdmin(isAdmin){
+        console.log(isAdmin+"|||");
+        if(isAdmin==1){
+            $(".user_pass").removeClass("hidden");
+            $(".user_role").removeClass("hidden");
+        }
+    }
+    function userAdd(){
+        jQuery.ajax({
+            async: false,
+            type: "post",
+            url: "$path/user/addUser",
+            data: $('#userAddForm').serialize(),
+            dataType: "json",
+            error: function (request) {
+                alert("网络错误");
+            },
+            success: function (data) {
+                alert(data["msg"])
+                setTimeout(function(){
+                    $("#addUser .close").click();
+                    $("#addUser").hide();
+                },500)
                 $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
             }
         });
     }
 
-    function userStatus(userId, isDeleted){
-        jQuery.ajax({
-            async: false,
-            type: "post",
-            url: "$path/users/" + userId + "/updateStatus",
-            data: {_method:"put",isDeleted:isDeleted},
-            dataType: "json",
-            error: function () {
-                initAlert(0,"网络错误");
-            },
-            success: function (data) {
-                var tdisDeleted = $("#"+userId).find("[aria-describedby $= 'isDeleted']");
-                var edit = $("#"+userId).find(".edit");
-                var stop = $("#"+userId).find(".stop");
-                if(tdisDeleted.text() == '0'){
-                    $("#"+userId).addClass("disabled");
-                    stop.attr("onclick","userStatus("+ userId +","+ 1 +")").text("启用");
-                    edit.attr("onclick","").addClass("disabled");
-                }else{
-                    $("#"+userId).removeClass("disabled");
-                    stop.attr("onclick","userStatus("+ userId +","+ 0 +")").text("停用");
-                    edit.attr("onclick","editUser("+ userId +")").removeClass("disabled");
-                }
-                tdisDeleted.text(isDeleted);
-                getTableData();
-            }
-        });
-    }
-
-    function resetPass(){
-        var userId = $("#editUserId").val();
-        jQuery.ajax({
-            async: false,
-            type: "put",
-            url: "$path/users/" + userId + "/resetPass",
-            data: null,
-            dataType: "json",
-            error: function () {
-                initAlert(0, "网络错误");
-            },
-            success: function (result) {
-                initAlert(result.data, result.message);
-            }
-        });
-    }
-    });
 </script>
 </body>
 </html>

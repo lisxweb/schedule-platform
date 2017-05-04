@@ -74,7 +74,7 @@ public interface UserService {
 	* @param userId
 	* @Description: 删除人员,这里是假删除,只是更改isDeleted的状态
 	*/
-	void deleteUserById(String userId);
+	void deleteUserById(String userId,String isDeleted);
 
 	/** 
 	* @Title: getAllUsers  

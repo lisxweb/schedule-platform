@@ -52,17 +52,17 @@
                 #end
                 <div class="collapse in slide-menu" id="part1">
                     #if($shiro.hasPermission("系统管理-人员管理"))
-                    <a class="active" href="/user" target="myiframe">
+                    <a class="active" href="$path/user" target="myiframe">
                         <span class="icon-19"></span>人员管理
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理-角色管理"))
-                    <a href="/department" target="myiframe">
+                    <a href="$path/department" target="myiframe">
                         <span class="icon-18"></span>人员分组
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理-角色管理"))
-                    <a href="/role" target="myiframe">
+                    <a href="$path/role" target="myiframe">
                         <span class="icon-17"></span>权限管理
                     </a>
                     #end
@@ -127,7 +127,7 @@
         </div>
         <!-- 系统设置 end -->
     </div>
-    <iframe id="myiframe" name="myiframe" src="/user"></iframe>
+    <iframe id="myiframe" name="myiframe" src="$path/user"></iframe>
 </section>
 </div>
 <!--隐藏的页面元素 end-->

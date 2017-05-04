@@ -1,6 +1,7 @@
 package com.ducetech.app.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.ducetech.app.model.Role;
 import com.ducetech.app.model.User;
 import com.ducetech.app.service.RoleService;
@@ -10,7 +11,6 @@ import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.model.PagerRS;
 import com.ducetech.framework.util.CookieUtil;
 import com.ducetech.framework.util.DateUtil;
-import com.ducetech.framework.web.view.OperationResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -28,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -150,36 +149,73 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public PagerRS<User> personData(HttpServletRequest request) throws Exception {
 		BaseQuery<User> query = User.getSearchCondition(User.class, request);
-		query.getT().setUserCode(query.getT().getUserCode().trim());
-		query.getT().setUserName(query.getT().getUserName().trim());
 		PagerRS<User> rs = userService.getUserByPager(query);
 		return rs;
 	}
 
 	/**
+     * 新增
 	 * @Title: addUser
-	 * @return void
-	 * @throws java.io.IOException
-	 * @Description: 新增人员
 	 */
-	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/addUser", method = RequestMethod.POST)
 	@ResponseBody
-	public OperationResult create(User user, HttpServletRequest request) throws IOException {
+	public JSONObject create(User user, HttpServletRequest request) throws Exception {
 		User userInfo = getLoginUser(request);
+		if(user.getPassword().equals("")||user.getPassword()==null) {
+            user.setPassword(userService.genRandomNum(6));
+        }
 		user.setUserPass(user.getPassword());
 		User uCode = userService.getUserByUserCode(user.getUserCode());
+        JSONObject data = new JSONObject();
+        data.put("msg","操作成功");
 		if(uCode!=null) {
-			return OperationResult.buildFailureResult("工号已存在", 0);
+            data.put("msg","工号已存在");
+			return data;
 		} else {
 			user.setCreatorId(userInfo.getUserId());
-			user.setIsAdmin(user.getRoleIds()!=""?0:1);
-			System.out.println(user.getIsAdmin()+"||");
 			user.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
 			userService.addUser(user);
-			return OperationResult.buildSuccessResult("成功", 1);
+			return data;
 		}
 	}
 
+    /**
+     * 编辑
+     * @param userId
+     */
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public User edit(@PathVariable(value="id")String userId) throws Exception {
+        User user = new User();
+        if(org.apache.commons.lang3.StringUtils.isNotEmpty(userId)){
+            user = userService.getUserByUserId(userId);
+        }
+        return user;
+    }
+    /**
+     * 更新
+     * @param user
+     */
+    @RequestMapping(value = "/users", method = RequestMethod.PUT)
+    @ResponseBody
+    public JSONObject update(User user) throws Exception {
+        userService.updateUser(user);
+        JSONObject data = new JSONObject();
+        data.put("message","操作成功");
+        return data;
+    }
+    /**
+     * 删除
+     * @param userId
+     */
+    @RequestMapping(value = "/users/{id}/userDel", method = RequestMethod.PUT)
+    @ResponseBody
+    public JSONObject userDel(@PathVariable(value="id") String userId) throws Exception {
+        userService.deleteUserById(userId,"1");
+        JSONObject data = new JSONObject();
+        data.put("msg","操作成功");
+        return data;
+    }
 
 	/**
 	 * @Title: resetPass
@@ -187,7 +223,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/users/{id}/resetPass", method = RequestMethod.PUT)
 	@ResponseBody
-	public ModelAndView resetPass(@PathVariable(value="id") String userId) throws IOException {
+	public ModelAndView resetPass(@PathVariable(value="id") String userId) throws Exception {
 		User user = userService.getUserByUserId(userId);
 		String pwd = userService.resetPass(user);
         ModelAndView mv = new ModelAndView();

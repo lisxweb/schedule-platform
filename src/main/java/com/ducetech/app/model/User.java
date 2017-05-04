@@ -30,8 +30,6 @@ public class User extends BaseModel implements Serializable {
 
 	private String station;	        //站点
 
-    private String position;        //岗位
-
 	private List<Role> roles; 		// 用户拥有的角色列表
 	
 	private String roleIds;			//角色IDS
@@ -46,7 +44,7 @@ public class User extends BaseModel implements Serializable {
 
 	private String createdAt;		//创建时间
 
-	private int isDeleted;		//删除标记	0启用	1停用	默认0启用
+	private String isDeleted;		//删除标记	0启用	1停用	默认0启用
 
-    private int isAdmin;            //是否是管理员 1是管理员 0是普通 默认0
+    private String isAdmin;            //是否是管理员 1是管理员 0是普通 默认0
 }

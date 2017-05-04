@@ -217,11 +217,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
-	public void deleteUserById(String userId) {
-		User user = userDAO.selectUserByUserId(userId);
-		user.setIsDeleted(1);		// 1为删除
-		userDAO.updateUser(user);
+	public void deleteUserById(String userId,String isDeleted) {
+		userDAO.deleteUserById(userId,isDeleted);
 	}
 
 	@Override
@@ -240,18 +237,7 @@ public class UserServiceImpl implements UserService {
 			PageHelper.startPage(query.getPage(), query.getRows(), true);
 		}
 		List<User> userList = userDAO.selectUser(query.getT());
-		for (User user : userList) {
-			List<Role> roles = roleService.getRolesByUserId(user.getUserId());
-			String roleNames = "";
-			for(Role role : roles){
-				roleNames += role.getRoleName() + " ，";
-			}
-			if(roleNames.length()>0){
-				roleNames = roleNames.substring(0,roleNames.length()-1);
-			}
-			user.setRoleNames(roleNames);
-			user.setRoles(roles);
-		}
+
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		PageInfo page = new PageInfo(userList);
 		PagerRS<User> pagerRS = new PagerRS<User>(userList, page.getTotal(), page.getPages());

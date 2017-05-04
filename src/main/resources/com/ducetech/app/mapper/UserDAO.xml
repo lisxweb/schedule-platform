@@ -41,11 +41,8 @@
 	<!-- 对用户的通用查询  -->
 	<select id="selectUser" parameterType="com.ducetech.app.model.User" resultMap="userMap">
 		select user_id, password, secret_key, user_code, user_name, station_area, station, creator_id, created_at, is_deleted, is_admin from user where 1=1
-		<if test="userCode!=null and userCode!=''">
-			and user_code=#{userCode}
-		</if>
-		<if test="userName!=null and userName!=''">
-			and user_name like '%' #{userName} '%'
+		<if test="userCode!=null and userCode!='' and userCode!='{}'||userName!=null and userName!='' and userName!='{}'|| userJob!=null and userJob!='' and userJob!='{}'">
+			AND (user_code=#{userCode} or user_name like '%' #{userName} '%' or user_job=#{userJob})
 		</if>
 		<if test="stationArea!=null and stationArea!=''">
 			and station_area=#{stationArea}
@@ -53,9 +50,7 @@
 		<if test="station!=null and station!=''">
 			and station=#{station}
 		</if>
-		<if test="userJob!=null and userJob!=''">
-			and user_job=#{userJob}
-		</if>
+
 		<if test="isAdmin!=null and isAdmin!=''">
 			and is_admin=#{isAdmin}
 		</if>
@@ -65,17 +60,23 @@
 		<if test="createdAt!=null and createdAt!=''">
 			and created_at=#{createdAt}
 		</if>
-		<if test="isDeleted!=null and isDeleted!=''">
-			and is_deleted=#{isDeleted}
-		</if>
+			and is_deleted!='1'
 	</select>
 	
 	<!-- 插入新用户 -->
 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
-		insert into user (password,user_code,user_name,station_area,station,creator_id,created_at,is_admin)
-		values(#{password},#{userCode},#{userName},#{stationArea},#{station},#{creatorId},#{createdAt},#{isAdmin})
+		insert into user (password,user_pass,user_code,user_name,station_area,station,creator_id,created_at,is_admin)
+		values(#{password},#{userPass},#{userCode},#{userName},#{stationArea},#{station},#{creatorId},#{createdAt},#{isAdmin})
 	</insert>
-	
+    <update id="deleteUserById" parameterType="com.ducetech.app.model.User">
+        update user
+        <set>
+        <if test="isDeleted != null and isDeleted != ''">
+            is_deleted=#{isDeleted},
+        </if>
+        </set>
+        where user_id=#{userId}
+    </update>
 	<!-- 更新某用户信息 -->
 	<update id="updateUser" parameterType="com.ducetech.app.model.User">
 		update user 

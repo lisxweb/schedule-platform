@@ -109,6 +109,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(100) NOT NULL,
+  `user_pass` varchar(100) NOT NULL,
   `secret_key` varchar(64) DEFAULT NULL,
   `user_code` varchar(50) DEFAULT NULL COMMENT '工号',
   `user_job` varchar(64) DEFAULT NULL,
@@ -124,7 +125,7 @@ CREATE TABLE `user` (
 
 
 INSERT INTO `user` (`user_id`, `password`, `secret_key`, `user_code`,`user_job`, `user_name`, `station_area`, `station`, `creator_id`, `created_at`, `is_deleted`,`is_admin`) VALUES
-('1', 'e7b68248d0782b49f0d4efaefb0e508c', 'cb7e52304f0d11e6965c00ff2c2e2b3f', '1', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
+('1', 'e7b68248d0782b49f0d4efaefb0e508c', 'cb7e52304f0d11e6965c00ff2c2e2b3f', 'admin', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
 
 
 
