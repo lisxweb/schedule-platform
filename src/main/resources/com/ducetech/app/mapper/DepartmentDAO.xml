@@ -25,8 +25,9 @@
     </select>
 
     <!-- 根据部门编码获取 -->
-    <select id="selectDepartmentByParentCode" resultMap="departmentMap">
-        select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where node_code=#{nodeCode}
+    <select id="selectByParentCode" resultMap="departmentMap">
+        select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department
+            where node_code like #{nodeCode} and length(node_code)=#{nodeCodeLength} order by node_code
     </select>
 
 	<!-- 根据ID精确查找部门 -->
@@ -36,24 +37,12 @@
 	
 	<!-- 对部门的通用查询  -->
 	<select id="selectDepartment" parameterType="com.ducetech.app.model.Department" resultMap="departmentMap">
-		select department_id, password, secret_key, node_code, node_name, station_area, station, creator_id, created_at, is_deleted, is_admin from department where 1=1
+		select department_id, node_code, node_name, node_order,if_use, creator_id, updator_id, created_at, updated_at from department where 1=1
 		<if test="nodeCode!=null and nodeCode!=''">
 			and node_code=#{nodeCode}
 		</if>
 		<if test="nodeName!=null and nodeName!=''">
 			and node_name like '%' #{nodeName} '%'
-		</if>
-		<if test="stationArea!=null and stationArea!=''">
-			and station_area=#{stationArea}
-		</if>
-		<if test="station!=null and station!=''">
-			and station=#{station}
-		</if>
-		<if test="departmentJob!=null and departmentJob!=''">
-			and department_job=#{departmentJob}
-		</if>
-		<if test="isAdmin!=null and isAdmin!=''">
-			and is_admin=#{isAdmin}
 		</if>
 		<if test="creatorId!=null and creatorId!=''">
 			and creator_id=#{creatorId}
@@ -68,8 +57,8 @@
 	
 	<!-- 插入新部门 -->
 	<insert id="insertDepartment" useGeneratedKeys="true" keyProperty="departmentId">
-		insert into department (password,secret_key,node_code,node_name,station_area,station,create_by_id,create_at,is_admin)
-		values(#{password},#{secretKey},#{nodeCode},#{nodeName},#{stationArea},#{station},#{createById},#{createAt},#{is_admin})
+		insert into department (node_code,node_name,node_order,if_use,creator_id,created_at)
+		values(#{nodeCode},#{nodeName},#{nodeOrder},#{ifUse},#{creatorId},#{createdAt})
 	</insert>
 	
 	<!-- 更新某部门信息 -->

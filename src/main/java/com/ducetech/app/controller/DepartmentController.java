@@ -1,7 +1,9 @@
 package com.ducetech.app.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.ducetech.app.model.Department;
+import com.ducetech.app.model.User;
 import com.ducetech.app.service.DepartmentService;
 import com.ducetech.framework.controller.BaseController;
 import com.ducetech.framework.model.BaseQuery;
@@ -56,14 +58,25 @@ public class DepartmentController extends BaseController {
     /**
      * @Title: addDepartment
      * @return void
-     * @Description: 新增部门
+     * @Description: 新增站区
      */
-    @RequestMapping(value = "/addDepartment", method = RequestMethod.POST)
+    @RequestMapping(value = "/dept/addStationAreaForm", method = RequestMethod.POST)
     @ResponseBody
-    public OperationResult create(Department dept) throws Exception {
+    public JSONObject create(Department dept, String parentCode, HttpServletRequest request) throws Exception {
+        User userInfo = getLoginUser(request);
         dept.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
+        dept.setCreatorId(userInfo.getUserId());
+        dept.setIfUse(0);
+        dept.setNodeOrder(0);
+        if(parentCode==null) {
+            dept.setNodeCode(departmentService.selectDepartmentByParentCode("000"));
+        }else{
+            dept.setNodeCode(departmentService.selectDepartmentByParentCode(parentCode));
+        }
         departmentService.insertDepartment(dept);
-        return OperationResult.buildSuccessResult("成功", 1);
+        JSONObject obj = new JSONObject();
+        obj.put("msg","新增站区成功");
+        return obj;
     }
 
     /**

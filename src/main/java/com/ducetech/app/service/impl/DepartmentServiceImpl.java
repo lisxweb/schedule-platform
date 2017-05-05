@@ -42,6 +42,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public List<Department> selectDepartment(Department dept) {
+
         return departmentDAO.selectDepartment(dept);
     }
 
@@ -49,10 +50,15 @@ public class DepartmentServiceImpl implements DepartmentService{
     public void insertDepartment(Department dept) {
         departmentDAO.insertDepartment(dept);
     }
-
+    /**
+     * 获取新的节点编号
+     * @param parentCode
+     * @return
+     */
     @Override
     public String selectDepartmentByParentCode(String parentCode){
         List<Department> nodes = querySubNodesByCode(parentCode);
+        System.out.println(nodes.size()+"|||");
         String newCode="001";
         if(!nodes.isEmpty()){
             Department node = nodes.get(nodes.size()-1);
@@ -79,7 +85,8 @@ public class DepartmentServiceImpl implements DepartmentService{
         return str;
     }
     public List<Department> querySubNodesByCode(String parentCode){
-        return departmentDAO.selectByParentCode(parentCode);
+        System.out.println(parentCode+"||"+(parentCode.length()+3));
+        return departmentDAO.selectByParentCode(parentCode+"%",parentCode.length()+3);
     }
     @Override
     public void updateDepartment(Department dept) {

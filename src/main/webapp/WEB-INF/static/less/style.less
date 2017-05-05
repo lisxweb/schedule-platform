@@ -1,8 +1,8 @@
 @import "color";
-@blue:#648EF1;
+@blue:#3A6BCE;
 @black:#1a1a1a;/* 深灰色 */
 @border:#e5e5e5;
-@red:#C0272D;
+@red:#EC1C24;
 @green:#39B44A;
 ul,ol {
   list-style: none;
@@ -21,6 +21,9 @@ textarea {
   clear: both;
   overflow: hidden;
 }
+.blue{
+  color: @blue;
+}
 /* 重置a标签的默认样式 */
 a:link,
 a:visited,
@@ -32,7 +35,7 @@ a:active {
 .btnDefault{
   padding:0 20px;
   text-align: center;
-  line-height: 36px;
+  line-height: 34px;
   float: left;
   margin-left:5px;
   border:1px solid @border;
@@ -83,8 +86,15 @@ select {
   padding:10px 15px 0;
   border-bottom: 1px solid @border;
   .float-left{
+    line-height:32px;
     .bgGreen{
       margin-left:0;
+    }
+    .title{
+      float: left;
+      line-height:32px;
+      color: @red;
+      margin-right:20px;
     }
   }
   .float-right{
@@ -114,6 +124,8 @@ select {
         outline:none;
       }
     }
+    .btnDefault{}
+    margin-bottom:10px;
   }
 }
 /* 按钮组合 */
@@ -210,14 +222,14 @@ select {
 }
 .form_line{
   float:left;
-  margin:2px 0 10px;
+  margin:0 10px 10px;
   &>*{
     float: left;
   }
   label{
-    width:70px;
+    min-width:70px;
     text-align:right;
-    line-height:32px;
+    line-height:34px;
     color: @black;
     margin-right:10px;
   }
@@ -237,7 +249,7 @@ select {
   }
   &>input[type="text"],select,.section input[type="text"],.section select{
     width:130px;
-    height:34px;
+    height:36px;
     padding:0 5px;
     border:1px solid @border;
     border-radius:3px;
@@ -279,10 +291,13 @@ select {
   background-color:#fff;
 }
 .modal{
+  margin-left:-100px;
+  .modal-dialog{
+    width:800px;
+  }
   .modal-content{
     border-radius:0;
     border:0;
-    width:800px;
     .modal-body{
       min-height:200px;
     }
@@ -504,7 +519,23 @@ select {
           margin-left:10px;
         }
         a{
-
+          float:right;
+          margin-right:10px;
+          &.icon-1{
+            color: @red;
+          }
+          &.icon-4{
+            color:@blue;
+          }
+        }
+        input{
+          width:200px;
+          float: left;
+          height:28px;
+          margin:5px;
+          padding:3px;
+          border:1px solid @border;
+          line-height:28px;
         }
       }
       .clear{
@@ -545,6 +576,7 @@ select {
   .menu-head{
     background:#CBCBCB;
     line-height:60px;
+    font-size:20px;
   }
   .nav-tabs{
     border:0;
@@ -553,6 +585,7 @@ select {
       border:0;
       border:0;
       border-radius:0;
+      padding:10px 0;
     }
     >li>a:hover,>li.active>a, >li.active>a:focus, >li.active>a:hover{
       background: #fff;
@@ -570,6 +603,7 @@ select {
   margin-top:17px;
   margin-bottom:10px;
   li{
+    position: relative;
     margin-right:10px;
     a,a:hover,a:focus{
       background: @blue;
@@ -584,6 +618,19 @@ select {
         background: #fff;
         color: @blue;
       }
+    }
+    >span{
+      position: absolute;
+      width:18px;
+      height:18px;
+      background:@red;
+      color: #fff;
+      text-align: center;
+      line-height:18px;
+      right:-4px;
+      top:-4px;
+      font-size:14px;
+      border-radius:50%;
     }
   }
 }
@@ -600,6 +647,7 @@ select {
     height:30px;
     line-height:30px;
     border-left:4px solid @blue;
+    cursor: pointer;
   }
   .dropdown{
     right:0;
@@ -714,6 +762,14 @@ select {
           color: #1a1a1a;
         }
       }
+      input{
+        border:1px solid @border;
+        width:80px;
+        height:30px;
+        padding:5px;
+        line-height:30px;
+        text-align: center;
+      }
     }
     .dark{
       background:#535761;
@@ -727,5 +783,131 @@ select {
         line-height:38px;
       }
     }
+  }
+  .foot{
+    overflow: hidden;
+    clear: both;
+    .btnDefault{
+      width:120px;
+    }
+  }
+}
+/* 新增自动排班 */
+.noPlan{
+  padding:10px;
+  margin:20px 0;
+  em{
+    display: inline-block;
+    width:20px;
+    height:20px;
+    background: #989898;
+    color: #fff;
+    border-radius:50%;
+    text-align: center;
+    line-height:20px;
+    margin-right:5px;
+  }
+}
+/* 排班审批 */
+.no-mes{
+  margin-bottom:20px;
+  padding:0 15px;
+  font-size:20px;
+}
+.approvalList{
+  overflow: hidden;
+  clear: both;
+  li{
+    border:1px solid @border;
+    margin-bottom:10px;
+    position: relative;
+    .checkbox{
+      position: absolute;
+      width:70px;
+      height:100%;
+      background:#f1f1f1;
+      margin:0;
+      border-right:1px solid @border;
+      >*{
+        position: absolute;
+        top:50%;
+      }
+      input{
+        width:16px;
+        height:16px;
+        left:50%;
+        background: #fff;
+        margin:-8px 0 0 -8px;
+      }
+      span{
+        width:100%;
+        line-height:20px;
+        text-align:center;
+        margin-top:-10px;
+      }
+    }
+    .vacationInfo{
+      position: relative;
+      margin-left:70px;
+      padding:40px 15px 10px;
+      overflow: hidden;
+      clear: both;
+      .head{
+        width:100%;
+        height:40px;
+        position: absolute;
+        left:0;
+        top:10px;
+        *{
+          line-height:24px;
+        }
+        span{
+          border-left:4px solid @blue;
+          text-indent:15px;
+          font-size:18px;
+          color: @blue;
+        }
+        em{
+          color:#999;
+          margin-right:10px;
+        }
+      }
+      .col{
+        float: left;
+        min-width:150px;
+        >*{
+          line-height:40px;
+          float: left;
+        }
+        em{
+          color: #B2B2B2;
+          margin-right:8px;
+        }
+      }
+      .col2{
+        min-width:400px;
+      }
+      .col3{
+        width:100%;
+      }
+    }
+  }
+}
+.approvalHeading{
+  margin-bottom:20px;
+  .float-left{
+    border-left:4px solid @blue;
+    padding-left:10px;
+  }
+}
+.approvalSchedule{
+  padding-bottom:15px;
+  margin-bottom:10px;
+  border-bottom:1px solid @border;
+  .schedule{
+    min-height:100px !important;
+  }
+  &:nth-last-child(1){
+    border:0;
   }
 }

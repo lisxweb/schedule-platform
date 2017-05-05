@@ -10,8 +10,8 @@ function Alert(status, message) {
     str += '<b></b></div></div></div>';
 
     var btn =  '<div class="alert-footer">';
-    btn += '<button class="btn  btn-cancel">取消</button></div>';
-    btn += '<button class="btn btn-confirm">确定</button>';
+    btn += '<button class="btn  btn-cancel">取消</button>';
+    btn += '<button class="btn btn-confirm">确定</button></div>';
     $("body").append(str);
     var mask = $("#mask",parent.document);
     mask.show();
@@ -26,7 +26,7 @@ function Alert(status, message) {
         mes.text("操作成功！");
     }else if(status == "danger"){
         obj.find(".alert-dialog").append(btn);
-        mes.text("数据即将删除，是否执行操作？");
+        mes.text("确定删除这条数据？");
     }
     if(message != undefined){
         mes.text(message);
@@ -41,7 +41,6 @@ function Alert(status, message) {
         	close();
         },800)
     }
-    
     function close(){
         $(".Alert").fadeOut(300);
         mask.fadeOut(300);

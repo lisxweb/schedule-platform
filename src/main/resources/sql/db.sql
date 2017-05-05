@@ -1,42 +1,18 @@
 /*!40101 SET NAMES utf8 */;
 
-DROP TABLE IF EXISTS `department`;
-
-CREATE TABLE `department` (
-  `department_id` int(11) NOT NULL AUTO_INCREMENT,
-  `department_name` varchar(30) DEFAULT NULL,
-  `department_code` varchar(50) DEFAULT NULL,
-  `parent_department_id` int(11) DEFAULT NULL,
-  `level` varchar(10) DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL,
-  `principal_person_id` int(11) DEFAULT NULL,
-  `creator_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `is_deleted` varchar(10) DEFAULT '0',
+DROP TABLE IF EXISTS department;
+CREATE TABLE department (
+	`department_id` int(11) NOT NULL AUTO_INCREMENT,
+	node_name varchar(50),
+	node_code varchar(50),
+	node_order  int(11) default 0,
+	creator_id int(11) default 0,
+	updator_id int(11) default 0,
+	if_use int(1) default 1,
+	created_at datetime,
+	updated_at datetime,
   PRIMARY KEY (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
-
-
-insert  into `department`(`department_id`,`department_name`,`department_code`,`parent_department_id`,`level`,`type`,`principal_person_id`,`creator_id`,`created_at`,`is_deleted`)
-values 
-(1,'人力资源部','01',1,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(2,'生产调度室','02',2,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(3,'物资部','03',3,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(4,'安质部','04',4,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(5,'财务部','05',5,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(6,'新线办','06',6,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(7,'改造办','07',7,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(8,'企发、法规','08',8,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(9,'项目部','09',9,'1','部室',NULL,NULL,'2015-10-12 14:20:22','0'),
-(10,'中心项目部','W0',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(11,'维修一项目部','W1',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(12,'维修二项目部','W2',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(13,'维修三项目部','W3',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(14,'维修四项目部','W4',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(15,'维修五项目部','W5',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(16,'维修六项目部','W6',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(17,'维修七项目部','W7',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0'),
-(18,'维修八项目部','W8',9,'2','项目部',NULL,NULL,'2015-10-12 14:20:22','0');
 
 
 DROP TABLE IF EXISTS `permission`;

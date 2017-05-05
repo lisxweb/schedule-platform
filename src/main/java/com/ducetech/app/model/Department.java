@@ -28,10 +28,10 @@ public class Department extends BaseModel implements Serializable{
     private int ifUse;
 
     // 创建人
-    private long creatorId;
+    private String creatorId;
 
     // 更新人
-    private long updatorId;
+    private String updatorId;
 
     // 创建时间
     private String createdAt;

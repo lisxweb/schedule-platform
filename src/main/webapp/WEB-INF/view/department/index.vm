@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>人员分组</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/static/css/common.css">
-    <link rel="stylesheet" href="/static/css/font.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="/static/js/underscore-min.js" type="text/javascript"></script>
-    <script src="/static/js/moment.min.js" type="text/javascript"></script>
-    <script src="/static/js/clndr.min.js" type="text/javascript"></script>
-    <script src="/static/js/common.js" type="text/javascript"></script>
-    <script src="/static/js/alert.js" type="text/javascript"></script>
+    #set($path = ${rc.contextPath})
+    <link rel="stylesheet" href="$path/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="$path/static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="$path/static/css/common.css">
+    <link rel="stylesheet" href="$path/static/css/font.css">
+    <link rel="stylesheet" href="$path/static/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="$path/static/css/style.css">
+    <script src="$path/static/js/jquery.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/underscore-min.js" type="text/javascript"></script>
+    <script src="$path/static/js/moment.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/common.js" type="text/javascript"></script>
+    <script src="$path/static/js/alert.js" type="text/javascript"></script>
+    <script src="$path/static/js/index.js" type="text/javascript"></script>
+    <!-- jqgrid -->
+    <script src="$path/static/js/jqgrid/grid.locale-cn.js" type="text/javascript"></script>
+    <script src="$path/static/js/jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
+    <script src="$path/static/js/jqgrid/table-jqgrid.js" type="text/javascript"></script>
+    <!-- json-serializeObject -->
+    <script src="$path/static/js/json/json-serializeObject.js" type="text/javascript"></script>
+    <script src="$path/static/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
 </head>
 <body>
 <!-- 右侧内容 start -->
@@ -44,7 +52,7 @@
                             <a role="menuitem" href="#addStation" data-toggle="modal" data-target="#addStation">添加站点</a>
                         </li>
                         <li role="presentation">
-                            <a role="menuitem" href="javascript:;">删除站区</a>
+                            <a class="delete" role="menuitem" href="javascript:;">删除站区</a>
                         </li>
                     </ul>
                 </div>
@@ -53,33 +61,49 @@
                 <ul>
                     <li>
                         <span>西直门</span>
-                        <a class="edit" href="javascript:;"></a>
-                        <a class="delete" href="javascript:;"></a>
+                        <a class="delete icon-1" href="javascript:;"></a>
+                        <a class="edit icon-4" href="javascript:;"></a>
                     </li>
                     <li>
-                        <span>西直门</span>
-                        <a class="edit" href="javascript:;"></a>
-                        <a class="delete" href="javascript:;"></a>
+                        <span>动物园</span>
+                        <a class="delete icon-1" href="javascript:;"></a>
+                        <a class="edit icon-4" href="javascript:;"></a>
+                    </li>
+                    <li class="clear"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="list">
+            <div class="station-head">
+                <span>永泰庄站区</span>
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown">操作
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation">
+                            <a role="menuitem" href="#editArea" data-toggle="modal" data-target="#editArea">修改站区名称</a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" href="#addStation" data-toggle="modal" data-target="#addStation">添加站点</a>
+                        </li>
+                        <li role="presentation">
+                            <a class="delete" role="menuitem" href="javascript:;">删除站区</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stations">
+                <ul>
+                    <li>
+                        <span>森林公园</span>
+                        <a class="delete icon-1" href="javascript:;"></a>
+                        <a class="edit icon-4" href="javascript:;"></a>
                     </li>
                     <li>
-                        <span>西直门</span>
-                        <a class="edit" href="javascript:;"></a>
-                        <a class="delete" href="javascript:;"></a>
-                    </li>
-                    <li>
-                        <span>西直门</span>
-                        <a class="edit" href="javascript:;"></a>
-                        <a class="delete" href="javascript:;"></a>
-                    </li>
-                    <li>
-                        <span>西直门</span>
-                        <a class="edit" href="javascript:;"></a>
-                        <a class="delete" href="javascript:;"></a>
-                    </li>
-                    <li>
-                        <span>西直门</span>
-                        <a class="edit" href="javascript:;"></a>
-                        <a class="delete" href="javascript:;"></a>
+                        <span>永泰庄</span>
+                        <a class="delete icon-1" href="javascript:;"></a>
+                        <a class="edit icon-4" href="javascript:;"></a>
                     </li>
                     <li class="clear"></li>
                 </ul>
@@ -97,15 +121,15 @@
                 <h4 class="modal-title">新增站区</h4>
             </div>
             <div class="modal-body">
-                <form class="form-container clear">
+                <form class="form-container clear" id="addStationAreaForm">
                     <div class="form_line">
                         <label>站区名称</label>
-                        <input type="text">
+                        <input type="text" name="nodeName">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-confirm" href="javascript:;">保存</a>
+                <a class="btn btn-confirm" onclick="addStationArea()" href="javascript:;">保存</a>
                 <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
@@ -128,7 +152,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-confirm" href="javascript:;">保存</a>
+                <a class="btn btn-confirm" onclick="addStationArea()" href="javascript:;">保存</a>
                 <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
@@ -158,4 +182,27 @@
     </div>
 </div>
 </body>
+<script>
+    function addStationArea(){
+        console.log("||||||")
+        jQuery.ajax({
+            async: false,
+            type: "post",
+            url: "$path/dept/addStationAreaForm",
+            data: $('#addStationAreaForm').serialize(),
+            dataType: "json",
+            error: function (request) {
+                alert("网络错误");
+            },
+            success: function (data) {
+                alert(data.msg)
+                setTimeout(function(){
+                    $("#addDeptForm .close").click();
+                    $("#addDeptForm").hide();
+                },500)
+                $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
+            }
+        });
+    }
+</script>
 </html>
