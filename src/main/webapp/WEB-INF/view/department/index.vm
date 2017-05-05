@@ -86,7 +86,7 @@
                 <form class="form-container clear" id="addStationAreaForm">
                     <div class="form_line">
                         <label>站区名称</label>
-                        <input type="text" id="addStationAreaName" name="nodeName">
+                        <input type="text" id="addStationAreaName" name="nodename">
                     </div>
                 </form>
             </div>
@@ -110,7 +110,7 @@
                     <div class="form_line">
                         <label>站区名称</label>
                         <input type="hidden" id="editStationAreaCode" name="nodeCode">
-                        <input type="text" id="editStationAreaName" name="nodeName">
+                        <input type="text" id="editStationAreaName" name="nodename">
                     </div>
                 </form>
             </div>
@@ -134,7 +134,7 @@
                     <div class="form_line">
                         <label>站点名称</label>
                         <input type="hidden" id="parentNode" name="parentNode">
-                        <input type="text" id="addStationName" name="nodeName">
+                        <input type="text" id="addStationName" name="nodename">
                     </div>
                 </form>
             </div>
@@ -170,10 +170,10 @@
     $("#editStationAreaBtn").click(function(){
         $("#editArea").show();
         var nodeCode = $(this).attr("nodeCode");
-        var nodeName = $(this).attr("nodeName");
-        console.log(nodeCode+"|||"+nodeName)
+        var nodename = $(this).attr("nodename");
+        console.log(nodeCode+"|||"+nodename)
         $("#editStationAreaCode").val(nodeCode);
-        $("#editStationAreaName").val(nodeName);
+        $("#editStationAreaName").val(nodename);
     });
     function editStationArea(){
         jQuery.ajax({
