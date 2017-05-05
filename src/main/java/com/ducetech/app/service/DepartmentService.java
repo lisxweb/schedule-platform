@@ -36,13 +36,6 @@ public interface DepartmentService {
      * @return
      */
     String selectDepartmentByParentCode(String parentCode);
-    /**
-     * @Title: selectDepartment
-     * @param dept
-     * @return List<Department>
-     * @Description: Department通用查询
-     */
-    List<Department> selectDepartment(Department dept);
 
     /**
      * @Title: addDepartment
@@ -66,4 +59,12 @@ public interface DepartmentService {
     void deleteDepartment(String nodeCode);
 
     Department selectDepartmentByNodeCode(String nodeCode);
+
+    /**
+     * 获取对应等级
+     * @param parentCode
+     * @param nodeCodeLength
+     * @return
+     */
+    List<Department> selectByParentCode(String parentCode, int nodeCodeLength);
 }

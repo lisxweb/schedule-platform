@@ -15,9 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -37,8 +39,11 @@ public class DepartmentController extends BaseController {
 	 * @Description: 跳转部门首页
 	 */
 	@RequestMapping(value = "/department", method = RequestMethod.GET)
-	public String departments(Model model) {
-		return "/department/index";
+	public String departments(ModelMap model) {
+        List<Department> stationArea = departmentService.selectByParentCode("000",6);
+        System.out.println(stationArea.size()+"||||||");
+        model.put("stationArea",stationArea);
+	    return "/department/index";
 	}
 
 	/**
@@ -49,10 +54,10 @@ public class DepartmentController extends BaseController {
 	 */
 	@RequestMapping(value = "/departments", method = RequestMethod.GET)
 	@ResponseBody
-	public PagerRS<Department> departmentData(HttpServletRequest request) throws Exception {
-		BaseQuery<Department> query = Department.getSearchCondition(Department.class, request);
-		PagerRS<Department> rs = departmentService.getDepartmentByPager(query);
-		return rs;
+	public List<Department> departmentData(HttpServletRequest request) throws Exception {
+		List<Department> stationArea = departmentService.selectByParentCode("000",6);
+		System.out.println(stationArea.size()+"||||||");
+		return stationArea;
 	}
 
     /**
@@ -78,7 +83,18 @@ public class DepartmentController extends BaseController {
         obj.put("msg","新增站区成功");
         return obj;
     }
-
+    /**
+     * @param dept
+     * @Description: 更新站区
+     */
+    @RequestMapping(value = "/dept/editStationAreaForm", method = RequestMethod.PUT)
+    @ResponseBody
+    public JSONObject update(Department dept) throws IOException {
+        departmentService.updateDepartment(dept);
+        JSONObject obj = new JSONObject();
+        obj.put("msg"," 更新站区成功");
+        return obj;
+    }
     /**
      * 编辑部门
      */
@@ -95,16 +111,5 @@ public class DepartmentController extends BaseController {
             dept = departmentService.selectDepartmentByNodeCode(nodeCode);
         }
         return dept;
-    }
-
-    /**
-     * @param dept
-     * @Description: 更新人员信息
-     */
-    @RequestMapping(value = "/departments", method = RequestMethod.PUT)
-    @ResponseBody
-    public OperationResult update(Department dept) throws IOException {
-        departmentService.updateDepartment(dept);
-        return OperationResult.buildFailureResult("成功", 1);
     }
 }

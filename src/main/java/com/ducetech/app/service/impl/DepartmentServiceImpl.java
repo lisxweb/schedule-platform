@@ -41,12 +41,6 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public List<Department> selectDepartment(Department dept) {
-
-        return departmentDAO.selectDepartment(dept);
-    }
-
-    @Override
     public void insertDepartment(Department dept) {
         departmentDAO.insertDepartment(dept);
     }
@@ -103,5 +97,10 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public Department selectDepartmentByNodeCode(String nodeCode) {
         return departmentDAO.selectDepartmentByNodeCode(nodeCode);
+    }
+
+    @Override
+    public List<Department> selectByParentCode(String parentCode, int nodeCodeLength) {
+        return departmentDAO.selectByParentCode(parentCode+"%",nodeCodeLength);
     }
 }
