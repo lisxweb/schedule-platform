@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -101,6 +102,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public List<Department> selectByParentCode(String parentCode, int nodeCodeLength) {
-        return departmentDAO.selectByParentCode(parentCode+"%",nodeCodeLength);
+        List<Department> deptList = departmentDAO.selectByParentCode(parentCode+"%",nodeCodeLength);
+        List<Department> list = new ArrayList<Department>();
+        for(Department dep:deptList){
+            dep.setStations(departmentDAO.selectByParentCode(dep.getNodeCode()+"%",dep.getNodeCode().length()+3));
+            list.add(dep);
+        }
+        return list;
     }
 }

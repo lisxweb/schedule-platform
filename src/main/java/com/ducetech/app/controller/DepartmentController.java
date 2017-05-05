@@ -67,7 +67,7 @@ public class DepartmentController extends BaseController {
      */
     @RequestMapping(value = "/dept/addStationAreaForm", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject create(Department dept, String parentCode, HttpServletRequest request) throws Exception {
+    public JSONObject addStationAreaForm(Department dept, String parentCode, HttpServletRequest request) throws Exception {
         User userInfo = getLoginUser(request);
         dept.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
         dept.setCreatorId(userInfo.getUserId());
@@ -89,10 +89,40 @@ public class DepartmentController extends BaseController {
      */
     @RequestMapping(value = "/dept/editStationAreaForm", method = RequestMethod.PUT)
     @ResponseBody
-    public JSONObject update(Department dept) throws IOException {
+    public JSONObject editStationAreaForm(Department dept,HttpServletRequest request) throws IOException {
+        User userInfo = getLoginUser(request);
+        dept.setUpdatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
+        dept.setUpdatorId(userInfo.getUserId());
         departmentService.updateDepartment(dept);
         JSONObject obj = new JSONObject();
         obj.put("msg"," 更新站区成功");
+        return obj;
+    }
+
+    /**
+     * 添加站点
+     * @param dept
+     * @param parentCode
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/dept/addStationForm", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject addStationForm(Department dept, String parentCode, HttpServletRequest request) throws Exception {
+        User userInfo = getLoginUser(request);
+        dept.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
+        dept.setCreatorId(userInfo.getUserId());
+        dept.setIfUse(0);
+        dept.setNodeOrder(0);
+        if(parentCode==null) {
+            dept.setNodeCode(departmentService.selectDepartmentByParentCode("000"));
+        }else{
+            dept.setNodeCode(departmentService.selectDepartmentByParentCode(parentCode));
+        }
+        departmentService.insertDepartment(dept);
+        JSONObject obj = new JSONObject();
+        obj.put("msg","新增站点成功");
         return obj;
     }
     /**

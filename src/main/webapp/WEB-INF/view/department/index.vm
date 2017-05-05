@@ -60,59 +60,18 @@
                 </div>
                 <div class="stations">
                     <ul>
+                        #foreach($station in $area.getStations())
                         <li>
-                            <span>西直门</span>
+                            <span name="editStationSpan">$station.getNodeName()</span>
                             <a class="delete icon-1" href="javascript:;"></a>
-                            <a class="edit icon-4" href="javascript:;"></a>
+                            <a class="edit editStation icon-4" href="javascript:;"></a>
                         </li>
-                        <li>
-                            <span>动物园</span>
-                            <a class="delete icon-1" href="javascript:;"></a>
-                            <a class="edit icon-4" href="javascript:;"></a>
-                        </li>
+                        #end
                         <li class="clear"></li>
                     </ul>
                 </div>
             </div>
         #end
-
-        <div class="list">
-            <div class="station-head">
-                <span>永泰庄站区</span>
-                <div class="dropdown">
-                    <button type="button" class="btn dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown">操作
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li role="presentation">
-                            <a role="menuitem" href="#editArea" data-toggle="modal" data-target="#editArea">修改站区名称</a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" href="#addStation" data-toggle="modal" data-target="#addStation">添加站点</a>
-                        </li>
-                        <li role="presentation">
-                            <a class="delete" role="menuitem" href="javascript:;">删除站区</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="stations">
-                <ul>
-                    <li>
-                        <span>森林公园</span>
-                        <a class="delete icon-1" href="javascript:;"></a>
-                        <a class="edit icon-4" href="javascript:;"></a>
-                    </li>
-                    <li>
-                        <span>永泰庄</span>
-                        <a class="delete icon-1" href="javascript:;"></a>
-                        <a class="edit icon-4" href="javascript:;"></a>
-                    </li>
-                    <li class="clear"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- 表格 end -->
 <!-- 新增站区 -->
@@ -171,15 +130,16 @@
                 <h4 class="modal-title">添加站点</h4>
             </div>
             <div class="modal-body">
-                <form class="form-container clear">
+                <form class="form-container clear" id="addStationForm">
                     <div class="form_line">
                         <label>站点名称</label>
-                        <input type="text">
+                        <input type="hidden" id="parentNode" name="parentNode">
+                        <input type="text" id="addStationName" name="nodeName">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-confirm" href="javascript:;">保存</a>
+                <a class="btn btn-confirm" href="javascript:;" onclick="addStation()">保存</a>
                 <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
@@ -187,6 +147,26 @@
 </div>
 </body>
 <script>
+    function addStation(){
+        jQuery.ajax({
+            async: false,
+            type: "post",
+            url: "$path/dept/addStationForm",
+            data: $('#addStationForm').serialize(),
+            dataType: "json",
+            error: function (request) {
+                alert("网络错误");
+            },
+            success: function (data) {
+                alert(data.msg)
+                setTimeout(function(){
+                    $("#addStation .close").click();
+                    $("#addStation").hide();
+                },500)
+                $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
+            }
+        });
+    }
     $("#editStationAreaBtn").click(function(){
         $("#editArea").show();
         var nodeCode = $(this).attr("nodeCode");

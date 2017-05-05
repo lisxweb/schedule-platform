@@ -1,10 +1,14 @@
 package com.ducetech.app.model;
 
+import com.ducetech.app.dao.DepartmentDAO;
+import com.ducetech.app.service.impl.DepartmentServiceImpl;
 import com.ducetech.framework.model.BaseModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 部门字典
@@ -38,4 +42,6 @@ public class Department extends BaseModel implements Serializable{
 
     // 更新时间
     private String updatedAt;
+
+    private List<Department> stations;
 }
