@@ -73,6 +73,6 @@
 				group_name=#{groupName},
 			</if>
 		</set>
-		where group_id=#{groupingId}
+		where group_code=#{groupCode}
 	</update>
 </mapper>

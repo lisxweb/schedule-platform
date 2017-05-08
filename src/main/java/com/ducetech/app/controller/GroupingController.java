@@ -83,7 +83,8 @@ public class GroupingController extends BaseController {
     @RequestMapping(value = "/group/editStationAreaForm", method = RequestMethod.PUT)
     @ResponseBody
     public JSONObject editStationAreaForm(Grouping group, HttpServletRequest request) throws Exception {
-        System.out.println(group.getGroupName()+"|");
+        System.out.println(group.getGroupName()+"|"+new String(group.getGroupName().getBytes("ISO-8859-1"),"utf-8"));
+        group.setGroupName(new String(group.getGroupName().getBytes("ISO-8859-1"),"utf-8"));
         User userInfo = getLoginUser(request);
         group.setUpdatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
         group.setUpdatorId(userInfo.getUserId());
