@@ -6,8 +6,6 @@
     <title>登录</title>
     <link rel="stylesheet" href="$path/static/css/font.css">
     <link rel="stylesheet" href="$path/static/css/sign.css">
-    <link rel="stylesheet" href="$path/static/css/alert.css">
-    <link rel="stylesheet" href="$path/static/css/bootstrap.css">
     <script src="$path/static/js/jquery.min.js" type="application/javascript"></script>
     <script src="$path/static/js/alert.js" type="application/javascript"></script>
 	<script>
@@ -36,26 +34,27 @@
 	</script>
 </head>
 <body>
+<div id="login">
     <div class="wrapper">
-        <div class="content">
-        <form action="login" method="post" id="loginForm">
-            <span class="icon-brand icon icon-logo"></span>
-            <h2 class="brand">地铁运营三分公司新班制辅助管理系统</h2>
-			<p style="color:red;"></p>
-			<p class="error" id="result">$!message</p>
-            <div class="icon-input">
-                <span class="icon-user"></span>
-                <input type="text"  name="userCode" placeholder="用户名" id="userCode">
-            </div>
-            <div class="icon-input">
-                <span class="icon-psw"></span>
-                <input type="password" name="password" placeholder="登录密码" id="password">
-            </div>
-            <button class="btn-login" type="button" onclick="submitLogin()">登录</button>
-        </form>
+    	<img src="$path/static/img/slogon.png">
+        <div class="login">
+        	<img src="$path/static/img/loginText.png">
+	        <form action="login" method="post" id="loginForm">
+				<p style="color:red;"></p>
+				<p class="error" id="result">$!message</p>
+	            <div class="inputBox">
+	                <span class="icon-3"></span>
+	                <input type="text"  name="userCode" placeholder="用户名" id="userCode">
+	            </div>
+	            <div class="inputBox">
+	                <span class="icon-2"></span>
+	                <input type="password" name="password" placeholder="登录密码" id="password">
+	            </div>
+	            <button class="btn-login" type="button" onclick="submitLogin()">登录</button>
+	        </form>
         </div>
-        <div class="footer">管理系统由神州同正科技有限公司开发</div>
     </div>
+</div>
 <script>
 function submitLogin(){
 	var name = $("#userCode").val();

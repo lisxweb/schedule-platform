@@ -143,7 +143,7 @@ select {
   }
 }
 /* 表格样式 */
-.table{
+.ui-jqgrid{
   thead{
     tr{
       background: #D7E4FF;
@@ -154,15 +154,19 @@ select {
         font-weight: normal;
         color: #333;
         border:0;
+        .ui-jqgrid-resize{
+          display: none;
+        }
       }
     }
   }
-  tbody{
+
+  .table {
     tr{
-      &:nth-of-type(2n){
+      outline: none;
+      &:nth-of-type(2n+1){
         background: #F9F9F9;
       }
-      outline: none;
       td{
         padding:0 8px;
         line-height:50px;
@@ -179,12 +183,29 @@ select {
         }
       }
     }
+    .jqgfirstrow td{
+      padding:0 !important;
+    }
   }
 }
 /* 分页 */
-.page{
+#pager,.page{
   overflow: hidden;
   clear: both;
+  #pg_pager{
+    float: right;
+    .ui-icon{
+      font-family:"icomoon";
+    }
+    .ui-icon-seek-first:before{
+      content:"\ea21";
+    }
+    .ui-pg-input{
+      border:1px solid @border;
+      margin:0 5px;
+      text-align:center;
+    }
+  }
   ul{
     float: right;
     border:1px solid @border;

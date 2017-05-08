@@ -150,10 +150,10 @@ select {
   margin-right: 0;
 }
 /* 表格样式 */
-.table thead tr {
+.ui-jqgrid thead tr {
   background: #D7E4FF;
 }
-.table thead tr th {
+.ui-jqgrid thead tr th {
   padding: 0 8px !important;
   line-height: 50px;
   color: #808080;
@@ -161,37 +161,64 @@ select {
   color: #333;
   border: 0;
 }
-.table tbody tr {
+.ui-jqgrid thead tr th .ui-jqgrid-resize {
+  display: none;
+}
+.ui-jqgrid .table tr {
   outline: none;
 }
-.table tbody tr:nth-of-type(2n) {
+.ui-jqgrid .table tr:nth-of-type(2n+1) {
   background: #F9F9F9;
 }
-.table tbody tr td {
+.ui-jqgrid .table tr td {
   padding: 0 8px;
   line-height: 50px;
   border-bottom: 1px solid #e5e5e5;
   border-top: 0;
   color: #1a1a1a;
 }
-.table tbody tr td a {
+.ui-jqgrid .table tr td a {
   float: left;
   margin-left: 10px;
   color: #1887EC;
 }
-.table tbody tr td a:nth-of-type(1) {
+.ui-jqgrid .table tr td a:nth-of-type(1) {
   margin-left: 0;
 }
+.ui-jqgrid .table .jqgfirstrow td {
+  padding: 0 !important;
+}
 /* 分页 */
+#pager,
 .page {
   overflow: hidden;
   clear: both;
 }
+#pager #pg_pager,
+.page #pg_pager {
+  float: right;
+}
+#pager #pg_pager .ui-icon,
+.page #pg_pager .ui-icon {
+  font-family: "icomoon";
+}
+#pager #pg_pager .ui-icon-seek-first:before,
+.page #pg_pager .ui-icon-seek-first:before {
+  content: "\ea21";
+}
+#pager #pg_pager .ui-pg-input,
+.page #pg_pager .ui-pg-input {
+  border: 1px solid #e5e5e5;
+  margin: 0 5px;
+  text-align: center;
+}
+#pager ul,
 .page ul {
   float: right;
   border: 1px solid #e5e5e5;
   border-left: 0;
 }
+#pager ul li,
 .page ul li {
   float: left;
   width: 30px;
@@ -199,6 +226,7 @@ select {
   border-left: 1px solid #e5e5e5;
   text-align: center;
 }
+#pager ul li.active,
 .page ul li.active {
   background: #3A6BCE;
   color: #fff;
