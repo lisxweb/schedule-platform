@@ -135,7 +135,7 @@
                         <label>站点名称</label>
                         <input type="hidden" id="parentGroup" name="parentGroup">
                         <input type="text" id="addStationName" name="groupName">
-                    </div>
+                  </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -174,7 +174,7 @@
         console.log(groupCode+"|||"+groupName)
         $("#editStationAreaCode").val(groupCode);
         $("#editStationAreaName").val(groupName);
-    });
+   });
     function editStationArea(){
         alert($('#editStationAreaForm').serialize())
         jQuery.ajax({
