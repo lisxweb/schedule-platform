@@ -137,4 +137,19 @@ public class GroupingController extends BaseController {
         }
         return group;
     }
+
+    @RequestMapping(value = "/grouping/delStationAreaForm", method = RequestMethod.DELETE)
+    @ResponseBody
+    public JSONObject delStationArea(String groupCode) throws Exception {
+        System.out.println(groupCode+"|||");
+        groupingService.deleteGrouping(groupCode);
+        JSONObject obj = new JSONObject();
+        if(groupCode.length()==6){
+            obj.put("msg","删除站区成功");
+        }else{
+            obj.put("msg","删除站点成功");
+        }
+
+        return obj;
+    }
 }

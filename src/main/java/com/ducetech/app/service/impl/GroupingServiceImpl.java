@@ -90,9 +90,7 @@ public class GroupingServiceImpl implements GroupingService{
 
     @Override
     public void deleteGrouping(String groupCode) {
-        Grouping dept = groupingDAO.selectGroupingByGroupCode(groupCode);
-        dept.setIfUse(1);
-        groupingDAO.updateGrouping(dept);
+        groupingDAO.deleteGrouping(groupCode+"%",1);
     }
 
     @Override

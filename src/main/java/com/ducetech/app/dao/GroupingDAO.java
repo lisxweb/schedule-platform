@@ -35,7 +35,7 @@ public interface GroupingDAO {
 	* @param groupCode
 	* @Description: 启用禁用人员,默认0位启用
 	*/
-	void deleteGrouping(@Param("groupCode") String groupCode);
+	void deleteGrouping(@Param("groupCode") String groupCode,@Param("ifUse")int ifUse);
 
     /**
      * @Title: selectGroupingByGroupName
