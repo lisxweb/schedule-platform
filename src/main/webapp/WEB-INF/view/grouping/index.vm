@@ -31,7 +31,7 @@
                                 <a role="menuitem" href="javascript:;" class="editStationAreaBtn" groupCode="$area.getGroupCode()" groupName="$area.getGroupName()">修改站区名称</a>
                             </li>
                             <li role="presentation">
-                                <a role="menuitem" href="#addStation" data-toggle="modal" data-target="#addStation">添加站点</a>
+                                <a role="menuitem" href="javascript:;"  class="addStationBtn" parentGroupCode="$area.getGroupCode()" data-toggle="modal" data-target="#addStation">添加站点</a>
                             </li>
                             <li role="presentation">
                                 <a class="delete" role="menuitem" stationAreaId="$area.getGroupId()" href="javascript:;">删除站区</a>
@@ -114,7 +114,7 @@
                 <form class="form-container clear" id="addStationForm">
                     <div class="form_line">
                         <label>站点名称</label>
-                        <input type="hidden" id="parentGroup" name="parentGroup">
+                        <input type="hidden" id="parentGroupCode" name="parentGroupCode">
                         <input type="text" id="addStationName" name="groupName">
                   </div>
                 </form>
@@ -128,6 +128,11 @@
 </div>
 </body>
 <script>
+    $(".addStationBtn").click(function(){
+        $("#addStation").show();
+        var parentCode = $(this).attr("parentGroupCode");
+        $("#parentGroupCode").val(parentCode);
+    })
     function addStation(){
         alert($('#addStationForm').serialize())
         jQuery.ajax({
