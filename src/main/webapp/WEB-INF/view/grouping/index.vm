@@ -40,20 +40,20 @@
         #foreach($area in $stationArea)
             <div class="list">
                 <div class="station-head">
-                    <span>$area.getNodeName()</span>
+                    <span>$area.getGroupName()</span>
                     <div class="dropdown">
                         <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">操作
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                             <li role="presentation">
-                                <a role="menuitem" href="javascript:;" id="editStationAreaBtn" nodeCode="$area.getNodeCode()" nodeName="$area.getNodeName()">修改站区名称</a>
+                                <a role="menuitem" href="javascript:;" id="editStationAreaBtn" groupCode="$area.getGroupCode()" groupName="$area.getGroupName()">修改站区名称</a>
                             </li>
                             <li role="presentation">
                                 <a role="menuitem" href="#addStation" data-toggle="modal" data-target="#addStation">添加站点</a>
                             </li>
                             <li role="presentation">
-                                <a class="delete" role="menuitem" stationAreaId="$area.getDepartmentId()" href="javascript:;">删除站区</a>
+                                <a class="delete" role="menuitem" stationAreaId="$area.getGroupId()" href="javascript:;">删除站区</a>
                             </li>
                         </ul>
                     </div>
@@ -62,7 +62,7 @@
                     <ul>
                         #foreach($station in $area.getStations())
                         <li>
-                            <span name="editStationSpan">$station.getNodeName()</span>
+                            <span name="editStationSpan">$station.getGroupName()</span>
                             <a class="delete icon-1" href="javascript:;"></a>
                             <a class="edit editStation icon-4" href="javascript:;"></a>
                         </li>
@@ -86,7 +86,7 @@
                 <form class="form-container clear" id="addStationAreaForm">
                     <div class="form_line">
                         <label>站区名称</label>
-                        <input type="text" id="addStationAreaName" name="nodeName">
+                        <input type="text" id="addStationAreaName" name="groupName">
                     </div>
                 </form>
             </div>
@@ -106,11 +106,11 @@
                 <h4 class="modal-title">修改站区名称</h4>
             </div>
             <div class="modal-body">
-                <form class="form-container clear">
+                <form class="form-container clear" id="editStationAreaForm">
                     <div class="form_line">
                         <label>站区名称</label>
-                        <input type="hidden" id="editStationAreaCode" name="nodeCode">
-                        <input type="text" id="editStationAreaName" name="nodeName">
+                        <input type="hidden" id="editStationAreaCode" name="groupCode">
+                        <input type="text" id="editStationAreaName" name="groupName">
                     </div>
                 </form>
             </div>
@@ -133,8 +133,8 @@
                 <form class="form-container clear" id="addStationForm">
                     <div class="form_line">
                         <label>站点名称</label>
-                        <input type="hidden" id="parentNode" name="parentNode">
-                        <input type="text" id="addStationName" name="nodeName">
+                        <input type="hidden" id="parentGroup" name="parentGroup">
+                        <input type="text" id="addStationName" name="groupName">
                     </div>
                 </form>
             </div>
@@ -151,7 +151,7 @@
         jQuery.ajax({
             async: false,
             type: "post",
-            url: "$path/dept/addStationForm",
+            url: "$path/group/addStationForm",
             data: $('#addStationForm').serialize(),
             dataType: "json",
             error: function (request) {
@@ -169,18 +169,19 @@
     }
     $("#editStationAreaBtn").click(function(){
         $("#editArea").show();
-        var nodeCode = $(this).attr("nodeCode");
-        var nodeName = $(this).attr("nodeName");
-        console.log(nodeCode+"|||"+nodeName)
-        $("#editStationAreaCode").val(nodeCode);
-        $("#editStationAreaName").val(nodeName);
+        var groupCode = $(this).attr("groupCode");
+        var groupName = $(this).attr("groupName");
+        console.log(groupCode+"|||"+groupName)
+        $("#editStationAreaCode").val(groupCode);
+        $("#editStationAreaName").val(groupName);
     });
     function editStationArea(){
+        alert($('#editStationAreaForm').serialize())
         jQuery.ajax({
             async: false,
             type: "put",
-            url: "$path/dept/editStationAreaForm",
-            data: $('#editStationAreaForm').serialize(),
+            url: "$path/group/editStationAreaForm?"+$('#editStationAreaForm').serialize(),
+            data: null,
             dataType: "json",
             error: function (request) {
                 alert("网络错误");
@@ -201,7 +202,7 @@
             jQuery.ajax({
                 async: false,
                 type: "post",
-                url: "$path/dept/addStationAreaForm",
+                url: "$path/group/addStationAreaForm",
                 data: $('#addStationAreaForm').serialize(),
                 dataType: "json",
                 error: function (request) {

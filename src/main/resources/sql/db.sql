@@ -1,17 +1,17 @@
 /*!40101 SET NAMES utf8 */;
 
-DROP TABLE IF EXISTS department;
-CREATE TABLE department (
-	`department_id` int(11) NOT NULL AUTO_INCREMENT,
-	node_name varchar(50),
-	node_code varchar(50),
-	node_order  int(11) default 0,
+DROP TABLE IF EXISTS grouping;
+CREATE TABLE grouping (
+	`group_id` int(11) NOT NULL AUTO_INCREMENT,
+	group_name varchar(50),
+	group_code varchar(50),
+	group_order  int(11) default 0,
 	creator_id int(11) default 0,
 	updator_id int(11) default 0,
 	if_use int(1) default 1,
 	created_at datetime,
 	updated_at datetime,
-  PRIMARY KEY (`department_id`)
+  PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 
 

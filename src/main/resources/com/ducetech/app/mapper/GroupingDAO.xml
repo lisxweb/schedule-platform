@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ducetech.app.dao.GroupingDAO">
+	<resultMap type="com.ducetech.app.model.Grouping" id="groupingMap">
+        <id column="group_id" property="groupId"/>
+		<result column="group_code" property="groupCode"/>
+    	<result column="group_name" property="groupName"/>
+    	<result column="group_order" property="groupOrder"/>
+    	<result column="if_use" property="ifUse"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="updator_id" property="updatorId"/>
+    	<result column="created_at" property="createdAt"/>
+    	<result column="updated_at" property="updatedAt"/>
+	</resultMap>
+
+	<!-- 根据部门名称获取 -->
+	<select id="selectGroupingByGroupName" resultMap="groupingMap">
+		select group_id, group_code, group_name, group_order,if_use, creator_id, updator_id, created_at, updated_at from grouping where group_name=#{groupName}
+	</select>
+
+    <!-- 根据部门编码获取 -->
+    <select id="selectGroupingByGroupCode" resultMap="groupingMap">
+        select group_id, group_code, group_name, group_order,if_use, creator_id, updator_id, created_at, updated_at from grouping where group_code=#{groupCode}
+    </select>
+
+    <!-- 根据部门编码获取 -->
+    <select id="selectByParentCode" resultMap="groupingMap">
+        select group_id, group_code, group_name, group_order,if_use, creator_id, updator_id, created_at, updated_at from grouping
+            where group_code like #{groupCode} and length(group_code)=#{groupCodeLength} order by group_code
+    </select>
+
+	<!-- 根据ID精确查找部门 -->
+	<select id="selectGroupingByGroupingId" resultMap="groupingMap">
+		select group_id, group_code, group_name, group_order,if_use, creator_id, updator_id, created_at, updated_at from grouping where group_id=#{groupingId}
+	</select>
+	
+	<!-- 对部门的通用查询  -->
+	<select id="selectGrouping" parameterType="com.ducetech.app.model.Grouping" resultMap="groupingMap">
+		select group_id, group_code, group_name, group_order,if_use, creator_id, updator_id, created_at, updated_at from grouping where 1=1
+		<if test="groupCode!=null and groupCode!=''">
+			and group_code=#{groupCode}
+		</if>
+		<if test="groupName!=null and groupName!=''">
+			and group_name like '%' #{groupName} '%'
+		</if>
+		<if test="creatorId!=null and creatorId!=''">
+			and creator_id=#{creatorId}
+		</if>
+		<if test="createdAt!=null and createdAt!=''">
+			and created_at=#{createdAt}
+		</if>
+		<if test="isDeleted!=null and isDeleted!=''">
+			and is_deleted=#{isDeleted}
+		</if>
+	</select>
+	
+	<!-- 插入新部门 -->
+	<insert id="insertGrouping" useGeneratedKeys="true" keyProperty="groupingId">
+		insert into grouping (group_code,group_name,group_order,if_use,creator_id,created_at)
+		values(#{groupCode},#{groupName},#{groupOrder},#{ifUse},#{creatorId},#{createdAt})
+	</insert>
+	
+	<!-- 更新某部门信息 -->
+	<update id="updateGrouping" parameterType="com.ducetech.app.model.Grouping">
+		update grouping 
+		<set>
+			<if test="groupCode != null and groupCode != ''">
+				group_code=#{groupCode},
+			</if>
+			<if test="groupName != null and groupName != ''">
+				group_name=#{groupName},
+			</if>
+		</set>
+		where group_id=#{groupingId}
+	</update>
+</mapper>
