@@ -3,13 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>班次设置</title>
-    <link href="../../../../../../../../Downloads/排班系统/css/index.css" rel="stylesheet"/>
-    <script src="../../../../../../../../Downloads/排班系统/js/jquery.min.js" type="text/javascript"></script>
-    <script src="../../../../../../../../Downloads/排班系统/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../../../../../../../../Downloads/排班系统/js/underscore-min.js" type="text/javascript"></script>
-    <script src="../../../../../../../../Downloads/排班系统/js/moment.min.js" type="text/javascript"></script>
-    <script src="../../../../../../../../Downloads/排班系统/js/common.js" type="text/javascript"></script>
-    <script src="../../../../../../../../Downloads/排班系统/js/alert.js" type="text/javascript"></script>
+    #parse('common/path-css.vm')
+    #parse('common/path-js.vm')
 </head>
 <body>
 <div class="menu">

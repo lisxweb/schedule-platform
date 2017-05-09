@@ -1,0 +1,485 @@
+shiftApproval2.html<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动排班</title>
+    #parse('common/path-css.vm')
+    #parse('common/path-js.vm')
+</head>
+<body>
+<div class="menu">
+    <p class="menu-head">永泰庄站区</p>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">育新</a></li>
+        <li><a href="#tab2" data-toggle="tab">西小口</a></li>
+        <li><a href="#tab3" data-toggle="tab">永泰庄</a></li>
+        <li><a href="#tab4" data-toggle="tab">林萃桥</a></li>
+        <li><a href="#tab5" data-toggle="tab">森林公园南门</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="content-header">
+        <div class="float-left">
+            <span class="title">选择排班方案</span>
+            <div class="form_line">
+                <label>站务员(<i class="blue">13人</i>)</label>
+                <select>
+                    <option>13人排班方案1</option>
+                    <option>13人排班方案2</option>
+                    <option>13人排班方案3</option>
+                </select>
+            </div>
+            <div class="form_line">
+                <label>综控员(<i class="blue">4人</i>)</label>
+                <select>
+                    <option>4人排班方案1</option>
+                    <option>4人排班方案2</option>
+                    <option>4人排班方案3</option>
+                </select>
+            </div>
+            <div class="form_line">
+                <label>值班站长(<i class="blue">2人</i>)</label>
+                <select>
+                    <option>2人排班方案1</option>
+                    <option>2人排班方案2</option>
+                    <option>2人排班方案3</option>
+                </select>
+            </div>
+            <a class="btnDefault bgBlue" href="javascript:;">自动生成排班</a>
+        </div>
+    </div>
+    <!-- 表格 start -->
+    <div class="wrapper" style="padding-top:0;">
+        <div class="tab-content">
+            <div class="tab-pane in active" id="tab1">
+                <div class="heading">
+                    2017年4月3日 — 2017年4月18日
+                    <span class="orange">当前自动排班方案平衡（循环）周期120天</span>
+                    <ul class="float-right">
+                        <li><span class="bgYellow"></span>换班/加班</li>
+                        <li><span class="bgGreen"></span>矿工</li>
+                        <li><span class="bgRed"></span>补假</li>
+                    </ul>
+                </div>
+                <div class="schedule">
+                    <table class="scheduleForm">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th class="dark"></th>
+                            <th class="dark"></th>
+                            <th class="dark"></th>
+                        </tr>
+                        <tr>
+                            <th>姓名</th>
+                            <th>岗位</th>
+                            <th>星期一</th>
+                            <th>星期二</th>
+                            <th>星期三</th>
+                            <th>星期四</th>
+                            <th>星期五</th>
+                            <th>星期六</th>
+                            <th>星期天</th>
+                            <th>星期一</th>
+                            <th>星期二</th>
+                            <th>星期三</th>
+                            <th>星期四</th>
+                            <th>星期五</th>
+                            <th>星期六</th>
+                            <th>星期天</th>
+                            <th class="dark">计划工时</th>
+                            <th class="dark">实际工时</th>
+                            <th class="dark">假期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="dark">A</td>
+                            <td>综控员</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td>中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td>早</td>
+                            <td>休</td>
+                            <td class="bgGreen">中</td>
+                            <td class="bgYellow">早</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">B</td>
+                            <td>值班站长</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td>中</td>
+                            <td class="bgGreen">中</td>
+                            <td>晚</td>
+                            <td>早</td>
+                            <td>休</td>
+                            <td>中</td>
+                            <td class="bgYellow">早</td>
+                            <td>晚</td>
+                            <td class="bgYellow">晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">C</td>
+                            <td>站务员</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td class="bgYellow">中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td class="bgGreen">早</td>
+                            <td>休</td>
+                            <td>中</td>
+                            <td>早</td>
+                            <td class="bgYellow">晚</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">D</td>
+                            <td>综控员</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td class="bgGreen">中</td>
+                            <td>中</td>
+                            <td class="bgYellow">晚</td>
+                            <td>早</td>
+                            <td>休</td>
+                            <td class="bgYellow">中</td>
+                            <td>早</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td class="bgGreen">晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">E</td>
+                            <td>站务员</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td>中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td class="bgYellow">早</td>
+                            <td>休</td>
+                            <td>中</td>
+                            <td>早</td>
+                            <td class="bgGreen">晚</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">F</td>
+                            <td>值班站长</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td class="bgYellow">中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td>早</td>
+                            <td>休</td>
+                            <td class="bgGreen">中</td>
+                            <td>早</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td class="bgYellow">夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">G</td>
+                            <td>综控员</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td>中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td class="bgYellow">早</td>
+                            <td>休</td>
+                            <td>中</td>
+                            <td class="bgGreen">早</td>
+                            <td>晚</td>
+                            <td class="bgYellow">晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">H</td>
+                            <td>值班站长</td>
+                            <td>早</td>
+                            <td class="bgYellow">早</td>
+                            <td>中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td>早</td>
+                            <td>休</td>
+                            <td>中</td>
+                            <td>早</td>
+                            <td class="bgGreen">晚</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        <tr>
+                            <td class="dark">I</td>
+                            <td>站务员</td>
+                            <td>早</td>
+                            <td>早</td>
+                            <td>中</td>
+                            <td>中</td>
+                            <td>晚</td>
+                            <td>早</td>
+                            <td>休</td>
+                            <td>中</td>
+                            <td>早</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>晚</td>
+                            <td>休</td>
+                            <td>夜</td>
+                            <td>65</td>
+                            <td>67</td>
+                            <td class="bgRed">2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="page">
+                        <div class="float-right">
+                            <a class="btnDefault bgBlue" href="javascript:;">确认执行排班</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <p class="noPlan"><em>?</em>请选择各个岗位的排班方案，并点击右侧的<span class="blue">自动生成排班</span>按钮</p>
+            </div>
+            <div class="tab-pane" id="tab3">
+                <p class="noPlan"><em>?</em>请选择各个岗位的排班方案，并点击右侧的<span class="blue">自动生成排班</span>按钮</p>
+            </div>
+            <div class="tab-pane" id="tab4">
+                <p class="noPlan"><em>?</em>请选择各个岗位的排班方案，并点击右侧的<span class="blue">自动生成排班</span>按钮</p>
+            </div>
+            <div class="tab-pane" id="tab5">
+                <p class="noPlan"><em>?</em>请选择各个岗位的排班方案，并点击右侧的<span class="blue">自动生成排班</span>按钮</p>
+            </div>
+        </div>
+    </div>
+    <!-- 表格 end -->
+</div>
+<!-- 添加新方案 -->
+<div class="modal" id="newPlan" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">添加新方案</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>方案名称</label>
+                        <input type="text">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新增班制 -->
+<div class="modal" id="addPlan" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">新增班制</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>班制名称</label>
+                        <input type="text">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改方案名称 -->
+<div class="modal" id="editPlan" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">修改方案名称</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>方案名称</label>
+                        <input type="text">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 增加班次 -->
+<div class="modal" id="addShift" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">增加班次</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>班次名称</label>
+                        <input type="text">
+                    </div>
+                    <div class="form_line">
+                        <label>起止时间</label>
+                        <div class="section">
+                            <input type="text">
+                            <span>至</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="form_line">
+                        <label>班次间隔</label>
+                        <input type="text">
+                    </div>
+                    <div class="form_line">
+                        <label>班次关联</label>
+                        <select>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="form_line">
+                        <label>值班人数</label>
+                        <input type="text">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑班次 -->
+<div class="modal" id="editShift" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">编辑班次</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>班次名称</label>
+                        <input type="text" value="大夜班">
+                    </div>
+                    <div class="form_line">
+                        <label>起止时间</label>
+                        <div class="section">
+                            <input type="text" value="00:00">
+                            <span>至</span>
+                            <input type="text" value="09:00">
+                        </div>
+                    </div>
+                    <div class="form_line">
+                        <label>班次间隔</label>
+                        <input type="text" value="24">
+                    </div>
+                    <div class="form_line">
+                        <label>班次关联</label>
+                        <select>
+                            <option>-</option>
+                        </select>
+                    </div>
+                    <div class="form_line">
+                        <label>值班人数</label>
+                        <input type="text" value="4">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

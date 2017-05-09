@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排班审批</title>
+    #parse('common/path-css.vm')
+    #parse('common/path-js.vm')
+</head>
+<body>
+<div class="menu">
+    <p class="menu-head">审批</p>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">假期审批</a></li>
+        <li><a href="#tab2" data-toggle="tab">实际工时审批</a></li>
+    </ul>
+</div>
+<div class="content">
+    <!-- 右侧内容 start -->
+    <div class="content-header">
+        <div class="float-left">
+            <a class="btnDefault bgGreen" href="javascript:;">审批通过</a>
+            <a class="btnDefault" href="javascript:;">驳回申请</a>
+            <a class="btnDefault" href="javascript:;">全选方案</a>
+        </div>
+        <div class="float-right">
+            <a class="btnDefault" href="javascript:;">审批记录</a>
+        </div>
+    </div>
+    <!-- 右侧内容 end -->
+    <!-- 审批列表 start -->
+    <div class="wrapper">
+        <div class="tab-content">
+            <div class="tab-pane in active" id="tab1">
+                <p class="no-mes">您还没有收到审批消息</p>
+                <ul class="approvalList">
+                    <li>
+                        <div class="checkbox"><input type="checkbox"></div>
+                        <div class="vacationInfo">
+                            <p class="head">
+                                <span class="float-left">探亲假</span>
+                                <em class="float-right">2017年4月25日</em>
+                            </p>
+                            <div class="col">
+                                <em class="icon-13"></em>
+                                <span>永泰庄</span>
+                            </div>
+                            <div class="col">
+                                <em class="icon-10"></em>
+                                <span>21212121</span>
+                            </div>
+                            <div class="col">
+                                <em class="icon-14"></em>
+                                <span>侯玉洁</span>
+                            </div>
+                            <div class="col">
+                                <em class="icon-8"></em>
+                                <span>值班站长</span>
+                            </div>
+                            <div class="col col2">
+                                <em class="icon-12"></em>
+                                <span>假期时间<i class="blue">2017年4月25日</i>至<i class="blue">2017年4月28日</i></span>
+                            </div>
+                            <div class="col col3">
+                                <em class="icon-9"></em>
+                                <span>侯玉洁因个人原因申请探亲假，望领导批准。</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="checkbox"><input type="checkbox"></div>
+                        <div class="vacationInfo">
+                            <p class="head">
+                                <span class="float-left">病假</span>
+                                <em class="float-right">2017年4月25日</em>
+                            </p>
+                            <div class="col">
+                                <em class="icon-13"></em>
+                                <span>永泰庄</span>
+                            </div>
+                            <div class="col">
+                                <em class="icon-10"></em>
+                                <span>21212121</span>
+                            </div>
+                            <div class="col">
+                                <em class="icon-14"></em>
+                                <span>侯玉洁</span>
+                            </div>
+                            <div class="col">
+                                <em class="icon-8"></em>
+                                <span>值班站长</span>
+                            </div>
+                            <div class="col col2">
+                                <em class="icon-12"></em>
+                                <span>假期时间<i class="blue">2017年4月25日</i>至<i class="blue">2017年4月28日</i></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <div class="approvalSchedule">
+                    <div class="heading approvalHeading">
+                        <span class="float-left">永泰庄 2017年4月3日 — 2017年4月18日</span>
+                        <ul class="float-right">
+                            <li><span class="bgYellow"></span>换班/加班</li>
+                            <li><span class="bgGreen"></span>矿工</li>
+                            <li><span class="bgRed"></span>补假</li>
+                        </ul>
+                    </div>
+                    <div class="schedule">
+                        <table class="scheduleForm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>3</th>
+                                    <th>4</th>
+                                    <th>5</th>
+                                    <th>6</th>
+                                    <th>7</th>
+                                    <th>8</th>
+                                    <th>9</th>
+                                    <th>10</th>
+                                    <th>11</th>
+                                    <th>12</th>
+                                    <th>13</th>
+                                    <th>14</th>
+                                    <th>15</th>
+                                    <th>16</th>
+                                    <th class="dark"></th>
+                                    <th class="dark"></th>
+                                    <th class="dark"></th>
+                                </tr>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>岗位</th>
+                                    <th>星期一</th>
+                                    <th>星期二</th>
+                                    <th>星期三</th>
+                                    <th>星期四</th>
+                                    <th>星期五</th>
+                                    <th>星期六</th>
+                                    <th>星期天</th>
+                                    <th>星期一</th>
+                                    <th>星期二</th>
+                                    <th>星期三</th>
+                                    <th>星期四</th>
+                                    <th>星期五</th>
+                                    <th>星期六</th>
+                                    <th>星期天</th>
+                                    <th class="dark">计划工时</th>
+                                    <th class="dark">实际工时</th>
+                                    <th class="dark">假期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="dark">A</td>
+                                    <td>综控员</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td>中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td>早</td>
+                                    <td>休</td>
+                                    <td class="bgGreen">中</td>
+                                    <td class="bgYellow">早</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">B</td>
+                                    <td>值班站长</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td>中</td>
+                                    <td class="bgGreen">中</td>
+                                    <td>晚</td>
+                                    <td>早</td>
+                                    <td>休</td>
+                                    <td>中</td>
+                                    <td class="bgYellow">早</td>
+                                    <td>晚</td>
+                                    <td class="bgYellow">晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">C</td>
+                                    <td>站务员</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td class="bgYellow">中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td class="bgGreen">早</td>
+                                    <td>休</td>
+                                    <td>中</td>
+                                    <td>早</td>
+                                    <td class="bgYellow">晚</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">D</td>
+                                    <td>综控员</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td class="bgGreen">中</td>
+                                    <td>中</td>
+                                    <td class="bgYellow">晚</td>
+                                    <td>早</td>
+                                    <td>休</td>
+                                    <td class="bgYellow">中</td>
+                                    <td>早</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td class="bgGreen">晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">E</td>
+                                    <td>站务员</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td>中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td class="bgYellow">早</td>
+                                    <td>休</td>
+                                    <td>中</td>
+                                    <td>早</td>
+                                    <td class="bgGreen">晚</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">F</td>
+                                    <td>值班站长</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td class="bgYellow">中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td>早</td>
+                                    <td>休</td>
+                                    <td class="bgGreen">中</td>
+                                    <td>早</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td class="bgYellow">夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">G</td>
+                                    <td>综控员</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td>中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td class="bgYellow">早</td>
+                                    <td>休</td>
+                                    <td>中</td>
+                                    <td class="bgGreen">早</td>
+                                    <td>晚</td>
+                                    <td class="bgYellow">晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">H</td>
+                                    <td>值班站长</td>
+                                    <td>早</td>
+                                    <td class="bgYellow">早</td>
+                                    <td>中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td>早</td>
+                                    <td>休</td>
+                                    <td>中</td>
+                                    <td>早</td>
+                                    <td class="bgGreen">晚</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                                <tr>
+                                    <td class="dark">I</td>
+                                    <td>站务员</td>
+                                    <td>早</td>
+                                    <td>早</td>
+                                    <td>中</td>
+                                    <td>中</td>
+                                    <td>晚</td>
+                                    <td>早</td>
+                                    <td>休</td>
+                                    <td>中</td>
+                                    <td>早</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>晚</td>
+                                    <td>休</td>
+                                    <td>夜</td>
+                                    <td>65</td>
+                                    <td>67</td>
+                                    <td class="bgRed">2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="foot">
+                            <div class="float-left">
+                                <span>提交时间：4月11日 17:26:23</span>
+                            </div>
+                            <div class="float-right">
+                                <a class="btnDefault bgBlue" href="javascript:;">审批通过</a>
+                                <a class="btnDefault" href="javascript:;">驳回</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="approvalSchedule">
+                    <div class="heading approvalHeading">
+                        <span class="float-left">永泰庄 2017年4月3日 — 2017年4月18日</span>
+                        <ul class="float-right">
+                            <li><span class="bgYellow"></span>换班/加班</li>
+                            <li><span class="bgGreen"></span>假/矿工</li>
+                            <li><span class="bgRed"></span>补假</li>
+                        </ul>
+                    </div>
+                    <div class="schedule">
+                        <table class="scheduleForm">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>8</th>
+                                <th>9</th>
+                                <th>10</th>
+                                <th>11</th>
+                                <th>12</th>
+                                <th>13</th>
+                                <th>14</th>
+                                <th>15</th>
+                                <th>16</th>
+                                <th class="dark"></th>
+                                <th class="dark"></th>
+                                <th class="dark"></th>
+                            </tr>
+                            <tr>
+                                <th>姓名</th>
+                                <th>岗位</th>
+                                <th>星期一</th>
+                                <th>星期二</th>
+                                <th>星期三</th>
+                                <th>星期四</th>
+                                <th>星期五</th>
+                                <th>星期六</th>
+                                <th>星期天</th>
+                                <th>星期一</th>
+                                <th>星期二</th>
+                                <th>星期三</th>
+                                <th>星期四</th>
+                                <th>星期五</th>
+                                <th>星期六</th>
+                                <th>星期天</th>
+                                <th class="dark">计划工时</th>
+                                <th class="dark">实际工时</th>
+                                <th class="dark">假期</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="dark">A</td>
+                                <td>综控员</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td>中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td>早</td>
+                                <td>休</td>
+                                <td class="bgGreen">中</td>
+                                <td class="bgYellow">早</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">B</td>
+                                <td>值班站长</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td>中</td>
+                                <td class="bgGreen">中</td>
+                                <td>晚</td>
+                                <td>早</td>
+                                <td>休</td>
+                                <td>中</td>
+                                <td class="bgYellow">早</td>
+                                <td>晚</td>
+                                <td class="bgYellow">晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">C</td>
+                                <td>站务员</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td class="bgYellow">中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td class="bgGreen">早</td>
+                                <td>休</td>
+                                <td>中</td>
+                                <td>早</td>
+                                <td class="bgYellow">晚</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">D</td>
+                                <td>综控员</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td class="bgGreen">中</td>
+                                <td>中</td>
+                                <td class="bgYellow">晚</td>
+                                <td>早</td>
+                                <td>休</td>
+                                <td class="bgYellow">中</td>
+                                <td>早</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td class="bgGreen">晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">E</td>
+                                <td>站务员</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td>中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td class="bgYellow">早</td>
+                                <td>休</td>
+                                <td>中</td>
+                                <td>早</td>
+                                <td class="bgGreen">晚</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">F</td>
+                                <td>值班站长</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td class="bgYellow">中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td>早</td>
+                                <td>休</td>
+                                <td class="bgGreen">中</td>
+                                <td>早</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td class="bgYellow">夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">G</td>
+                                <td>综控员</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td>中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td class="bgYellow">早</td>
+                                <td>休</td>
+                                <td>中</td>
+                                <td class="bgGreen">早</td>
+                                <td>晚</td>
+                                <td class="bgYellow">晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">H</td>
+                                <td>值班站长</td>
+                                <td>早</td>
+                                <td class="bgYellow">早</td>
+                                <td>中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td>早</td>
+                                <td>休</td>
+                                <td>中</td>
+                                <td>早</td>
+                                <td class="bgGreen">晚</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            <tr>
+                                <td class="dark">I</td>
+                                <td>站务员</td>
+                                <td>早</td>
+                                <td>早</td>
+                                <td>中</td>
+                                <td>中</td>
+                                <td>晚</td>
+                                <td>早</td>
+                                <td>休</td>
+                                <td>中</td>
+                                <td>早</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>晚</td>
+                                <td>休</td>
+                                <td>夜</td>
+                                <td>65</td>
+                                <td>67</td>
+                                <td class="bgRed">2</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="foot">
+                            <div class="float-left">
+                                <span>提交时间：4月11日 17:26:23</span>
+                            </div>
+                            <div class="float-right">
+                                <a class="btnDefault bgBlue" href="javascript:;">审批通过</a>
+                                <a class="btnDefault" href="javascript:;">驳回</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工时报表</title>
+    #parse('common/path-css.vm')
+    #parse('common/path-js.vm')
+</head>
+<body>
+<!-- 右侧内容 start -->
+<div class="content-header">
+    <div class="float-left">
+        <a class="btnDefault bgBlue" href="javascript:;">本月</a>
+        <a class="btnDefault" href="javascript:;">本年</a>
+        <div class="form_line">
+            <label>时间段</label>
+            <div class='input-group datetimepicker start_time'>
+                <input type='text' class="form-control"/>
+                <em class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </em>
+            </div>
+            <span>至</span>
+            <div class='input-group datetimepicker end_time'>
+                <input type='text' class="form-control"/>
+                <em class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </em>
+            </div>
+        </div>
+        <div class="form_line">
+            <label>站区</label>
+            <select>
+                <option>西直门站区</option>
+                <option>永泰庄站区</option>
+            </select>
+        </div>
+        <div class="form_line">
+            <label>站点</label>
+            <select>
+                <option>西直门</option>
+                <option>车公庄</option>
+            </select>
+        </div>
+        <div class="form_line">
+            <label>员工编号</label>
+            <input type="text">
+        </div>
+        <div class="form_line">
+            <label>姓名</label>
+            <input type="text">
+        </div>
+        <div class="form_line">
+            <label>岗位</label>
+            <input type="text">
+        </div>
+        <div class=" float-right">
+            <a class="btnDefault" href="javascript:;">导出</a>
+            <a class="btnDefault bgBlue" href="javascript:;">查询</a>
+        </div>
+    </div>
+</div>
+<!-- 右侧内容 end -->
+<!-- 表格 start -->
+<div class="wrapper">
+    <p class="heading">2017 年 4 月 1 日 —— 2017 年 4 月 30 日</p>
+    <div class="chart">
+        <ul class="legend">
+            <li>
+                <span class="color-bar realHour"></span>实际工时
+            </li>
+            <li>
+                <span class="color-bar planHour"></span>计划工时
+            </li>
+        </ul>
+        <canvas id="myChart" width="800" height="400"></canvas>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>员工编号</th>
+                <th>姓名</th>
+                <th>岗位</th>
+                <th>站区</th>
+                <th>站点</th>
+                <th>计划工时</th>
+                <th>实际工时</th>
+                <th>假期</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>121221</td>
+                <td>高阳</td>
+                <td>站区长</td>
+                <td>西直门站区</td>
+                <td>西直门</td>
+                <td>150</td>
+                <td>160</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>121221</td>
+                <td>叶涛涛</td>
+                <td>站区助理</td>
+                <td>西直门站区</td>
+                <td>西直门</td>
+                <td>150</td>
+                <td>160</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>121221</td>
+                <td>陈云</td>
+                <td>值班站长</td>
+                <td>西直门站区</td>
+                <td>西直门</td>
+                <td>150</td>
+                <td>160</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>121221</td>
+                <td>李双喜</td>
+                <td>站务员</td>
+                <td>西直门站区</td>
+                <td>西直门</td>
+                <td>150</td>
+                <td>160</td>
+                <td>0</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="page" class="page">
+        <ul>
+            <li class="icon-20"></li>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>...</li>
+            <li>26</li>
+            <li class="icon-22"></li>
+        </ul>
+    </div>
+</div>
+<!-- 表格 end -->
+<!-- 新增岗位 -->
+<div class="modal" id="addPost" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">新增岗位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>岗位名称</label>
+                        <input type="text">
+                    </div>
+                    <div class="form_line">
+                        <label>月工时上限</label>
+                        <input type="text">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>年工时上限</label>
+                        <input type="text">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>每周最少休班</label>
+                        <input type="text">
+                        <span>天</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑岗位 -->
+<div class="modal" id="editPost" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">编辑岗位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>岗位名称</label>
+                        <input type="text" value="站区长">
+                    </div>
+                    <div class="form_line">
+                        <label>月工时上限</label>
+                        <input type="text" value="166">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>年工时上限</label>
+                        <input type="text" value="2000">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>每周最少休班</label>
+                        <input type="text" value="2">
+                        <span>天</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //工时报表
+    var ctx1 = document.getElementById("myChart");
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels : ["高阳", "叶涛涛", "李少蒙", "李双喜", "陈硕峰", "赵世令", "李安海", "曹骏一", "李庆雪", "侯玉洁"],
+            datasets : [
+                {
+                    backgroundColor : "#3A6BCE",
+                    data : [150,160,150,150,150,170,140,150,160,160],
+                },
+                {
+                    backgroundColor : "#39B44A",
+                    data : [155,162,153,159,148,154,152,156,166,169]
+                }
+            ],
+        },
+        options: {
+            responsive: false,
+            legend: {
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: true,
+                    },
+                    type: "category",
+                    categoryPercentage: 0.5,
+                    barPercentage: 1.00,
+                }],
+                yAxes: [{
+                    ticks: {
+                        autoSkip: false,
+                        beginAtZero: true,
+                        fixedStepSize: 45
+                    },
+                }],
+            }
+        }
+    });
+</script>
+</body>
+</html>

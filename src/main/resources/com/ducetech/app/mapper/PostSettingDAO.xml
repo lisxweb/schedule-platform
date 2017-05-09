@@ -16,5 +16,8 @@
     	<result column="created_at" property="createdAt"/>
     	<result column="updated_at" property="updatedAt"/>
 	</resultMap>
-
+    <!-- 根据分组编码获取 -->
+    <select id="selectPostSettingByPostCode" resultMap="PostSettingMap">
+        select post_id, post_code, post_name, post_month,post_year,post_weekly,if_use, creator_id, updator_id, created_at, updated_at from post_setting where  if_use=0 and post_code=#{postCode}
+    </select>
 </mapper>

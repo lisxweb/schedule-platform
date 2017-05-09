@@ -61,17 +61,17 @@
                 #end
                 <div class="collapse slide-menu" id="part2">
                     #if($shiro.hasPermission("系统管理"))
-                    <a class="active" href="javascript:;" target="myiframe">
+                    <a class="active" href="$path/scheduleForm" target="myiframe">
                         <span class="icon-16"></span>排班表格
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理"))
-                    <a href="javascript:;" target="myiframe">
+                    <a href="$path/automaticScheduling" target="myiframe">
                         <span class="icon-6"></span>新增自动排班
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理"))
-                    <a href="javascript:;" target="myiframe">
+                    <a href="$path/shiftApproval" target="myiframe">
                         <span class="icon-17"></span>排班审批
                     </a>
                     #end
@@ -88,7 +88,7 @@
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理"))
-                    <a href="$path/position" target="myiframe">
+                    <a href="$path/postSetting" target="myiframe">
                         <span class="icon-8"></span>岗位设置
                     </a>
                     #end
@@ -100,12 +100,12 @@
                 #end
                 #if($shiro.hasPermission("系统管理"))
                 <div class="collapse slide-menu" id="part4">
-                    <a class="active" href="javascript:;" target="myiframe">
+                    <a class="active" href="$path/hourReport" target="myiframe">
                         <span class="icon-15"></span>工时报表
                     </a>
                 #end
                 #if($shiro.hasPermission("系统管理"))
-                    <a href="javascript:;" target="myiframe">
+                    <a href="$path/temporaryReport" target="myiframe">
                         <span class="icon-16"></span>临时安排报表
                     </a>
                 #end
