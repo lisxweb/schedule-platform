@@ -11,24 +11,24 @@ import java.util.Date;
  * Created by lisx on 2017/4/27.
  */
 @Data
-public class Position extends BaseModel implements Serializable{
+public class PostSetting extends BaseModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private String positionId;
+    private String postId;
     // 字典code
-    private String positionCode;
+    private String postCode;
 
     // 岗位名称
-    private String positionName;
+    private String postName;
 
     // 月工时上限(时)
-    private String month;
+    private String postMonth;
 
     // 年工时上限(时)
-    private String year;
+    private String postYear;
 
     // 每周最少休班(天)
-    private String weekly;
+    private String postWeekly;
 
     // 是否使用
     private int ifUse;

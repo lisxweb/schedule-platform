@@ -2,9 +2,9 @@ package com.ducetech.app.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.ducetech.app.model.Position;
+import com.ducetech.app.model.PostSetting;
 import com.ducetech.app.model.User;
-import com.ducetech.app.service.PositionService;
+import com.ducetech.app.service.PostSettingService;
 import com.ducetech.framework.controller.BaseController;
 import com.ducetech.framework.util.DateUtil;
 import org.slf4j.Logger;
@@ -23,11 +23,11 @@ import java.util.List;
 
 
 @Controller
-public class PositionController extends BaseController {
+public class PostSettingController extends BaseController {
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private PositionService positionService;
+	private PostSettingService positionService;
 
 	/**
 	 * @Title: person
@@ -37,7 +37,7 @@ public class PositionController extends BaseController {
 	 */
 	@RequestMapping(value = "/position", method = RequestMethod.GET)
 	public String positions(ModelMap model) {
-        List<Position> stationArea = positionService.selectByParentCode("000",6);
+        List<PostSetting> stationArea = positionService.selectByParentCode("000",6);
         System.out.println(stationArea.size()+"||||||");
         model.put("stationArea",stationArea);
 	    return "/position/index";
@@ -51,30 +51,30 @@ public class PositionController extends BaseController {
 	 */
 	@RequestMapping(value = "/positions", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Position> positionData(HttpServletRequest request) throws Exception {
-		List<Position> stationArea = positionService.selectByParentCode("000",6);
+	public List<PostSetting> positionData(HttpServletRequest request) throws Exception {
+		List<PostSetting> stationArea = positionService.selectByParentCode("000",6);
 		System.out.println(stationArea.size()+"||||||");
 		return stationArea;
 	}
 
     /**
-     * @Title: addPosition
+     * @Title: addPostSetting
      * @return void
      * @Description: 新增站区
      */
     @RequestMapping(value = "/position/addStationAreaForm", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject addStationAreaForm(Position position, String parentCode, HttpServletRequest request) throws Exception {
+    public JSONObject addStationAreaForm(PostSetting position, String parentCode, HttpServletRequest request) throws Exception {
         User userInfo = getLoginUser(request);
         position.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
         position.setCreatorId(userInfo.getUserId());
         position.setIfUse(0);
         if(parentCode==null) {
-            position.setPositionCode(positionService.selectPositionByParentCode("000"));
+            position.setPostCode(positionService.selectPostSettingByParentCode("000"));
         }else{
-            position.setPositionCode(positionService.selectPositionByParentCode(parentCode));
+            position.setPostCode(positionService.selectPostSettingByParentCode(parentCode));
         }
-        positionService.insertPosition(position);
+        positionService.insertPostSetting(position);
         JSONObject obj = new JSONObject();
         obj.put("msg","新增站区成功");
         return obj;
@@ -84,13 +84,13 @@ public class PositionController extends BaseController {
      */
     @RequestMapping(value = "/position/editStationAreaForm", method = RequestMethod.PUT)
     @ResponseBody
-    public JSONObject editStationAreaForm(Position position, HttpServletRequest request) throws Exception {
-        System.out.println(position.getPositionName()+"|"+new String(position.getPositionName().getBytes("ISO-8859-1"),"utf-8"));
-        position.setPositionName(new String(position.getPositionName().getBytes("ISO-8859-1"),"utf-8"));
+    public JSONObject editStationAreaForm(PostSetting position, HttpServletRequest request) throws Exception {
+        System.out.println(position.getPostName()+"|"+new String(position.getPostName().getBytes("ISO-8859-1"),"utf-8"));
+        position.setPostName(new String(position.getPostName().getBytes("ISO-8859-1"),"utf-8"));
         User userInfo = getLoginUser(request);
         position.setUpdatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
         position.setUpdatorId(userInfo.getUserId());
-        positionService.updatePosition(position);
+        positionService.updatePostSetting(position);
         JSONObject obj = new JSONObject();
         obj.put("msg"," 更新站区成功");
         return obj;
@@ -106,17 +106,17 @@ public class PositionController extends BaseController {
      */
     @RequestMapping(value = "/position/addStationForm", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject addStationForm(Position position, String parentCode, HttpServletRequest request) throws Exception {
+    public JSONObject addStationForm(PostSetting position, String parentCode, HttpServletRequest request) throws Exception {
         User userInfo = getLoginUser(request);
         position.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
         position.setCreatorId(userInfo.getUserId());
         position.setIfUse(0);
         if(parentCode==null) {
-            position.setPositionCode(positionService.selectPositionByParentCode("000"));
+            position.setPostCode(positionService.selectPostSettingByParentCode("000"));
         }else{
-            position.setPositionCode(positionService.selectPositionByParentCode(parentCode));
+            position.setPostCode(positionService.selectPostSettingByParentCode(parentCode));
         }
-        positionService.insertPosition(position);
+        positionService.insertPostSetting(position);
         JSONObject obj = new JSONObject();
         obj.put("msg","新增站点成功");
         return obj;
@@ -131,10 +131,10 @@ public class PositionController extends BaseController {
      */
     @RequestMapping(value = "/position/{positionCode}", method = RequestMethod.GET)
     @ResponseBody
-    public Position edit(@PathVariable(value="positionCode")String positionCode) throws Exception {
-        Position position = new Position();
+    public PostSetting edit(@PathVariable(value="positionCode")String positionCode) throws Exception {
+        PostSetting position = new PostSetting();
         if(org.apache.commons.lang3.StringUtils.isNotEmpty(positionCode)){
-            position = positionService.selectPositionByPositionCode(positionCode);
+            position = positionService.selectPostSettingByPostCode(positionCode);
         }
         return position;
     }
@@ -143,7 +143,7 @@ public class PositionController extends BaseController {
     @ResponseBody
     public JSONObject delStationArea(String positionCode) throws Exception {
         System.out.println(positionCode+"|||");
-        positionService.deletePosition(positionCode);
+        positionService.deletePostSetting(positionCode);
         JSONObject obj = new JSONObject();
         if(positionCode.length()==6){
             obj.put("msg","删除站区成功");

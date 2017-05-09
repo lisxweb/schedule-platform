@@ -1,8 +1,8 @@
 package com.ducetech.app.service.impl;
 
-import com.ducetech.app.dao.PositionDAO;
-import com.ducetech.app.model.Position;
-import com.ducetech.app.service.PositionService;
+import com.ducetech.app.dao.PostSettingDAO;
+import com.ducetech.app.model.PostSetting;
+import com.ducetech.app.service.PostSettingService;
 import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.model.PagerRS;
 import com.github.pagehelper.PageHelper;
@@ -14,36 +14,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PositionServiceImpl implements PositionService{
+public class PostSettingServiceImpl implements PostSettingService{
 
     @Autowired
-    private PositionDAO positionDAO;
+    private PostSettingDAO positionDAO;
 
     @Override
-    public List<Position> getAllPositions() {
-        return this.getPositionByPager(new BaseQuery<Position>(new Position())).getResults();
+    public List<PostSetting> getAllPostSettings() {
+        return this.getPostSettingByPager(new BaseQuery<PostSetting>(new PostSetting())).getResults();
     }
 
     @Override
-    public List<Position> getPositionByQuery(Position dept) {
-        return positionDAO.selectPosition(dept);
+    public List<PostSetting> getPostSettingByQuery(PostSetting dept) {
+        return positionDAO.selectPostSetting(dept);
     }
 
     @Override
-    public PagerRS<Position> getPositionByPager(BaseQuery<Position> query) {
+    public PagerRS<PostSetting> getPostSettingByPager(BaseQuery<PostSetting> query) {
         if( query != null && query.getPage() > 0 ){			//如果传入offset大于0,则启用分页查询，否则不启用
             PageHelper.startPage(query.getPage(), query.getRows(), true);
         }
-        List<Position> deptList = positionDAO.selectPosition(query.getT());
+        List<PostSetting> deptList = positionDAO.selectPostSetting(query.getT());
         @SuppressWarnings({ "unchecked", "rawtypes" })
         PageInfo page = new PageInfo(deptList);
-        PagerRS<Position> pagerRS = new PagerRS<Position>(deptList, page.getTotal(), page.getPages());
+        PagerRS<PostSetting> pagerRS = new PagerRS<PostSetting>(deptList, page.getTotal(), page.getPages());
         return pagerRS;
     }
 
     @Override
-    public void insertPosition(Position dept) {
-        positionDAO.insertPosition(dept);
+    public void insertPostSetting(PostSetting dept) {
+        positionDAO.insertPostSetting(dept);
     }
     /**
      * 获取新的节点编号
@@ -51,13 +51,13 @@ public class PositionServiceImpl implements PositionService{
      * @return
      */
     @Override
-    public String selectPositionByParentCode(String parentCode){
-        List<Position> groups = querySubPositionsByCode(parentCode);
+    public String selectPostSettingByParentCode(String parentCode){
+        List<PostSetting> groups = querySubPostSettingsByCode(parentCode);
         System.out.println(groups.size()+"|||");
         String newCode="001";
         if(!groups.isEmpty()){
-            Position group = groups.get(groups.size()-1);
-            String groupCode = group.getPositionCode();
+            PostSetting group = groups.get(groups.size()-1);
+            String groupCode = group.getPostCode();
             String subCode = groupCode.substring(groupCode.length()-3, groupCode.length());
             int current = Integer.parseInt(subCode);
             current = current+1;
@@ -79,30 +79,30 @@ public class PositionServiceImpl implements PositionService{
         }
         return str;
     }
-    public List<Position> querySubPositionsByCode(String parentCode){
+    public List<PostSetting> querySubPostSettingsByCode(String parentCode){
         System.out.println(parentCode+"||"+(parentCode.length()+3));
         return positionDAO.selectByParentCode(parentCode+"%",parentCode.length()+3);
     }
     @Override
-    public void updatePosition(Position dept) {
-        positionDAO.updatePosition(dept);
+    public void updatePostSetting(PostSetting dept) {
+        positionDAO.updatePostSetting(dept);
     }
 
     @Override
-    public void deletePosition(String groupCode) {
-        positionDAO.deletePosition(groupCode+"%",1);
+    public void deletePostSetting(String groupCode) {
+        positionDAO.deletePostSetting(groupCode+"%",1);
     }
 
     @Override
-    public Position selectPositionByPositionCode(String groupCode) {
-        return positionDAO.selectPositionByPositionCode(groupCode);
+    public PostSetting selectPostSettingByPostCode(String groupCode) {
+        return positionDAO.selectPostSettingByPostCode(groupCode);
     }
 
     @Override
-    public List<Position> selectByParentCode(String parentCode, int groupCodeLength) {
-        List<Position> deptList = positionDAO.selectByParentCode(parentCode+"%",groupCodeLength);
-        List<Position> list = new ArrayList<Position>();
-        for(Position dep:deptList){
+    public List<PostSetting> selectByParentCode(String parentCode, int groupCodeLength) {
+        List<PostSetting> deptList = positionDAO.selectByParentCode(parentCode+"%",groupCodeLength);
+        List<PostSetting> list = new ArrayList<PostSetting>();
+        for(PostSetting dep:deptList){
             list.add(dep);
         }
         return list;
