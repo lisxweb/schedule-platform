@@ -32,19 +32,6 @@ $(function () {
     $(".stations .delete").click(function(){
         $(this).closest("li").remove();
     })
-    //编辑站点名称
-    $(".stations .edit").click(function(){
-        var span = $(this).siblings("span");
-        $("<input type='text' value='"+ span.text() +"'>").insertBefore(span);
-        span.hide();
-        $(this).siblings("input").focus();
-    })
-    //编辑站点名称的输入框失去焦点
-    $(document).on("blur",".stations input",function(){
-        var val = $(this).val();
-        $(this).siblings("span").text(val).show();
-        $(this).remove();
-    })
     //模态框显示，遮罩层显示
     $("[data-toggle='modal']").click(function(){
         $("#mask",parent.document).show();

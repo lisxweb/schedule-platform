@@ -128,13 +128,23 @@
 </div>
 </body>
 <script>
-    //编辑站点保存
-    function editStation(){
-        var stationCode =//
-        var stationName =//
+var stationCode = '';
+var stationName = '';
+$(function(){
+	//编辑站点名称
+    $(".stations .edit").click(function(){
+        var span = $(this).siblings("span");
+        stationCode = span.attr("stationcode");
+        $("<input type='text' value='"+ span.text() +"'>").insertBefore(span);
+        span.hide();
+        $(this).siblings("input").focus();
+    })
+    //编辑站点名称的输入框失去焦点
+    $(document).on("blur",".stations input",function(){
+        stationName = $(this).val();
         jQuery.ajax({
             async: false,
-            type: "put",
+            type: "post",
             url: "$path/group/editStation?groupCode="+stationCode+"&groupName="+stationName,
             data: null,
             dataType: "json",
@@ -142,11 +152,13 @@
                 alert("网络错误");
             },
             success: function (data) {
-                alert(data.msg)
+                $(this).siblings("span").text(stationName).show();
+        		$(this).remove();
                 location.replace("$path/grouping");
             }
         });
-    }
+    })
+})
     //删除站区
     $(".delStationAreaBtn").click(function(){
         var groupCode=$(this).attr("stationAreaCode");
@@ -213,7 +225,7 @@
                 alert("网络错误");
             },
             success: function (data) {
-                alert(data.msg)
+                console.log(data.msg)
                 setTimeout(function(){
                     $("#editArea .close").click();
                     $("#editArea").hide();
@@ -237,7 +249,7 @@
                     alert("网络错误");
                 },
                 success: function (data) {
-                    alert(data.msg)
+                    console.log(data.msg)
                     setTimeout(function(){
                         $("#addArea .close").click();
                         $("#addArea").hide();
