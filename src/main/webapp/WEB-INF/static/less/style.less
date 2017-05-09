@@ -194,11 +194,26 @@ select {
   clear: both;
   #pg_pager{
     float: right;
+    .ui-pg-table{
+      margin-right:30px;
+    }
     .ui-icon{
       font-family:"icomoon";
+      color: @blue;
+      margin: 0 5px;
+      line-height:30px;
     }
     .ui-icon-seek-first:before{
       content:"\ea21";
+    }
+    .ui-icon-seek-end:before{
+      content:"\ea22";
+    }
+    .ui-icon-seek-prev:before{
+      content:"\ea23";
+    }
+    .ui-icon-seek-next:before{
+      content:"\ea24";
     }
     .ui-pg-input{
       border:1px solid @border;
