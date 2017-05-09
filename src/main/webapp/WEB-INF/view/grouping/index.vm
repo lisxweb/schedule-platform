@@ -154,7 +154,6 @@
     })
     //添加站点保存
     function addStation(){
-        alert($('#addStationForm').serialize())
         jQuery.ajax({
             async: false,
             type: "post",

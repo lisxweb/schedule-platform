@@ -27,46 +27,19 @@
             </tr>
         </thead>
         <tbody>
+            #foreach($post in $rs.getResults())
             <tr>
-                <td>站区长</td>
-                <td>166</td>
-                <td>2000</td>
-                <td>2</td>
+                <td>$post.getPostName()</td>
+                <td>$post.getPostMonth()</td>
+                <td>$post.getPostYear()</td>
+                <td>$post.getPostWeekly()</td>
                 <td>
-                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
+                    <a href="#editPost" postCode="$post.getPostCode()" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" postCode="$post.getPostCode()"postCode="$post.getPostCode()" href="javascript:;">删除</a>
                 </td>
             </tr>
-            <tr>
-                <td>区长助理</td>
-                <td>166</td>
-                <td>2000</td>
-                <td>2</td>
-                <td>
-                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>人力</td>
-                <td>166</td>
-                <td>2000</td>
-                <td>2</td>
-                <td>
-                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
-            <tr>
-                <td>销售</td>
-                <td>166</td>
-                <td>2000</td>
-                <td>2</td>
-                <td>
-                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
-                    <a class="delete" href="javascript:;">删除</a>
-                </td>
-            </tr>
+            #end
+
         </tbody>
     </table>
     <div id="page" class="page">
@@ -92,30 +65,30 @@
                 <h4 class="modal-title">新增岗位</h4>
             </div>
             <div class="modal-body">
-                <form class="form-container clear">
+                <form class="form-container clear" id="addPostSettingForm">
                     <div class="form_line">
                         <label>岗位名称</label>
-                        <input type="text">
+                        <input type="text" name="postName">
                     </div>
                     <div class="form_line">
                         <label>月工时上限</label>
-                        <input type="text">
+                        <input type="text" name="postMonth">
                         <span>时</span>
                     </div>
                     <div class="form_line">
                         <label>年工时上限</label>
-                        <input type="text">
+                        <input type="text" name="postYear">
                         <span>时</span>
                     </div>
                     <div class="form_line">
                         <label>每周最少休班</label>
-                        <input type="text">
+                        <input type="text" name="postWeekly">
                         <span>天</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <a class="btn btn-confirm" href="javascript:;" onclick="addPostSetting()">确定</a>
                 <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
@@ -160,4 +133,27 @@
     </div>
 </div>
 </body>
+<script>
+    function addPostSetting(){
+        console.log($('#addPostSettingForm').serialize());
+        jQuery.ajax({
+            async: false,
+            type: "post",
+            url: "$path/addPostSettingForm",
+            data: $('#addPostSettingForm').serialize(),
+            dataType: "json",
+            error: function (request) {
+                alert("网络错误");
+            },
+            success: function (data) {
+                alert(data.msg)
+                setTimeout(function(){
+                    $("#addPost .close").click();
+                    $("#addPost").hide();
+                },500);
+                location.replace("$path/postSetting");
+            }
+        });
+    }
+</script>
 </html>

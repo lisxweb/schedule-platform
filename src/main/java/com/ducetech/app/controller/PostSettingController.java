@@ -6,6 +6,8 @@ import com.ducetech.app.model.PostSetting;
 import com.ducetech.app.model.User;
 import com.ducetech.app.service.PostSettingService;
 import com.ducetech.framework.controller.BaseController;
+import com.ducetech.framework.model.BaseQuery;
+import com.ducetech.framework.model.PagerRS;
 import com.ducetech.framework.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +32,11 @@ public class PostSettingController extends BaseController {
 	private PostSettingService postSettingService;
 
 	@RequestMapping(value = "/postSetting", method = RequestMethod.GET)
-	public String postSettings(ModelMap model) {
-	    return "/postSetting/index";
+	public String postSettings(ModelMap model,HttpServletRequest request) {
+        BaseQuery<PostSetting> query = PostSetting.getSearchCondition(PostSetting.class, request);
+        PagerRS<PostSetting> rs = postSettingService.getPostSettingByPager(query);
+	    model.put("rs",rs);
+        return "/postSetting/index";
 	}
 
 	/**
@@ -53,9 +58,9 @@ public class PostSettingController extends BaseController {
      * @return void
      * @Description: 新增站区
      */
-    @RequestMapping(value = "/postSetting/addStationAreaForm", method = RequestMethod.POST)
+    @RequestMapping(value = "/addPostSettingForm", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject addStationAreaForm(PostSetting postSetting, String parentCode, HttpServletRequest request) throws Exception {
+    public JSONObject addPostSettingForm(PostSetting postSetting, String parentCode, HttpServletRequest request) throws Exception {
         User userInfo = getLoginUser(request);
         postSetting.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
         postSetting.setCreatorId(userInfo.getUserId());

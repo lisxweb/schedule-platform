@@ -32,19 +32,19 @@ public interface PostSettingDAO {
 
 	/**
 	* @Title: deletePostSetting
-	* @param positionCode
+	* @param postCode
 	* @Description: 启用禁用人员,默认0位启用
 	*/
-	void deletePostSetting(@Param("positionCode") String positionCode, @Param("ifUse") int ifUse);
+	void deletePostSetting(@Param("postCode") String postCode, @Param("ifUse") int ifUse);
 
     /**
      * @Title: selectPostSettingByGroupName
-     * @param positionCode
+     * @param postCode
      * @return PostSetting
      * @Description: 按登部门名称查询
      */
-    PostSetting selectPostSettingByPostCode(@Param("positionCode") String positionCode);
+    PostSetting selectPostSettingByPostCode(@Param("postCode") String postCode);
 
-    List<PostSetting> selectByParentCode(@Param("positionCode") String parentCode, @Param("positionCodeLength") int positionCodeLength);
+    List<PostSetting> selectByParentCode(@Param("postCode") String parentCode, @Param("postCodeLength") int postCodeLength);
 
 }

@@ -16,8 +16,18 @@
     	<result column="created_at" property="createdAt"/>
     	<result column="updated_at" property="updatedAt"/>
 	</resultMap>
-    <!-- 根据分组编码获取 -->
+    <!-- 根据岗位设置编码获取 -->
     <select id="selectPostSettingByPostCode" resultMap="PostSettingMap">
         select post_id, post_code, post_name, post_month,post_year,post_weekly,if_use, creator_id, updator_id, created_at, updated_at from post_setting where  if_use=0 and post_code=#{postCode}
+    </select>
+    <!-- 插入岗位设置 -->
+    <insert id="insertPostSetting" useGeneratedKeys="true" keyProperty="postId">
+        insert into post_setting (post_code,post_name,post_month,post_year,post_weekly,if_use,creator_id,created_at)
+        values(#{postCode},#{postName},#{postMonth},#{postYear},#{postWeekly},#{ifUse},#{creatorId},#{createdAt})
+    </insert>
+    <!-- 根据人员分组编码获取 -->
+    <select id="selectByParentCode" resultMap="PostSettingMap">
+        select post_id, post_code, post_name,post_month,post_year,post_weekly,if_use, creator_id, updator_id, created_at, updated_at from post_setting
+        where if_use=0 and post_code like #{postCode} and length(post_code)=#{postCodeLength} order by post_code
     </select>
 </mapper>
