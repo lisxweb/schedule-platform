@@ -32,10 +32,7 @@ public class PostSettingController extends BaseController {
 	private PostSettingService postSettingService;
 
 	@RequestMapping(value = "/postSetting", method = RequestMethod.GET)
-	public String postSettings(ModelMap model,HttpServletRequest request) {
-        BaseQuery<PostSetting> query = PostSetting.getSearchCondition(PostSetting.class, request);
-        PagerRS<PostSetting> rs = postSettingService.getPostSettingByPager(query);
-	    model.put("rs",rs);
+	public String postSettings(ModelMap model) {
         return "/postSetting/index";
 	}
 

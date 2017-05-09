@@ -121,6 +121,24 @@ public class GroupingController extends BaseController {
         return obj;
     }
     /**
+     * 添加站点
+     * @param group
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/group/editStation", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editStation(Grouping group, HttpServletRequest request) throws Exception {
+        User userInfo = getLoginUser(request);
+        group.setUpdatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
+        group.setUpdatorId(userInfo.getUserId());
+        groupingService.updateGrouping(group);
+        JSONObject obj = new JSONObject();
+        obj.put("msg","更新站点成功");
+        return obj;
+    }
+    /**
      * 编辑部门
      */
 
