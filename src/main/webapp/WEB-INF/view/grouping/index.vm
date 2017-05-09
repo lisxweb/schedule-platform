@@ -144,7 +144,7 @@ $(function(){
         stationName = $(this).val();
         jQuery.ajax({
             async: false,
-            type: "post",
+            type: "put",
             url: "$path/group/editStation?groupCode="+stationCode+"&groupName="+stationName,
             data: null,
             dataType: "json",

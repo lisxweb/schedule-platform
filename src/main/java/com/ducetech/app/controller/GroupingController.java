@@ -127,7 +127,7 @@ public class GroupingController extends BaseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/group/editStation", method = RequestMethod.POST)
+    @RequestMapping(value = "/group/editStation", method = RequestMethod.PUT)
     @ResponseBody
     public JSONObject editStation(Grouping group, HttpServletRequest request) throws Exception {
         User userInfo = getLoginUser(request);
