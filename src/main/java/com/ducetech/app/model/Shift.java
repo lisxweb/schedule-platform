@@ -13,15 +13,15 @@ import java.util.Date;
 @Data
 public class Shift extends BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String spellId;
+    private String shiftId;
     //班次名称
     private String shiftName;
     //班次人数
     private int shiftNum;
     //班次颜色
-    private String scheduleColor;
+    private String shiftColor;
     //开始时间
-    private Date stratAt;
+    private Date startAt;
     //结束时间
     private Date endAt;
     //总时间
@@ -39,7 +39,7 @@ public class Shift extends BaseModel implements Serializable {
     //更新人
     private String updatorId;
     //创建时间
-    private Date createdAt;
+    private String createdAt;
     //更新时间
-    private Date updatedAt;
+    private String updatedAt;
 }

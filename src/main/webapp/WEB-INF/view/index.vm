@@ -83,12 +83,12 @@
                 #end
                 <div class="collapse slide-menu" id="part3">
                     #if($shiro.hasPermission("系统管理"))
-                    <a class="active" href="javascript:;" target="myiframe">
+                    <a class="active" href="$path/shift" target="myiframe">
                         <span class="icon-7"></span>班次设置
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理"))
-                    <a href="javascript:;" target="myiframe">
+                    <a href="$path/position" target="myiframe">
                         <span class="icon-8"></span>岗位设置
                     </a>
                     #end

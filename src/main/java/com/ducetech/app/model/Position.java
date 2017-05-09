@@ -14,28 +14,34 @@ import java.util.Date;
 public class Position extends BaseModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    private String departmentId;
+    private String positionId;
     // 字典code
-    private String nodeCode;
+    private String positionCode;
 
-    // 字典名称
-    private String nodeName;
+    // 岗位名称
+    private String positionName;
 
-    // 字典排序
-    private int nodeOrder;
+    // 月工时上限(时)
+    private String month;
+
+    // 年工时上限(时)
+    private String year;
+
+    // 每周最少休班(天)
+    private String weekly;
 
     // 是否使用
     private int ifUse;
 
     // 创建人
-    private long creatorId;
+    private String creatorId;
 
     // 更新人
-    private long updatorId;
+    private String updatorId;
 
     // 创建时间
-    private Date createdAt;
+    private String createdAt;
 
     // 更新时间
-    private Date updatedAt;
+    private String updatedAt;
 }

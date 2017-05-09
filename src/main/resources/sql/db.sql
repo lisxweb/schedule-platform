@@ -1,5 +1,21 @@
 /*!40101 SET NAMES utf8 */;
 
+DROP TABLE IF EXISTS `position`;
+CREATE TABLE `position` (
+	`position_id` int(11) NOT NULL AUTO_INCREMENT,
+	position_name varchar(50),
+	position_code varchar(50),
+	month  int(11) default 0,
+	year  int(11) default 0,
+	weekly  int(11) default 0,
+	creator_id int(11) default 0,
+	updator_id int(11) default 0,
+	if_use int(1) default 1,
+	created_at datetime,
+	updated_at datetime,
+  PRIMARY KEY (`position_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS grouping;
 CREATE TABLE grouping (
 	`group_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -100,8 +116,8 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `user` (`user_id`, `password`, `secret_key`, `user_code`,`user_job`, `user_name`, `station_area`, `station`, `creator_id`, `created_at`, `is_deleted`,`is_admin`) VALUES
-('1', 'e7b68248d0782b49f0d4efaefb0e508c', 'cb7e52304f0d11e6965c00ff2c2e2b3f', 'admin', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
+INSERT INTO `user` (`user_id`, `password`,`user_pass`, `secret_key`, `user_code`,`user_job`, `user_name`, `station_area`, `station`, `creator_id`, `created_at`, `is_deleted`,`is_admin`) VALUES
+('999', 'e7b68248d0782b49f0d4efaefb0e508c','123456', 'cb7e52304f0d11e6965c00ff2c2e2b3f', 'admin', '系统管理员', '人名', '站区', '站点', 1, '2015-10-10 12:14:17', 0 , 0);
 
 
 

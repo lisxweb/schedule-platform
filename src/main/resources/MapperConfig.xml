@@ -35,6 +35,7 @@
 	<mappers>
 		<mapper resource="com/ducetech/app/mapper/UserDAO.xml"/>
         <mapper resource="com/ducetech/app/mapper/GroupingDAO.xml"/>
+        <mapper resource="com/ducetech/app/mapper/PositionDAO.xml"/>
 		<mapper resource="com/ducetech/app/mapper/RoleDAO.xml"/>
 		<mapper resource="com/ducetech/app/mapper/PermissionDAO.xml"/>
 	</mappers>

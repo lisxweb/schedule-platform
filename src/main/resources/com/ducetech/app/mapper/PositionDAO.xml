@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ducetech.app.dao.PositionDAO">
+	<resultMap type="com.ducetech.app.model.Position" id="PositionMap">
+        <id column="position_id" property="positionId"/>
+		<result column="position_code" property="positionCode"/>
+    	<result column="position_name" property="positionName"/>
+    	<result column="month" property="month"/>
+        <result column="year" property="year"/>
+        <result column="weekly" property="weekly"/>
+    	<result column="if_use" property="ifUse"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="updator_id" property="updatorId"/>
+    	<result column="created_at" property="createdAt"/>
+    	<result column="updated_at" property="updatedAt"/>
+	</resultMap>
+
+	<!-- 根据人员分组名称获取 -->
+	<select id="selectPositionByPositionName" resultMap="positionMap">
+		select position_id, position_code, position_name, month,year,weekly,if_use, creator_id, updator_id, created_at, updated_at from position where position_name=#{positionName}
+	</select>
+
+    <!-- 根据人员分组编码获取 -->
+    <select id="selectPositionByPositionCode" resultMap="positionMap">
+        select position_id, position_code, position_name, position_order,if_use, creator_id, updator_id, created_at, updated_at from position where position_code=#{positionCode}
+    </select>
+
+    <!-- 根据人员分组编码获取 -->
+    <select id="selectByParentCode" resultMap="positionMap">
+        select position_id, position_code, position_name, position_order,if_use, creator_id, updator_id, created_at, updated_at from position
+            where if_use=0 and position_code like #{positionCode} and length(position_code)=#{positionCodeLength} order by position_code
+    </select>
+
+	<!-- 根据ID精确查找人员分组 -->
+	<select id="selectPositionByPositionId" resultMap="positionMap">
+		select position_id, position_code, position_name, position_order,if_use, creator_id, updator_id, created_at, updated_at from position where position_id=#{positionId}
+	</select>
+	
+	<!-- 对人员分组的通用查询  -->
+	<select id="selectPosition" parameterType="com.ducetech.app.model.Position" resultMap="positionMap">
+		select position_id, position_code, position_name, position_order,if_use, creator_id, updator_id, created_at, updated_at from position where if_use=0
+		<if test="positionCode!=null and positionCode!=''">
+			and position_code=#{positionCode}
+		</if>
+		<if test="positionName!=null and positionName!=''">
+			and position_name like '%' #{positionName} '%'
+		</if>
+		<if test="creatorId!=null and creatorId!=''">
+			and creator_id=#{creatorId}
+		</if>
+		<if test="createdAt!=null and createdAt!=''">
+			and created_at=#{createdAt}
+		</if>
+		<if test="isDeleted!=null and isDeleted!=''">
+			and is_deleted=#{isDeleted}
+		</if>
+	</select>
+	
+	<!-- 插入新人员分组 -->
+	<insert id="insertPosition" useGeneratedKeys="true" keyProperty="positionId">
+		insert into position (position_code,position_name,position_order,if_use,creator_id,created_at)
+		values(#{positionCode},#{positionName},#{positionOrder},#{ifUse},#{creatorId},#{createdAt})
+	</insert>
+	
+	<!-- 更新某人员分组信息 -->
+	<update id="updatePosition" parameterType="com.ducetech.app.model.Position">
+		update position 
+		<set>
+			<if test="positionCode != null and positionCode != ''">
+				position_code=#{positionCode},
+			</if>
+			<if test="positionName != null and positionName != ''">
+				position_name=#{positionName},
+			</if>
+            <if test="ifUse != 0">
+                if_use=#{ifUse},
+            </if>
+		</set>
+		where position_code=#{positionCode}
+	</update>
+    <!-- 删除某人员分组信息 -->
+    <update id="deletePosition" parameterType="com.ducetech.app.model.Position">
+        update position
+        <set>
+            <if test="ifUse != 0">
+                if_use=#{ifUse},
+            </if>
+        </set>
+        where position_code like #{positionCode}
+    </update>
+</mapper>

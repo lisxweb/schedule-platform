@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>岗位设置</title>
+    #parse('common/path-css.vm')
+    #parse('common/path-js.vm')
+</head>
+<body>
+<!-- 右侧内容 start -->
+<div class="content-header">
+    <div class="float-left">
+        <a class="btnDefault bgGreen" href="#addPost" data-toggle="modal" data-target="#addPost">新增岗位</a>
+    </div>
+</div>
+<!-- 右侧内容 end -->
+<!-- 表格 start -->
+<div class="wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>岗位名称</th>
+                <th>月工时上限(时)</th>
+                <th>年工时上限(时)</th>
+                <th>每周最少休班(天)</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>站区长</td>
+                <td>166</td>
+                <td>2000</td>
+                <td>2</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>区长助理</td>
+                <td>166</td>
+                <td>2000</td>
+                <td>2</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>人力</td>
+                <td>166</td>
+                <td>2000</td>
+                <td>2</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>销售</td>
+                <td>166</td>
+                <td>2000</td>
+                <td>2</td>
+                <td>
+                    <a href="#editPost" data-toggle="modal" data-target="#editPost">编辑</a>
+                    <a class="delete" href="javascript:;">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="page" class="page">
+        <ul>
+            <li class="icon-20"></li>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>...</li>
+            <li>26</li>
+            <li class="icon-22"></li>
+        </ul>
+    </div>
+</div>
+<!-- 表格 end -->
+<!-- 新增岗位 -->
+<div class="modal" id="addPost" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">新增岗位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>岗位名称</label>
+                        <input type="text">
+                    </div>
+                    <div class="form_line">
+                        <label>月工时上限</label>
+                        <input type="text">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>年工时上限</label>
+                        <input type="text">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>每周最少休班</label>
+                        <input type="text">
+                        <span>天</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑岗位 -->
+<div class="modal" id="editPost" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="javascript:;" class="close icon-1" data-dismiss="modal" aria-label="Close"></a>
+                <h4 class="modal-title">编辑岗位</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-container clear">
+                    <div class="form_line">
+                        <label>岗位名称</label>
+                        <input type="text" value="站区长">
+                    </div>
+                    <div class="form_line">
+                        <label>月工时上限</label>
+                        <input type="text" value="166">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>年工时上限</label>
+                        <input type="text" value="2000">
+                        <span>时</span>
+                    </div>
+                    <div class="form_line">
+                        <label>每周最少休班</label>
+                        <input type="text" value="2">
+                        <span>天</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
