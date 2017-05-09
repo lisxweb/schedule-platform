@@ -96,3 +96,15 @@
 .icon-danger:before {
     content: "\e916";
 }
+.icon-first:before {
+    content: "\ea21";
+}
+.icon-last:before {
+    content: "\ea22";
+}
+.icon-previous:before {
+    content: "\ea23";
+}
+.icon-next:before {
+    content: "\ea24";
+}

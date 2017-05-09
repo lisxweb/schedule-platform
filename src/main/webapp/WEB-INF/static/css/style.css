@@ -198,13 +198,32 @@ select {
 .page #pg_pager {
   float: right;
 }
+#pager #pg_pager .ui-pg-table,
+.page #pg_pager .ui-pg-table {
+  margin-right: 30px;
+}
 #pager #pg_pager .ui-icon,
 .page #pg_pager .ui-icon {
   font-family: "icomoon";
+  color: #3A6BCE;
+  margin: 0 5px;
+  line-height: 30px;
 }
 #pager #pg_pager .ui-icon-seek-first:before,
 .page #pg_pager .ui-icon-seek-first:before {
   content: "\ea21";
+}
+#pager #pg_pager .ui-icon-seek-end:before,
+.page #pg_pager .ui-icon-seek-end:before {
+  content: "\ea22";
+}
+#pager #pg_pager .ui-icon-seek-prev:before,
+.page #pg_pager .ui-icon-seek-prev:before {
+  content: "\ea23";
+}
+#pager #pg_pager .ui-icon-seek-next:before,
+.page #pg_pager .ui-icon-seek-next:before {
+  content: "\ea24";
 }
 #pager #pg_pager .ui-pg-input,
 .page #pg_pager .ui-pg-input {
