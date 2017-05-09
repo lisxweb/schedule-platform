@@ -44,10 +44,10 @@ public class PostSettingController extends BaseController {
 	 */
 	@RequestMapping(value = "/postSettings", method = RequestMethod.GET)
 	@ResponseBody
-	public List<PostSetting> postSettingData(HttpServletRequest request) throws Exception {
-		List<PostSetting> stationArea = postSettingService.selectByParentCode("000",6);
-		System.out.println(stationArea.size()+"||||||");
-		return stationArea;
+	public PagerRS<PostSetting> postSettingData(HttpServletRequest request) throws Exception {
+        BaseQuery<PostSetting> query = PostSetting.getSearchCondition(PostSetting.class, request);
+        PagerRS<PostSetting> rs = postSettingService.getPostSettingByPager(query);
+        return rs;
 	}
 
     /**

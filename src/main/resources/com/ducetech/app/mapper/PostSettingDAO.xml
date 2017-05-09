@@ -25,6 +25,9 @@
         insert into post_setting (post_code,post_name,post_month,post_year,post_weekly,if_use,creator_id,created_at)
         values(#{postCode},#{postName},#{postMonth},#{postYear},#{postWeekly},#{ifUse},#{creatorId},#{createdAt})
     </insert>
+    <select id="selectPostSetting" resultMap="PostSettingMap">
+        select post_id, post_code, post_name, post_month,post_year,post_weekly,if_use, creator_id, updator_id, created_at, updated_at from post_setting where  if_use=0
+    </select>
     <!-- 根据人员分组编码获取 -->
     <select id="selectByParentCode" resultMap="PostSettingMap">
         select post_id, post_code, post_name,post_month,post_year,post_weekly,if_use, creator_id, updator_id, created_at, updated_at from post_setting

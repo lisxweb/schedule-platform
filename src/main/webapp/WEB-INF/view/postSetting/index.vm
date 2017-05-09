@@ -16,7 +16,7 @@
 <!-- 右侧内容 end -->
 <!-- 表格 start -->
 <div class="wrapper">
-    <table class="table">
+    <table class="table" id="postSettingTable">
         <thead>
             <tr>
                 <th>岗位名称</th>
@@ -27,32 +27,10 @@
             </tr>
         </thead>
         <tbody>
-            #foreach($post in $rs.getResults())
-            <tr>
-                <td>$post.getPostName()</td>
-                <td>$post.getPostMonth()</td>
-                <td>$post.getPostYear()</td>
-                <td>$post.getPostWeekly()</td>
-                <td>
-                    <a href="#editPost" postCode="$post.getPostCode()" data-toggle="modal" data-target="#editPost">编辑</a>
-                    <a class="delete" postCode="$post.getPostCode()"postCode="$post.getPostCode()" href="javascript:;">删除</a>
-                </td>
-            </tr>
-            #end
 
         </tbody>
     </table>
-    <div id="page" class="page">
-        <ul>
-            <li class="icon-20"></li>
-            <li class="active">1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>...</li>
-            <li>26</li>
-            <li class="icon-22"></li>
-        </ul>
+    <div id="pager" class="page">
     </div>
 </div>
 <!-- 表格 end -->
@@ -103,30 +81,31 @@
                 <h4 class="modal-title">编辑岗位</h4>
             </div>
             <div class="modal-body">
-                <form class="form-container clear">
+                <form class="form-container clear" id="editPostSettingForm">
                     <div class="form_line">
                         <label>岗位名称</label>
-                        <input type="text" value="站区长">
+                        <input type="hidden" id="editPostCode" name="postCode" value="站区长">
+                        <input type="text" id="editPostName" name="postName" value="站区长">
                     </div>
                     <div class="form_line">
                         <label>月工时上限</label>
-                        <input type="text" value="166">
+                        <input type="text" id="editPostMonth" name="postMonth" value="166">
                         <span>时</span>
                     </div>
                     <div class="form_line">
                         <label>年工时上限</label>
-                        <input type="text" value="2000">
+                        <input type="text" id="editPostYear" name="postYear" value="2000">
                         <span>时</span>
                     </div>
                     <div class="form_line">
                         <label>每周最少休班</label>
-                        <input type="text" value="2">
+                        <input type="text" id="editPostWeekly" name="postWeekly" value="2">
                         <span>天</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-confirm" href="javascript:;">确定</a>
+                <a class="btn btn-confirm" href="javascript:;" onclick="editPostSetting()">确定</a>
                 <button class="btn btn-cancel" href="javascript:;" data-dismiss="modal" aria-label="Close">取消</button>
             </div>
         </div>
@@ -134,6 +113,49 @@
 </div>
 </body>
 <script>
+    $(function () {
+        tableInit();
+    });
+    //首页数据
+    function tableInit(){
+        $("#postSettingTable").jqGrid({
+            url:"$path/postSettings",
+            datatype:"json",
+            mtype:"get",
+            height:'auto',
+            autowidth:true,
+            colNames:['岗位名称','月工时上限','年工时上限','每周最少休班',"操作"],
+            colModel:[
+                {name:'postName', width:'15%'},
+                {name:'postMonth', width:'15%'},
+                {name:'postYear', width:'15%'},
+                {name:'postWeekly', width:'15%'},
+                {name:'operation', width:'10%',formatter:function(cellvalue,options,rowObject){
+                    var	str='';
+                    if($shiro.hasPermission("人员管理-编辑")){
+                        str = '<a href="javascript:;" postName="'+rowObject.postName+'" postMonth="'+rowObject.postMonth+'" postYear="'+rowObject.postYear+'" postWeekly="'+rowObject.postWeekly+'" class="edit postEditBtn">编辑</a>';
+                    }
+                    if($shiro.hasPermission("人员管理-停用")){
+                        str += '<a class="stop" href="javascript:;" onclick="postDel('+ rowObject.postId+')">删除</a>';
+                    }
+                    return str;
+                }},
+            ],
+            viewrecords: true,//是否在浏览导航栏显示记录总数
+            rowNum:10,//每页显示记录数
+            pager:$('#pager'),
+            jsonReader:{
+                page: "page",
+                total: "pages",
+                records: "count",
+                root: "results",
+                repeatitems: false,
+                id: "postId"
+            }
+        });
+        jQuery("#postSettingTable").jqGrid('navGrid','#pager',{edit:false,add:false,del:false});
+    }
+    //添加站区设置
     function addPostSetting(){
         console.log($('#addPostSettingForm').serialize());
         jQuery.ajax({
@@ -155,5 +177,15 @@
             }
         });
     }
+
+    //编辑站区设置
+    $(".postEditBtn").click(function(){
+        console.log("||||||||||||||||||")
+        $("#editPostCode").val($(this).attr("postCode"));
+        $("#editPostName").val($(this).attr("postName"));
+        $("#editPostMonth").val($(this).attr("postMonth"));
+        $("#editPostYear").val($(this).attr("postYear"));
+        $("#editPostWeekly").val($(this).attr("postWeekly"));
+    })
 </script>
 </html>
