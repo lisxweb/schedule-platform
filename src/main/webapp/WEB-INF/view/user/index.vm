@@ -274,6 +274,9 @@
     }
 
     function userUpdate(){
+        console.log($('#userEditForm').serialize());
+        var data = $('#userEditForm').serializeObject();
+        console.log(data);
         jQuery.ajax({
             async: false,
             type: "put",
