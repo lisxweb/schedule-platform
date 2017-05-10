@@ -259,7 +259,7 @@
             data: null,
             dataType: "json",
             error: function (xmlHttpReq, status) {
-                alert("网络错误");
+                Alert(0,"网络错误");
             },
             success: function (data) {
                 $("#editUserId").val(userId);
@@ -282,10 +282,10 @@
             data: null,
             dataType: "json",
             error: function () {
-                alert("网络错误");
+                Alert(0,"网络错误");
             },
-            success: function (data) {
-            alert(data.message)
+            success: function (result) {
+                Alert(result.data, result.message);
             setTimeout(function(){
                 $("#editUser .close").click();
                 $("#editUser").hide();
@@ -301,10 +301,10 @@
             url: "$path/users/" + userId + "/userDel",
             dataType: "json",
             error: function () {
-                alert("网络错误");
+                Alert(0,"网络错误");
             },
-            success: function (data) {
-                alert(data["msg"])
+            success: function (result) {
+                Alert(result.data, result.message);
                 getTableData();
             }
         });
@@ -336,10 +336,10 @@
             data: $('#userAddForm').serialize(),
             dataType: "json",
             error: function (request) {
-                alert("网络错误");
+                Alert(0,"网络错误");
             },
-            success: function (data) {
-                alert(data["msg"])
+            success: function (result) {
+                Alert(result.data, result.message);
                 setTimeout(function(){
                     $("#addUser .close").click();
                     $("#addUser").hide();

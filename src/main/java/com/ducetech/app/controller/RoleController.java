@@ -33,7 +33,7 @@ import java.util.List;
 *
  */
 @Controller
-@RequestMapping("permissions")
+@RequestMapping("role")
 public class RoleController extends BaseController{
 
 	@Autowired
@@ -48,13 +48,13 @@ public class RoleController extends BaseController{
 
 	/**
 	* @Title: role
-	* @param model
 	* @return String
 	* @Description: 角色管理首页
 	*/
-	@RequestMapping(value = "/role", method = RequestMethod.GET)
-	public String role(Model model) {
-		return "/role/index";
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String role() {
+		System.out.println("role||||||||||||");
+	    return "/role/index";
 	}
 
 	/**

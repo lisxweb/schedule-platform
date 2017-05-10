@@ -35,7 +35,6 @@ public class GroupingController extends BaseController {
 	@RequestMapping(value = "/grouping", method = RequestMethod.GET)
 	public String groupings(ModelMap model) {
         List<Grouping> stationArea = groupingService.selectByParentCode("000",6);
-        System.out.println(stationArea.size()+"||||||");
         model.put("stationArea",stationArea);
 	    return "/grouping/index";
 	}
@@ -50,7 +49,6 @@ public class GroupingController extends BaseController {
 	@ResponseBody
 	public List<Grouping> groupingData(HttpServletRequest request) throws Exception {
 		List<Grouping> stationArea = groupingService.selectByParentCode("000",6);
-		System.out.println(stationArea.size()+"||||||");
 		return stationArea;
 	}
 

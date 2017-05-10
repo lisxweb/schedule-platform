@@ -11,6 +11,7 @@ import com.ducetech.framework.model.BaseQuery;
 import com.ducetech.framework.model.PagerRS;
 import com.ducetech.framework.util.CookieUtil;
 import com.ducetech.framework.util.DateUtil;
+import com.ducetech.framework.web.view.OperationResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -159,23 +160,20 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "/user/addUser", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject create(User user, HttpServletRequest request) throws Exception {
+	public OperationResult create(User user, HttpServletRequest request) throws Exception {
 		User userInfo = getLoginUser(request);
 		if(user.getPassword().equals("")||user.getPassword()==null) {
             user.setPassword(userService.genRandomNum(6));
         }
 		user.setUserPass(user.getPassword());
 		User uCode = userService.getUserByUserCode(user.getUserCode());
-        JSONObject data = new JSONObject();
-        data.put("msg","操作成功");
 		if(uCode!=null) {
-            data.put("msg","工号已存在");
-			return data;
+            return OperationResult.buildFailureResult("工号已存在", 0);
 		} else {
 			user.setCreatorId(userInfo.getUserId());
 			user.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
 			userService.addUser(user);
-			return data;
+            return OperationResult.buildSuccessResult("操作成功", 1);
 		}
 	}
 
@@ -198,11 +196,10 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.PUT)
     @ResponseBody
-    public JSONObject update(User user) throws Exception {
+    public OperationResult update(User user,HttpServletRequest request) throws Exception {
+        System.out.println(request.getCharacterEncoding()+"|||___");
         userService.updateUser(user);
-        JSONObject data = new JSONObject();
-        data.put("message","操作成功");
-        return data;
+        return OperationResult.buildSuccessResult("更新成功", 1);
     }
     /**
      * 删除
@@ -210,11 +207,9 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/users/{id}/userDel", method = RequestMethod.PUT)
     @ResponseBody
-    public JSONObject userDel(@PathVariable(value="id") String userId) throws Exception {
+    public OperationResult userDel(@PathVariable(value="id") String userId) throws Exception {
         userService.deleteUserById(userId,"1");
-        JSONObject data = new JSONObject();
-        data.put("msg","操作成功");
-        return data;
+        return OperationResult.buildSuccessResult("删除成功", 1);
     }
 
 	/**

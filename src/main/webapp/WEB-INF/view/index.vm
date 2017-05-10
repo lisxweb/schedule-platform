@@ -49,7 +49,7 @@
                     </a>
                     #end
                     #if($shiro.hasPermission("系统管理-角色管理"))
-                    <a href="$path/role" target="myiframe">
+                    <a href="$path/role/index" target="myiframe">
                         <span class="icon-17"></span>权限管理
                     </a>
                     #end
