@@ -258,7 +258,7 @@
             data: null,
             dataType: "json",
             error: function (xmlHttpReq, status) {
-                Alert(0,"网络错误");
+                Alert("fail","网络错误");
             },
             success: function (data) {
                 $("#editUserId").val(userId);
@@ -287,8 +287,7 @@
                 Alert('fail',"网络错误");
             },
             success: function (result) {
-            	var status = (result.data == 1 ? "success" : "fail");
-                Alert(status,result.message);
+                Alert(result.data, result.message);
 	            setTimeout(function(){
 	                $("#editUser").modal('hide');
 	            },500)

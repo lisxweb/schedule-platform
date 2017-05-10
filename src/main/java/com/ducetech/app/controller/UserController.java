@@ -168,12 +168,12 @@ public class UserController extends BaseController {
 		user.setUserPass(user.getPassword());
 		User uCode = userService.getUserByUserCode(user.getUserCode());
 		if(uCode!=null) {
-            return OperationResult.buildFailureResult("工号已存在", 0);
+            return OperationResult.buildFailureResult("工号已存在", "fail");
 		} else {
 			user.setCreatorId(userInfo.getUserId());
 			user.setCreatedAt(DateUtil.formatDate(new Date(), DateUtil.DEFAULT_TIME_FORMAT));
 			userService.addUser(user);
-            return OperationResult.buildSuccessResult("操作成功", 1);
+            return OperationResult.buildSuccessResult("操作成功", "success");
 		}
 	}
 
@@ -197,9 +197,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/users", method = RequestMethod.PUT)
     @ResponseBody
     public OperationResult update(User user,HttpServletRequest request) throws Exception {
-        System.out.println(request.getCharacterEncoding()+"|||___");
         userService.updateUser(user);
-        return OperationResult.buildSuccessResult("更新成功", 1);
+        return OperationResult.buildSuccessResult("更新成功", "success");
     }
     /**
      * 删除
@@ -209,7 +208,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public OperationResult userDel(@PathVariable(value="id") String userId) throws Exception {
         userService.deleteUserById(userId,"1");
-        return OperationResult.buildSuccessResult("删除成功", 1);
+        return OperationResult.buildSuccessResult("删除成功", "success");
     }
 
 	/**
