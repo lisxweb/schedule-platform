@@ -21,9 +21,9 @@ public class Shift extends BaseModel implements Serializable {
     //班次颜色
     private String shiftColor;
     //开始时间
-    private Date startAt;
+    private String startAt;
     //结束时间
-    private Date endAt;
+    private String endAt;
     //总时间
     private Integer totalAt;
     //间隔时间
@@ -34,6 +34,8 @@ public class Shift extends BaseModel implements Serializable {
     private String station;
     //所属站区
     private String stationArea;
+    //是否删除
+    private int ifUse;
     //创建人
     private String creatorId;
     //更新人

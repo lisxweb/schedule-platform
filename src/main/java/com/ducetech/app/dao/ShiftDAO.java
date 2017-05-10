@@ -1,6 +1,6 @@
 package com.ducetech.app.dao;
 
-import com.ducetech.app.model.Grouping;
+import com.ducetech.app.model.Shift;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -9,42 +9,42 @@ import java.util.List;
 public interface ShiftDAO {
 
 	/**
-	* @Title: selectGrouping
+	* @Title: selectShift
 	* @param dept
-	* @return List<Grouping>
-	* @Description: Grouping通用查询
+	* @return List<Shift>
+	* @Description: Shift通用查询
 	*/
-	List<Grouping> selectGrouping(Grouping dept);
+	List<Shift> selectShift(Shift dept);
 
 	/**
-	* @Title: addGrouping
+	* @Title: addShift
 	* @param dept
 	* @Description: 保存新增的人员信息
 	*/
-	void insertGrouping(Grouping dept);
+	void insertShift(Shift dept);
 
 	/**
-	* @Title: updateGrouping
+	* @Title: updateShift
 	* @param dept
 	* @Description: 更新人员信息
 	*/
-	void updateGrouping(Grouping dept);
+	void updateShift(Shift dept);
 
 	/**
-	* @Title: deleteGrouping
+	* @Title: deleteShift
 	* @param groupCode
 	* @Description: 启用禁用人员,默认0位启用
 	*/
-	void deleteGrouping(@Param("groupCode") String groupCode, @Param("ifUse") int ifUse);
+	void deleteShift(@Param("groupCode") String groupCode, @Param("ifUse") int ifUse);
 
     /**
-     * @Title: selectGroupingByGroupName
+     * @Title: selectShiftByGroupName
      * @param groupCode
-     * @return Grouping
+     * @return Shift
      * @Description: 按登部门名称查询
      */
-    Grouping selectGroupingByGroupCode(@Param("groupCode") String groupCode);
+    Shift selectShiftByGroupCode(@Param("groupCode") String groupCode);
 
-    List<Grouping> selectByParentCode(@Param("groupCode") String parentCode, @Param("groupCodeLength") int groupCodeLength);
+    List<Shift> selectByParentCode(@Param("groupCode") String parentCode, @Param("groupCodeLength") int groupCodeLength);
 
 }

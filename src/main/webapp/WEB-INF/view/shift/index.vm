@@ -10,6 +10,9 @@
 <div class="menu">
     <p class="menu-head">岗位名称</p>
     <ul class="nav nav-tabs">
+        #foreach($post in $postList)
+            <li><a href="javascript:;" class="postBtn" data-toggle="tab">$post.getPostName()</a></li>
+        #end
         <li class="active"><a href="#tab1" data-toggle="tab">站务员</a></li>
         <li><a href="#tab2" data-toggle="tab">综控员</a></li>
         <li><a href="#tab3" data-toggle="tab">值班站长</a></li>
@@ -615,6 +618,9 @@
     </div>
 </div>
 <script>
+    $(".postBtn").click(function(){
+        $("#tab1").modal();
+    })
     $(".shiftEdit.btnDefault").click(function(){
         if($(this).hasClass("complete")){
             $(this).next().find("li span").remove();

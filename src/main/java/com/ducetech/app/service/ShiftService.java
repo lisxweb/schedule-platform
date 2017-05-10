@@ -9,11 +9,11 @@ import java.util.List;
 public interface ShiftService {
 
     /**
-     * @Title: getAllShifts
-     * @return List<Shift>
-     * @Description: 获取所有人员
+     * 查询
+     * @param dept
+     * @return
      */
-    List<Shift> getAllShifts();
+    List<Shift> selectShift(Shift dept);
 
     /**
      * @Title: getShiftByQuery

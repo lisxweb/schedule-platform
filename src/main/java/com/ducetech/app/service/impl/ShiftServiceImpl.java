@@ -15,10 +15,12 @@ import java.util.List;
 
 @Service
 public class ShiftServiceImpl implements ShiftService{
+    @Autowired
+    private ShiftDAO shiftDAO;
 
     @Override
-    public List<Shift> getAllShifts() {
-        return null;
+    public List<Shift> selectShift(Shift dept) {
+        return shiftDAO.selectShift(dept);
     }
 
     @Override

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ducetech.app.dao.ShiftDAO">
+	<resultMap type="com.ducetech.app.model.Shift" id="ShiftMap">
+        <id column="shift_id" property="shiftId"/>
+    	<result column="shift_name" property="shiftName"/>
+    	<result column="shift_num" property="shiftNum"/>
+        <result column="shift_color" property="shiftColor"/>
+        <result column="start_at" property="startAt"/>
+    	<result column="end_at" property="endAt"/>
+        <result column="total_at" property="totalAt"/>
+        <result column="interval_at" property="intervalAt"/>
+        <result column="relevance" property="relevance"/>
+        <result column="station" property="station"/>
+        <result column="station_area" property="stationArea"/>
+        <result column="if_use" property="ifUse"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="updator_id" property="updatorId"/>
+    	<result column="created_at" property="createdAt"/>
+    	<result column="updated_at" property="updatedAt"/>
+	</resultMap>
+    <!-- 查询首页 -->
+    <select id="selectShift" resultMap="ShiftMap">
+        select shift_id, shift_num, shift_name, shift_color,start_at,end_at,total_at,interval_at,relevance,station,station_area,if_use, creator_id, updator_id, created_at, updated_at from shift where  if_use=0
+    </select>
+</mapper>

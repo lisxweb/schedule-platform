@@ -1,5 +1,26 @@
 /*!40101 SET NAMES utf8 */;
 
+DROP TABLE IF EXISTS `shift`;
+CREATE TABLE `shift` (
+	shift_id int(11) NOT NULL AUTO_INCREMENT,
+	shift_name varchar(50),
+	shift_num varchar(50),
+	shift_color  varchar(20),
+	start_at  varchar(20),
+	end_at  varchar(20),
+	total_at int(11) default 0,
+	interval_at int(11) default 0,
+	relevance  varchar(20),
+	station  varchar(20),
+	stationArea  varchar(20),
+	creator_id int(11) default 0,
+	updator_id int(11) default 0,
+	if_use int(1) default 1,
+	created_at datetime,
+	updated_at datetime,
+  PRIMARY KEY (shift_id)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `post_setting`;
 CREATE TABLE `post_setting` (
 	post_id int(11) NOT NULL AUTO_INCREMENT,
