@@ -1,4 +1,5 @@
 function Alert(status, message) {
+	//fail:失败，success:成功，danger:警告
     if(status == undefined){
         status = 'success';
     }
@@ -18,7 +19,6 @@ function Alert(status, message) {
     var obj = $(".Alert");
     var mes = $(".alert-mes b");
     
-    //status为0时:失败提示,1为成功提示
     obj.addClass(status);
     if(status == "fail"){
         mes.text("操作失败，请重试！");
