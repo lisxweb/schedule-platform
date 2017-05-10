@@ -35,7 +35,6 @@
 <!-- 表格 end -->
 </form>
 <!-- 新增人员 -->
-
 <div class="modal" id="addUser" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -287,8 +286,7 @@
             success: function (data) {
             alert(data.message)
             setTimeout(function(){
-                $("#editUser .close").click();
-                $("#editUser").hide();
+                $("#editUser").modal('hide');
             },500)
             $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
         }
@@ -341,8 +339,7 @@
             success: function (data) {
                 alert(data["msg"])
                 setTimeout(function(){
-                    $("#addUser .close").click();
-                    $("#addUser").hide();
+                    $("#addUser").modal("hide");
                 },500)
                 $(".ui-jqgrid-btable").jqGrid().trigger('reloadGrid');
             }

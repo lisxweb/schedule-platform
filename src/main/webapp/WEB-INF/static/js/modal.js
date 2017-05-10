@@ -17,10 +17,6 @@ $(function(){
 		$(".modal").modal(); 
 
 	})	
-	//关闭弹出框
-	$(document).on("click",".modal .close",function(){
-		$(".modal .modal-body").html('');	
-	})
 	//弹出注册框
 	$(document).on("click",".modal_regist",function(){
 		var str='';
